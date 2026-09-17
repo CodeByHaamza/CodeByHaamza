@@ -44,7 +44,15 @@
 ## 🎮 Gaming Corner
 
 <!-- steam-box start -->
-
+🎮 Recently played Steam games
+```text
+🎮 BLEACH Rebirth of Souls          🕘 16 hrs 48 mins
+🎮 People Playground                🕘 50 hrs 11 mins
+🎮 Black Myth: Wukong               🕘 11 hrs 42 mins
+🎮 Portal                           🕘 1 hrs 57 mins
+🎮 CARRION                          🕘 4 hrs 55 mins
+```
+<!-- Powered by https://github.com/YouEclipse/steam-box . -->
 <!-- steam-box end -->
 
 ---
