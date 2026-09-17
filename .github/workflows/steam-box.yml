@@ -1,8 +1,8 @@
-name: Steam Box
+name: Steam Games Gallery
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 */12 * * *"
   workflow_dispatch:
 
 permissions:
@@ -14,32 +14,71 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: actions/checkout@v5
-        with:
-          repository: YouEclipse/steam-box
-          path: steam-box
-
-      - uses: actions/setup-go@v5
-        with:
-          go-version: stable
-
-      - name: Update README
-        working-directory: steam-box
+      - name: Generate Steam gallery
         env:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
           STEAM_ID: ${{ secrets.STEAM_ID }}
-          STEAM_OPTION: RECENT
-          UPDATE_OPTION: MARKDOWN
-          MARKDOWN_FILE: ../README.md
-        run: go run ./cmd/box/main.go
+        run: |
+          python3 - <<'EOF'
+          import os, json, re, html, urllib.request
+
+          key = os.environ["STEAM_API_KEY"]
+          sid = os.environ["STEAM_ID"]
+          base = "https://api.steampowered.com/IPlayerService"
+
+          def get(url):
+              with urllib.request.urlopen(url) as r:
+                  return json.load(r).get("response", {}).get("games", [])
+
+          # 1. Jeux joués récemment
+          games = get(f"{base}/GetRecentlyPlayedGames/v1/?key={key}&steamid={sid}")[:6]
+
+          # 2. Complète avec les jeux les plus joués si besoin
+          if len(games) < 6:
+              owned = get(f"{base}/GetOwnedGames/v1/?key={key}&steamid={sid}&include_appinfo=1")
+              owned.sort(key=lambda g: g.get("playtime_forever", 0), reverse=True)
+              ids = {g["appid"] for g in games}
+              games += [g for g in owned if g["appid"] not in ids][: 6 - len(games)]
+
+          if not games:
+              print("Aucun jeu trouvé : vérifie la confidentialité Steam")
+              raise SystemExit(0)
+
+          cells = []
+          for g in games:
+              appid = g["appid"]
+              name = html.escape(g.get("name", ""))
+              hours = round(g.get("playtime_forever", 0) / 60)
+              cells.append(
+                  f'<td align="center" width="33%">'
+                  f'<a href="https://store.steampowered.com/app/{appid}/">'
+                  f'<img src="https://cdn.cloudflare.steamstatic.com/steam/apps/{appid}/header.jpg" width="250" alt="{name}"/></a>'
+                  f'<br/><sub><b>{name}</b><br/>⏱️ {hours}h played</sub></td>'
+              )
+
+          rows = ["<tr>" + "".join(cells[i:i + 3]) + "</tr>" for i in range(0, len(cells), 3)]
+          block = '<div align="center">\n<table>\n' + "\n".join(rows) + "\n</table>\n</div>"
+
+          with open("README.md", encoding="utf-8") as f:
+              readme = f.read()
+
+          new = re.sub(
+              r"(<!-- steam-games start -->).*?(<!-- steam-games end -->)",
+              lambda m: m.group(1) + "\n" + block + "\n" + m.group(2),
+              readme,
+              flags=re.S,
+          )
+
+          with open("README.md", "w", encoding="utf-8") as f:
+              f.write(new)
+          EOF
 
       - name: Commit & Push
         run: |
-          rm -rf steam-box
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add README.md
-          if git commit -m "Update Steam Box"; then
+          if git commit -m "Update Steam gallery"; then
             git pull --rebase
             git push
           fi
