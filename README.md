@@ -9,10 +9,10 @@
  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝
 ```
 
-![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&pause=1000&color=D42029&center=true&vCenter=true&width=600&lines=Web+Developer+%7C+BUT+Informatique;Creator+of+PersonaDLE;ROM+Hacker+%7C+Translator;Tech+%26+Gaming+Enthusiast)
+![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&pause=1000&color=70A5FD&center=true&vCenter=true&width=600&lines=Web+Developer+%7C+BUT+Informatique;Creator+of+PersonaDLE;ROM+Hacker+%7C+Translator;Tech+%26+Gaming+Enthusiast)
 
 [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:hamza.karrouchi.dev@gmail.com)
-![Visit Count](https://komarev.com/ghpvc/?username=CodeByHaamza&icon=0&color=E3001B&style=for-the-badge)
+![Visit Count](https://komarev.com/ghpvc/?username=CodeByHaamza&icon=0&color=70A5FD&style=for-the-badge)
 
 </div>
 
@@ -63,21 +63,19 @@
 
 ---
 
-## 🎭 GitHub Analytics (Persona Style)
+## 📊 GitHub Analytics
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=CodeByHaamza&title_color=E3001B&icon_color=E3001B&text_color=ffffff&bg_color=000000&hide_border=true&include_all_commits=true&count_private=true" height="192px" alt="GitHub Stats"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=CodeByHaamza&title_color=E3001B&text_color=ffffff&bg_color=000000&hide_border=true&layout=compact" height="192px" alt="Top Languages"/>
+  <img src="https://github-readme-stats.vercel.app/api?username=CodeByHaamza&theme=tokyonight&hide_border=true&include_all_commits=true&count_private=true" height="192px" alt="GitHub Stats"/>
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=CodeByHaamza&theme=tokyonight&hide_border=true&layout=compact" height="192px" alt="Top Languages"/>
 </div>
 
 <br/>
 
 <div align="center">
-  <img src="https://streak-stats.demolab.com/?user=CodeByHaamza&fire=E3001B&ring=E3001B&currStreakLabel=E3001B&sideNums=ffffff&sideLabels=ffffff&dates=ffffff&background=000000&hide_border=true" alt="GitHub Streak"/>
+  <img src="https://streak-stats.demolab.com/?user=CodeByHaamza&theme=tokyonight&hide_border=true" alt="GitHub Streak"/>
 </div>
 
-## 🏆 GitHub Trophies
+<br/>
 
-<div align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=CodeByHaamza&theme=radical&no-frame=false&no-bg=true&margin-w=4" alt="GitHub Trophies"/>
-</div>
+![footer](https://capsule-render.vercel.app/api?type=waving&color=0:1A1B27,100:70A5FD&height=120&section=footer)
