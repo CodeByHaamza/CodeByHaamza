@@ -1,0 +1,45 @@
+name: Steam Box
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/checkout@v5
+        with:
+          repository: YouEclipse/steam-box
+          path: steam-box
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+
+      - name: Update README
+        working-directory: steam-box
+        env:
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          STEAM_ID: ${{ secrets.STEAM_ID }}
+          STEAM_OPTION: RECENT
+          UPDATE_OPTION: MARKDOWN
+          MARKDOWN_FILE: ../README.md
+        run: go run ./cmd/box/main.go
+
+      - name: Commit & Push
+        run: |
+          rm -rf steam-box
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add README.md
+          if git commit -m "Update Steam Box"; then
+            git pull --rebase
+            git push
+          fi
