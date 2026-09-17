@@ -43,17 +43,24 @@
 
 ## 🎮 Gaming Corner
 
+<div align="center">
+  <a href="https://store.steampowered.com/app/1687950/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1687950/header.jpg" width="200" alt="Persona 5 Royal"/></a>
+  <a href="https://store.steampowered.com/app/2161700/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2161700/header.jpg" width="200" alt="Persona 3 Reload"/></a>
+  <a href="https://store.steampowered.com/app/1245620/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg" width="200" alt="Elden Ring"/></a>
+  <br/>
+  <a href="https://store.steampowered.com/app/374320/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg" width="200" alt="Dark Souls III"/></a>
+  <a href="https://store.steampowered.com/app/814380/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/814380/header.jpg" width="200" alt="Sekiro"/></a>
+  <a href="https://store.steampowered.com/app/1113000/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1113000/header.jpg" width="200" alt="Persona 4 Golden"/></a>
+</div>
+
+<details>
+<summary><b>🕹️ Recently played on Steam</b></summary>
+
 <!-- steam-box start -->
-🎮 Recently played Steam games
-```text
-🎮 BLEACH Rebirth of Souls          🕘 16 hrs 48 mins
-🎮 People Playground                🕘 50 hrs 11 mins
-🎮 Black Myth: Wukong               🕘 11 hrs 42 mins
-🎮 Portal                           🕘 1 hrs 57 mins
-🎮 CARRION                          🕘 4 hrs 55 mins
-```
-<!-- Powered by https://github.com/YouEclipse/steam-box . -->
+
 <!-- steam-box end -->
+
+</details>
 
 ---
 
