@@ -71,3 +71,11 @@
 <br/>
 
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=0:1A1B27,100:70A5FD&height=120&section=footer)
+
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/CodeByHaamza/CodeByHaamza/output/snake-dark.svg"/>
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/CodeByHaamza/CodeByHaamza/output/snake-light.svg"/>
+    <img alt="Snake eating my contributions" src="https://raw.githubusercontent.com/CodeByHaamza/CodeByHaamza/output/snake-dark.svg"/>
+  </picture>
+</div>
