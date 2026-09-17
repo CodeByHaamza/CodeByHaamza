@@ -50,18 +50,23 @@
 <tr>
 <td align="center" width="25%"><a href="https://store.steampowered.com/app/1687950/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1687950/header.jpg" width="200" alt="Persona 5 Royal"/></a><br/><sub><b>Persona 5 Royal</b></sub></td>
 <td align="center" width="25%"><a href="https://store.steampowered.com/app/2161700/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2161700/header.jpg" width="200" alt="Persona 3 Reload"/></a><br/><sub><b>Persona 3 Reload</b></sub></td>
+<td align="center" width="25%"><a href="https://store.steampowered.com/app/1113000/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1113000/header.jpg" width="200" alt="Persona 4 Golden"/></a><br/><sub><b>Persona 4 Golden</b></sub></td>
 <td align="center" width="25%"><a href="https://store.steampowered.com/app/1245620/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg" width="200" alt="Elden Ring"/></a><br/><sub><b>Elden Ring</b></sub></td>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/2358720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" width="200" alt="Black Myth: Wukong"/></a><br/><sub><b>Black Myth: Wukong</b></sub></td>
 </tr>
-</table>
-<table>
 <tr>
-<td align="center" width="33%"><a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="200" alt="Cyberpunk 2077"/></a><br/><sub><b>Cyberpunk 2077</b></sub></td>
-<td align="center" width="33%"><a href="https://store.steampowered.com/app/1174180/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg" width="200" alt="Red Dead Redemption 2"/></a><br/><sub><b>Red Dead Redemption 2</b></sub></td>
-<td align="center" width="33%"><a href="https://store.steampowered.com/app/374320/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg" width="200" alt="Dark Souls III"/></a><br/><sub><b>Dark Souls III</b></sub></td>
+<td align="center" width="25%"><a href="https://store.steampowered.com/app/2358720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" width="200" alt="Black Myth: Wukong"/></a><br/><sub><b>Black Myth: Wukong</b></sub></td>
+<td align="center" width="25%"><a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="200" alt="Cyberpunk 2077"/></a><br/><sub><b>Cyberpunk 2077</b></sub></td>
+<td align="center" width="25%"><a href="https://store.steampowered.com/app/1174180/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg" width="200" alt="Red Dead Redemption 2"/></a><br/><sub><b>Red Dead Redemption 2</b></sub></td>
+<td align="center" width="25%"><a href="https://store.steampowered.com/app/374320/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg" width="200" alt="Dark Souls III"/></a><br/><sub><b>Dark Souls III</b></sub></td>
 </tr>
 </table>
 </div>
+
+### 🕹️ Recently Played on Steam
+
+<!-- steam-games start -->
+
+<!-- steam-games end -->
 
 ## 🎮 Gaming Corner
 
