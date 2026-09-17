@@ -41,6 +41,12 @@
 
 </details>
 
+## 🎮 Gaming Corner
+
+<!-- steam-box start -->
+
+<!-- steam-box end -->
+
 ---
 
 ## 💻 Tech Stack
@@ -62,6 +68,7 @@
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white) ![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white) ![Playwright](https://img.shields.io/badge/-playwright-%232EAD33?style=for-the-badge&logo=playwright&logoColor=white) ![Vitest](https://img.shields.io/badge/-Vitest-252529?style=for-the-badge&logo=vitest&logoColor=FCC72B) ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white) ![Claude](https://img.shields.io/badge/Claude-D97757?style=for-the-badge&logo=claude&logoColor=white)
 
 ---
+
 ## 📊 GitHub Analytics
 
 <div align="center">
@@ -70,7 +77,11 @@
 
 <br/>
 
-![footer](https://capsule-render.vercel.app/api?type=waving&color=0:1A1B27,100:70A5FD&height=120&section=footer)
+<div align="center">
+  <img src="./profile-3d-contrib/profile-night-view.svg" alt="3D Contributions"/>
+</div>
+
+<br/>
 
 <div align="center">
   <picture>
@@ -79,3 +90,7 @@
     <img alt="Snake eating my contributions" src="https://raw.githubusercontent.com/CodeByHaamza/CodeByHaamza/output/snake-dark.svg"/>
   </picture>
 </div>
+
+<br/>
+
+![footer](https://capsule-render.vercel.app/api?type=waving&color=0:1A1B27,100:70A5FD&height=120&section=footer)
