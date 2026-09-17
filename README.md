@@ -65,7 +65,12 @@
 ### 🕹️ Recently Played on Steam
 
 <!-- steam-games start -->
-
+<div align="center">
+<table>
+<tr><td align="center" width="33%"><a href="https://store.steampowered.com/app/1689620/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1689620/header.jpg" width="250" alt="BLEACH Rebirth of Souls"/></a><br/><sub><b>BLEACH Rebirth of Souls</b><br/>⏱️ 17h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/1118200/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1118200/header.jpg" width="250" alt="People Playground"/></a><br/><sub><b>People Playground</b><br/>⏱️ 50h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/2358720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" width="250" alt="Black Myth: Wukong"/></a><br/><sub><b>Black Myth: Wukong</b><br/>⏱️ 12h played</sub></td></tr>
+<tr><td align="center" width="33%"><a href="https://store.steampowered.com/app/400/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/400/header.jpg" width="250" alt="Portal"/></a><br/><sub><b>Portal</b><br/>⏱️ 2h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/953490/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/953490/header.jpg" width="250" alt="CARRION"/></a><br/><sub><b>CARRION</b><br/>⏱️ 5h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/2050650/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg" width="250" alt="Resident Evil 4"/></a><br/><sub><b>Resident Evil 4</b><br/>⏱️ 1h played</sub></td></tr>
+</table>
+</div>
 <!-- steam-games end -->
 
 ---
