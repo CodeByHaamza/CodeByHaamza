@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="591" height="110" viewBox="0 0 591 110">
+  <style>
+    .l {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: pop 5s cubic-bezier(.2, 1.6, .4, 1) infinite both;
+    }
+    @keyframes pop {
+      0% { transform: scale(0) rotate(-25deg); opacity: 0; }
+      10% { transform: scale(1) rotate(0); opacity: 1; }
+      80% { transform: scale(1) rotate(0); opacity: 1; }
+      88%, 100% { transform: scale(0) rotate(25deg); opacity: 0; }
+    }
+  </style>
+  <g transform="translate(50.0 53.3) rotate(-4.9)">
+    <g class="l" style="animation-delay:0.00s">
+      <rect x="-19.9" y="-24.1" width="39.9" height="48.3" fill="#111111" stroke="#FFFFFF" stroke-width="2"/>
+      <text y="15.1" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="42" font-weight="900" fill="#FFFFFF">T</text>
+    </g>
+  </g>
+  <g transform="translate(95.9 57.9) rotate(8.8)">
+    <g class="l" style="animation-delay:0.07s">
+      <rect x="-19.9" y="-24.1" width="39.9" height="48.3" fill="#FFFFFF" stroke="#111111" stroke-width="2"/>
+      <text y="15.1" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="900" fill="#111111">A</text>
+    </g>
+  </g>
+  <g transform="translate(141.8 54.6) rotate(-9.4)">
+    <g class="l" style="animation-delay:0.14s">
+      <rect x="-19.9" y="-24.1" width="39.9" height="48.3" fill="#E60012" stroke="#111111" stroke-width="2"/>
+      <text y="15.1" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-size="42" font-weight="900" fill="#111111">K</text>
+    </g>
+  </g>
+  <g transform="translate(183.9 59.8) rotate(3.0)">
+    <g class="l" style="animation-delay:0.21s">
+      <rect x="-16.1" y="-19.5" width="32.3" height="39.1" fill="#111111" stroke="#E60012" stroke-width="2"/>
+      <text y="12.2" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="34" font-weight="900" fill="#E60012">E</text>
+    </g>
+  </g>
+  <g transform="translate(244.2 59.4) rotate(-2.6)">
+    <g class="l" style="animation-delay:0.28s">
+      <rect x="-16.1" y="-19.5" width="32.3" height="39.1" fill="#FFFFFF" stroke="#111111" stroke-width="2"/>
+      <text y="12.2" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="34" font-weight="900" fill="#E60012">Y</text>
+    </g>
+  </g>
+  <g transform="translate(284.4 55.9) rotate(0.9)">
+    <g class="l" style="animation-delay:0.35s">
+      <rect x="-18.1" y="-21.8" width="36.1" height="43.7" fill="#111111" stroke="#FFFFFF" stroke-width="2"/>
+      <text y="13.7" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="38" font-weight="900" fill="#FFFFFF">O</text>
+    </g>
+  </g>
+  <g transform="translate(324.6 53.9) rotate(4.6)">
+    <g class="l" style="animation-delay:0.42s">
+      <rect x="-16.1" y="-19.5" width="32.3" height="39.1" fill="#FFFFFF" stroke="#111111" stroke-width="2"/>
+      <text y="12.2" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="900" fill="#111111">U</text>
+    </g>
+  </g>
+  <g transform="translate(362.9 58.2) rotate(8.3)">
+    <g class="l" style="animation-delay:0.49s">
+      <rect x="-16.1" y="-19.5" width="32.3" height="39.1" fill="#E60012" stroke="#111111" stroke-width="2"/>
+      <text y="12.2" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-size="34" font-weight="900" fill="#111111">R</text>
+    </g>
+  </g>
+  <g transform="translate(423.2 49.9) rotate(5.2)">
+    <g class="l" style="animation-delay:0.56s">
+      <rect x="-16.1" y="-19.5" width="32.3" height="39.1" fill="#111111" stroke="#E60012" stroke-width="2"/>
+      <text y="12.2" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="34" font-weight="900" fill="#E60012">T</text>
+    </g>
+  </g>
+  <g transform="translate(465.3 50.5) rotate(2.3)">
+    <g class="l" style="animation-delay:0.63s">
+      <rect x="-19.9" y="-24.1" width="39.9" height="48.3" fill="#FFFFFF" stroke="#111111" stroke-width="2"/>
+      <text y="15.1" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="42" font-weight="900" fill="#E60012">I</text>
+    </g>
+  </g>
+  <g transform="translate(507.4 49.1) rotate(9.4)">
+    <g class="l" style="animation-delay:0.70s">
+      <rect x="-16.1" y="-19.5" width="32.3" height="39.1" fill="#111111" stroke="#FFFFFF" stroke-width="2"/>
+      <text y="12.2" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="34" font-weight="900" fill="#FFFFFF">M</text>
+    </g>
+  </g>
+  <g transform="translate(545.6 51.0) rotate(9.2)">
+    <g class="l" style="animation-delay:0.77s">
+      <rect x="-16.1" y="-19.5" width="32.3" height="39.1" fill="#FFFFFF" stroke="#111111" stroke-width="2"/>
+      <text y="12.2" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="900" fill="#111111">E</text>
+    </g>
+  </g>
+</svg>

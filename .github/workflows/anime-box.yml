@@ -1,0 +1,147 @@
+name: Anime & Manga Gallery
+
+on:
+  push:
+    paths:
+      - .github/anime-favorites.json
+      - .github/workflows/anime-box.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Generate anime gallery
+        run: |
+          python3 - <<'EOF'
+          import json, re, html, urllib.request, urllib.error
+
+          with open(".github/anime-favorites.json", encoding="utf-8") as f:
+              favorites = json.load(f)
+
+          FIELDS = "id type siteUrl meanScore title { english romaji } coverImage { extraLarge large }"
+
+          def anilist(query, variables):
+              req = urllib.request.Request(
+                  "https://graphql.anilist.co",
+                  data=json.dumps({"query": query, "variables": variables}).encode(),
+                  headers={
+                      "Content-Type": "application/json",
+                      "Accept": "application/json",
+                      # AniList (Cloudflare) refuse le User-Agent par défaut de urllib
+                      "User-Agent": "CodeByHaamza-readme/1.0 (+https://github.com/CodeByHaamza/CodeByHaamza)",
+                  },
+              )
+              with urllib.request.urlopen(req) as r:
+                  return json.load(r)["data"]
+
+          # 1. Récupère couvertures et notes depuis AniList (par id, ou par nom avec "search")
+          try:
+              ids = [f["id"] for f in favorites if "id" in f]
+              page = anilist(f"query ($ids: [Int]) {{ Page(perPage: 50) {{ media(id_in: $ids) {{ {FIELDS} }} }} }}", {"ids": ids})
+              by_id = {m["id"]: m for m in page["Page"]["media"]}
+          except urllib.error.HTTPError as e:
+              print(f"::error::AniList a répondu {e.code}: {e.read().decode(errors='replace')[:500]}")
+              raise SystemExit(1)
+
+          def resolve(fav):
+              if "id" in fav:
+                  m = by_id.get(fav["id"])
+              else:
+                  try:
+                      m = anilist(
+                          f"query ($s: String, $t: MediaType) {{ Media(search: $s, type: $t) {{ {FIELDS} }} }}",
+                          {"s": fav["search"], "t": fav.get("type", "ANIME")},
+                      )["Media"]
+                  except urllib.error.HTTPError:
+                      m = None
+              label = fav.get("id") or fav.get("search")
+              if not m:
+                  print(f"::warning::AniList : « {label} » introuvable")
+              else:
+                  print(f"{label} -> id {m['id']} ({m['title']['romaji']})")
+              return m
+
+          def card(fav, width):
+              m = resolve(fav)
+              if not m:
+                  return None
+              title = html.escape(fav.get("title") or m["title"]["english"] or m["title"]["romaji"])
+              cover = m["coverImage"]["extraLarge"] or m["coverImage"]["large"]
+              kind = "📖 Manga" if m["type"] == "MANGA" else "📺 Anime"
+              score = f" · ⭐ {m['meanScore']}%" if m.get("meanScore") else ""
+              img = f'<a href="{m["siteUrl"]}"><img src="{cover}" width="{width}" alt="{title}"/></a>'
+              return img, title, f"{kind}{score}"
+
+          blocks = []
+
+          # 2. Le favori absolu, mis en avant
+          for fav in [f for f in favorites if f.get("featured")]:
+              c = card(fav, 200)
+              if c:
+                  img, title, meta = c
+                  note = html.escape(fav.get("note", ""))
+                  blocks.append(
+                      '<table>\n<tr>'
+                      f'<td align="center">{img}</td>'
+                      f'<td><h3>👑 {title}</h3><sub>{meta}</sub><br/><br/><i>{note}</i></td>'
+                      '</tr>\n</table>'
+                  )
+
+          # 3. Le classement, dans l'ordre du fichier, en grille de 5
+          medals = ["🥇", "🥈", "🥉"]
+          cells = []
+          for fav in [f for f in favorites if not f.get("featured") and not f.get("mention")]:
+              c = card(fav, 140)
+              if c:
+                  img, title, meta = c
+                  rank = medals[len(cells)] if len(cells) < len(medals) else f"#{len(cells) + 1}"
+                  cells.append(f'<td align="center" width="20%">{img}<br/><sub>{rank} <b>{title}</b><br/>{meta}</sub></td>')
+          if cells:
+              rows = ["<tr>" + "".join(cells[i:i + 5]) + "</tr>" for i in range(0, len(cells), 5)]
+              blocks.append(f"<h3>🏆 Top {len(cells)}</h3>\n<table>\n" + "\n".join(rows) + "\n</table>")
+
+          # 4. Les mentions honorables, en plus petit
+          mentions = []
+          for fav in [f for f in favorites if f.get("mention")]:
+              c = card(fav, 90)
+              if c:
+                  img, title, _ = c
+                  mentions.append(f'<td align="center">{img}<br/><sub>{title}</sub></td>')
+          if mentions:
+              blocks.append("<sub><b>✨ Honorable mentions</b></sub>\n<table>\n<tr>" + "".join(mentions) + "</tr>\n</table>")
+
+          if not blocks:
+              print("Aucun anime trouvé : vérifie .github/anime-favorites.json")
+              raise SystemExit(1)
+
+          block = '<div align="center">\n' + "\n<br/>\n".join(blocks) + "\n</div>"
+
+          with open("README.md", encoding="utf-8") as f:
+              readme = f.read()
+
+          new = re.sub(
+              r"(<!-- anime-favorites start -->).*?(<!-- anime-favorites end -->)",
+              lambda m: m.group(1) + "\n" + block + "\n" + m.group(2),
+              readme,
+              flags=re.S,
+          )
+
+          with open("README.md", "w", encoding="utf-8") as f:
+              f.write(new)
+          EOF
+
+      - name: Commit & Push
+        run: |
+          git config user.name CodeByHaamza
+          git config user.email 208399741+CodeByHaamza@users.noreply.github.com
+          git add README.md
+          if git commit -m "Update anime gallery"; then
+            git pull --rebase
+            git push
+          fi

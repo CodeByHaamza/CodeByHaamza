@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="90" viewBox="0 0 460 90">
+  <defs>
+    <linearGradient id="arrow" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#F2DC9B"/>
+      <stop offset="0.5" stop-color="#C9A24D"/>
+      <stop offset="1" stop-color="#8A6A2A"/>
+    </linearGradient>
+  </defs>
+  <style>
+    .slide {
+      animation: slide 6s cubic-bezier(.15, .85, .3, 1) infinite both;
+    }
+    @keyframes slide {
+      0% { transform: translateX(470px); }
+      12%, 85% { transform: translateX(0); }
+      95%, 100% { transform: translateX(470px); }
+    }
+    .label {
+      font-family: "Arial Black", Impact, sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      font-style: italic;
+      fill: #3B2A10;
+      letter-spacing: 1px;
+    }
+  </style>
+  <g class="slide">
+    <!-- arrow pointing left, like the end of a JoJo episode -->
+    <polygon points="10,45 70,8 70,24 445,24 445,66 70,66 70,82"
+             fill="url(#arrow)" stroke="#3B2A10" stroke-width="4" stroke-linejoin="round"/>
+    <text class="label" x="258" y="55" text-anchor="middle">TO BE CONTINUED</text>
+  </g>
+</svg>

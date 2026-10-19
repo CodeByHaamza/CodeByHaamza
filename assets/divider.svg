@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="8" viewBox="0 0 800 8">
+  <defs>
+    <linearGradient id="base" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#70A5FD" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#70A5FD" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#70A5FD" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#BB9AF7" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#C0D8FF" stop-opacity="1"/>
+      <stop offset="1" stop-color="#BB9AF7" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="line">
+      <rect x="0" y="2" width="800" height="4" rx="2"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="2" width="800" height="4" rx="2" fill="url(#base)"/>
+  <g clip-path="url(#line)">
+    <rect x="-200" y="2" width="200" height="4" fill="url(#shine)">
+      <animate attributeName="x" values="-200;800" dur="3s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+</svg>
