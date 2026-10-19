@@ -2,14 +2,7 @@
 
 <div align="center">
 
-```text
- ██╗  ██╗ █████╗ ███╗   ███╗███████╗ █████╗ 
- ██║  ██║██╔══██╗████╗ ████║╚══███╔╝██╔══██╗
- ███████║███████║██╔████╔██║  ███╔╝ ███████║
- ██╔══██║██╔══██║██║╚██╔╝██║ ███╔╝  ██╔══██║
- ██║  ██║██║  ██║██║ ╚═╝ ██║███████╗██║  ██║
- ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝
-```
+<img src="./assets/matrix-name.svg" width="800" alt="HAMZA"/>
 
 ![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&pause=1000&color=70A5FD&center=true&vCenter=true&width=600&lines=Web+Developer+%7C+BUT+Informatique;Creator+of+PersonaDLE;ROM+Hacker+%7C+Translator;Tech+%26+Gaming+Enthusiast)
 
