@@ -1,3 +1,5 @@
+![header](https://capsule-render.vercel.app/api?type=waving&color=0:70A5FD,100:1A1B27&height=120&section=header)
+
 <div align="center">
 
 ```text
@@ -15,6 +17,8 @@
 ![Visit Count](https://komarev.com/ghpvc/?username=CodeByHaamza&icon=0&color=70A5FD&style=for-the-badge)
 
 </div>
+
+<div align="center"><img src="./assets/divider.svg" width="100%" alt=""/></div>
 
 ## 💫 About Me
 
@@ -41,64 +45,47 @@
 
 </details>
 
-## 🎮 Gaming Corner
-
-### ⭐ All-Time Favorites
-
-<div align="center">
-<table>
-<tr>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/1687950/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1687950/header.jpg" width="200" alt="Persona 5 Royal"/></a><br/><sub><b>Persona 5 Royal</b></sub></td>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/2161700/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2161700/header.jpg" width="200" alt="Persona 3 Reload"/></a><br/><sub><b>Persona 3 Reload</b></sub></td>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/1113000/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1113000/header.jpg" width="200" alt="Persona 4 Golden"/></a><br/><sub><b>Persona 4 Golden</b></sub></td>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/1245620/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg" width="200" alt="Elden Ring"/></a><br/><sub><b>Elden Ring</b></sub></td>
-</tr>
-<tr>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/2358720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" width="200" alt="Black Myth: Wukong"/></a><br/><sub><b>Black Myth: Wukong</b></sub></td>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="200" alt="Cyberpunk 2077"/></a><br/><sub><b>Cyberpunk 2077</b></sub></td>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/1174180/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg" width="200" alt="Red Dead Redemption 2"/></a><br/><sub><b>Red Dead Redemption 2</b></sub></td>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/374320/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg" width="200" alt="Dark Souls III"/></a><br/><sub><b>Dark Souls III</b></sub></td>
-</tr>
-</table>
-</div>
-
-### 🕹️ Recently Played on Steam
-
-<!-- steam-games start -->
-<div align="center">
-<table>
-<tr><td align="center" width="33%"><a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="250" alt="Cyberpunk 2077"/></a><br/><sub><b>Cyberpunk 2077</b><br/>⏱️ 25h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/881100/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/881100/header.jpg" width="250" alt="Noita"/></a><br/><sub><b>Noita</b><br/>⏱️ 5h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/1966720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1966720/header.jpg" width="250" alt="Lethal Company"/></a><br/><sub><b>Lethal Company</b><br/>⏱️ 10h played</sub></td></tr>
-<tr><td align="center" width="33%"><a href="https://store.steampowered.com/app/1602010/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1602010/header.jpg" width="250" alt="Persona 4 Arena Ultimax"/></a><br/><sub><b>Persona 4 Arena Ultimax</b><br/>⏱️ 7h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/2212330/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2212330/header.jpg" width="250" alt="Your Only Move Is HUSTLE"/></a><br/><sub><b>Your Only Move Is HUSTLE</b><br/>⏱️ 8h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/1118200/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1118200/header.jpg" width="250" alt="People Playground"/></a><br/><sub><b>People Playground</b><br/>⏱️ 53h played</sub></td></tr>
-</table>
-</div>
-<!-- steam-games end -->
-
----
+<div align="center"><img src="./assets/divider.svg" width="100%" alt=""/></div>
 
 ## 💻 Tech Stack
 
+<div align="center">
+
 **Languages**
 
-![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white) ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Bash Script](https://img.shields.io/badge/bash_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
+<img src="https://skillicons.dev/icons?i=c,java,js,ts,php,py,bash&theme=dark" alt="Languages"/>
 
 **Frontend**
 
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Three js](https://img.shields.io/badge/threejs-black?style=for-the-badge&logo=three.js&logoColor=white)
+<img src="https://skillicons.dev/icons?i=html,css,react,threejs&theme=dark" alt="Frontend"/>
 
 **Backend & Databases**
 
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white) ![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white) ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![Apache](https://img.shields.io/badge/apache-%23D42029.svg?style=for-the-badge&logo=apache&logoColor=white)
+<img src="https://skillicons.dev/icons?i=nodejs,nestjs,mysql,mongodb&theme=dark" alt="Backend & Databases"/>
 
-**DevOps, Data & Tools**
+**DevOps & Tools**
 
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white) ![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white) ![Playwright](https://img.shields.io/badge/-playwright-%232EAD33?style=for-the-badge&logo=playwright&logoColor=white) ![Vitest](https://img.shields.io/badge/-Vitest-252529?style=for-the-badge&logo=vitest&logoColor=FCC72B) ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white) ![Claude](https://img.shields.io/badge/Claude-D97757?style=for-the-badge&logo=claude&logoColor=white)
+<img src="https://skillicons.dev/icons?i=docker,git,githubactions,cloudflare&theme=dark" alt="DevOps & Tools"/>
 
----
+**And also**
+
+![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=mariadb&logoColor=white) ![Apache](https://img.shields.io/badge/apache-%23D42029.svg?style=flat-square&logo=apache&logoColor=white) ![Playwright](https://img.shields.io/badge/-playwright-%232EAD33?style=flat-square&logo=playwright&logoColor=white) ![Vitest](https://img.shields.io/badge/-Vitest-252529?style=flat-square&logo=vitest&logoColor=FCC72B) ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=flat-square&logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=flat-square&logo=numpy&logoColor=white) ![Claude](https://img.shields.io/badge/Claude-D97757?style=flat-square&logo=claude&logoColor=white)
+
+</div>
+
+<div align="center"><img src="./assets/divider.svg" width="100%" alt=""/></div>
 
 ## 📊 GitHub Analytics
 
 <div align="center">
-  <img src="https://streak-stats.demolab.com/?user=CodeByHaamza&theme=tokyonight&hide_border=true" alt="GitHub Streak"/>
+  <img height="170" src="https://github-readme-stats.vercel.app/api?username=CodeByHaamza&show_icons=true&include_all_commits=true&theme=tokyonight&hide_border=true" alt="GitHub Stats"/>
+  <img height="170" src="https://streak-stats.demolab.com/?user=CodeByHaamza&theme=tokyonight&hide_border=true" alt="GitHub Streak"/>
+</div>
+
+<br/>
+
+<div align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=CodeByHaamza&theme=tokyo-night&hide_border=true&area=true" alt="Activity Graph"/>
 </div>
 
 <br/>
@@ -118,5 +105,77 @@
 </div>
 
 <br/>
+
+<div align="center"><img src="./assets/divider.svg" width="100%" alt=""/></div>
+
+## 🎮 Gaming Corner
+
+<div align="center">
+  <img src="./assets/take-your-time.svg" alt="Take Your Time"/>
+</div>
+
+<!-- steam-games start -->
+<div align="center">
+<table>
+<tr><td align="center" width="33%"><a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="250" alt="Cyberpunk 2077"/></a><br/><sub><b>Cyberpunk 2077</b><br/>⏱️ 25h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/881100/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/881100/header.jpg" width="250" alt="Noita"/></a><br/><sub><b>Noita</b><br/>⏱️ 5h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/1966720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1966720/header.jpg" width="250" alt="Lethal Company"/></a><br/><sub><b>Lethal Company</b><br/>⏱️ 10h played</sub></td></tr>
+<tr><td align="center" width="33%"><a href="https://store.steampowered.com/app/1602010/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1602010/header.jpg" width="250" alt="Persona 4 Arena Ultimax"/></a><br/><sub><b>Persona 4 Arena Ultimax</b><br/>⏱️ 7h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/2212330/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2212330/header.jpg" width="250" alt="Your Only Move Is HUSTLE"/></a><br/><sub><b>Your Only Move Is HUSTLE</b><br/>⏱️ 8h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/1118200/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1118200/header.jpg" width="250" alt="People Playground"/></a><br/><sub><b>People Playground</b><br/>⏱️ 53h played</sub></td></tr>
+</table>
+</div>
+<!-- steam-games end -->
+
+<details>
+<summary><b>⭐ All-Time Favorites</b></summary>
+<br>
+
+<div align="center">
+<table>
+<tr>
+<td align="center" width="25%"><a href="https://store.steampowered.com/app/1687950/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1687950/header.jpg" width="200" alt="Persona 5 Royal"/></a><br/><sub><b>Persona 5 Royal</b></sub></td>
+<td align="center" width="25%"><a href="https://store.steampowered.com/app/2161700/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2161700/header.jpg" width="200" alt="Persona 3 Reload"/></a><br/><sub><b>Persona 3 Reload</b></sub></td>
+<td align="center" width="25%"><a href="https://store.steampowered.com/app/1113000/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1113000/header.jpg" width="200" alt="Persona 4 Golden"/></a><br/><sub><b>Persona 4 Golden</b></sub></td>
+<td align="center" width="25%"><a href="https://store.steampowered.com/app/1245620/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg" width="200" alt="Elden Ring"/></a><br/><sub><b>Elden Ring</b></sub></td>
+</tr>
+<tr>
+<td align="center" width="25%"><a href="https://store.steampowered.com/app/2358720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" width="200" alt="Black Myth: Wukong"/></a><br/><sub><b>Black Myth: Wukong</b></sub></td>
+<td align="center" width="25%"><a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="200" alt="Cyberpunk 2077"/></a><br/><sub><b>Cyberpunk 2077</b></sub></td>
+<td align="center" width="25%"><a href="https://store.steampowered.com/app/1174180/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg" width="200" alt="Red Dead Redemption 2"/></a><br/><sub><b>Red Dead Redemption 2</b></sub></td>
+<td align="center" width="25%"><a href="https://store.steampowered.com/app/374320/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg" width="200" alt="Dark Souls III"/></a><br/><sub><b>Dark Souls III</b></sub></td>
+</tr>
+</table>
+</div>
+
+</details>
+
+<div align="center"><img src="./assets/divider.svg" width="100%" alt=""/></div>
+
+## 🍥 Manga & Anime Corner
+
+<div align="center">
+  <img src="./assets/menacing.svg" width="720" alt="ゴゴゴ Is that a JoJo reference?"/>
+</div>
+
+<!-- anime-favorites start -->
+<div align="center">
+<table>
+<tr><td align="center"><a href="https://anilist.co/manga/31706"><img src="https://s4.anilist.co/file/anilistcdn/media/manga/cover/large/bx31706-lRncu9VbcBB7.png" width="200" alt="JoJo Part 7: Steel Ball Run"/></a></td><td><h3>👑 JoJo Part 7: Steel Ball Run</h3><sub>📖 Manga · ⭐ 92%</sub><br/><br/><i>A horse race across America that turns into the best JoJo part. No debate.</i></td></tr>
+</table>
+<br/>
+<h3>🏆 Top 5</h3>
+<table>
+<tr><td align="center" width="20%"><a href="https://anilist.co/anime/14719"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx14719-VT5dRzTBSZ0w.jpg" width="140" alt="JoJo&#x27;s Bizarre Adventure"/></a><br/><sub>🥇 <b>JoJo&#x27;s Bizarre Adventure</b><br/>📺 Anime · ⭐ 77%</sub></td><td align="center" width="20%"><a href="https://anilist.co/anime/5114"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx5114-nSWCgQlmOMtj.jpg" width="140" alt="Fullmetal Alchemist: Brotherhood"/></a><br/><sub>🥈 <b>Fullmetal Alchemist: Brotherhood</b><br/>📺 Anime · ⭐ 90%</sub></td><td align="center" width="20%"><a href="https://anilist.co/manga/34632"><img src="https://s4.anilist.co/file/anilistcdn/media/manga/cover/large/bx34632-5xMDkx3pXsEh.png" width="140" alt="Goodnight Punpun"/></a><br/><sub>🥉 <b>Goodnight Punpun</b><br/>📖 Manga · ⭐ 88%</sub></td><td align="center" width="20%"><a href="https://anilist.co/anime/16498"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-buvcRTBx4NSm.jpg" width="140" alt="Attack on Titan"/></a><br/><sub>#4 <b>Attack on Titan</b><br/>📺 Anime · ⭐ 85%</sub></td><td align="center" width="20%"><a href="https://anilist.co/anime/21341"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21341-Pyc7SkMEuGsl.jpg" width="140" alt="Ajin: Demi-Human"/></a><br/><sub>#5 <b>Ajin: Demi-Human</b><br/>📺 Anime · ⭐ 71%</sub></td></tr>
+</table>
+<br/>
+<sub><b>✨ Honorable mentions</b></sub>
+<table>
+<tr><td align="center"><a href="https://anilist.co/anime/269"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx269-d2GmRkJbMopq.png" width="90" alt="Bleach"/></a><br/><sub>Bleach</sub></td></tr>
+</table>
+</div>
+<!-- anime-favorites end -->
+
+<br/>
+
+<div align="right">
+  <img src="./assets/to-be-continued.svg" width="360" alt="To Be Continued"/>
+</div>
 
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=0:1A1B27,100:70A5FD&height=120&section=footer)
