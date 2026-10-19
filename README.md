@@ -164,11 +164,6 @@
 <table>
 <tr><td align="center" width="20%"><a href="https://anilist.co/anime/14719"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx14719-VT5dRzTBSZ0w.jpg" width="140" alt="JoJo&#x27;s Bizarre Adventure"/></a><br/><sub>🥇 <b>JoJo&#x27;s Bizarre Adventure</b><br/>📺 Anime · ⭐ 77%</sub></td><td align="center" width="20%"><a href="https://anilist.co/anime/5114"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx5114-nSWCgQlmOMtj.jpg" width="140" alt="Fullmetal Alchemist: Brotherhood"/></a><br/><sub>🥈 <b>Fullmetal Alchemist: Brotherhood</b><br/>📺 Anime · ⭐ 90%</sub></td><td align="center" width="20%"><a href="https://anilist.co/manga/34632"><img src="https://s4.anilist.co/file/anilistcdn/media/manga/cover/large/bx34632-5xMDkx3pXsEh.png" width="140" alt="Goodnight Punpun"/></a><br/><sub>🥉 <b>Goodnight Punpun</b><br/>📖 Manga · ⭐ 88%</sub></td><td align="center" width="20%"><a href="https://anilist.co/anime/16498"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-buvcRTBx4NSm.jpg" width="140" alt="Attack on Titan"/></a><br/><sub>#4 <b>Attack on Titan</b><br/>📺 Anime · ⭐ 85%</sub></td><td align="center" width="20%"><a href="https://anilist.co/manga/79865"><img src="https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/b79865-rwKmISrhJJyP.jpg" width="140" alt="Ajin: Demi-Human"/></a><br/><sub>#5 <b>Ajin: Demi-Human</b><br/>📖 Manga · ⭐ 80%</sub></td></tr>
 </table>
-<br/>
-<sub><b>✨ Honorable mentions</b></sub>
-<table>
-<tr><td align="center"><a href="https://anilist.co/anime/269"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx269-d2GmRkJbMopq.png" width="90" alt="Bleach"/></a><br/><sub>Bleach</sub></td></tr>
-</table>
 </div>
 <!-- anime-favorites end -->
 
