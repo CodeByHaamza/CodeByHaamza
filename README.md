@@ -107,19 +107,6 @@
   <img src="./assets/take-your-time.svg" alt="Take Your Time"/>
 </div>
 
-<!-- steam-games start -->
-<div align="center">
-<table>
-<tr><td align="center" width="33%"><a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="250" alt="Cyberpunk 2077"/></a><br/><sub><b>Cyberpunk 2077</b><br/>⏱️ 25h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/881100/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/881100/header.jpg" width="250" alt="Noita"/></a><br/><sub><b>Noita</b><br/>⏱️ 5h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/1966720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1966720/header.jpg" width="250" alt="Lethal Company"/></a><br/><sub><b>Lethal Company</b><br/>⏱️ 10h played</sub></td></tr>
-<tr><td align="center" width="33%"><a href="https://store.steampowered.com/app/1602010/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1602010/header.jpg" width="250" alt="Persona 4 Arena Ultimax"/></a><br/><sub><b>Persona 4 Arena Ultimax</b><br/>⏱️ 7h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/2212330/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2212330/header.jpg" width="250" alt="Your Only Move Is HUSTLE"/></a><br/><sub><b>Your Only Move Is HUSTLE</b><br/>⏱️ 8h played</sub></td><td align="center" width="33%"><a href="https://store.steampowered.com/app/1118200/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1118200/header.jpg" width="250" alt="People Playground"/></a><br/><sub><b>People Playground</b><br/>⏱️ 53h played</sub></td></tr>
-</table>
-</div>
-<!-- steam-games end -->
-
-<details>
-<summary><b>⭐ All-Time Favorites</b></summary>
-<br>
-
 <div align="center">
 <table>
 <tr>
@@ -132,12 +119,10 @@
 <td align="center" width="25%"><a href="https://store.steampowered.com/app/2358720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" width="200" alt="Black Myth: Wukong"/></a><br/><sub><b>Black Myth: Wukong</b></sub></td>
 <td align="center" width="25%"><a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="200" alt="Cyberpunk 2077"/></a><br/><sub><b>Cyberpunk 2077</b></sub></td>
 <td align="center" width="25%"><a href="https://store.steampowered.com/app/1174180/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg" width="200" alt="Red Dead Redemption 2"/></a><br/><sub><b>Red Dead Redemption 2</b></sub></td>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/374320/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg" width="200" alt="Dark Souls III"/></a><br/><sub><b>Dark Souls III</b></sub></td>
+<td align="center" width="25%"><a href="https://www.playstation.com/games/bloodborne/"><img src="./assets/bloodborne.jpg" width="200" alt="Bloodborne"/></a><br/><sub><b>Bloodborne</b></sub></td>
 </tr>
 </table>
 </div>
-
-</details>
 
 <div align="center"><img src="./assets/divider.svg" width="100%" alt=""/></div>
 
