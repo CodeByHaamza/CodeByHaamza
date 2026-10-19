@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="215" viewBox="0 0 460 215">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E0B14"/>
+      <stop offset="0.6" stop-color="#231018"/>
+      <stop offset="1" stop-color="#3A0E12"/>
+    </linearGradient>
+    <radialGradient id="moon" cx="0.45" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#FBF4E6"/>
+      <stop offset="1" stop-color="#D8C4A0"/>
+    </radialGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="fog" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+  </defs>
+  <style>
+    .halo { animation: pulse 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    @keyframes pulse { 0%, 100% { opacity: 0.45; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.08); } }
+    .mist { animation: drift 14s ease-in-out infinite alternate; }
+    @keyframes drift { from { transform: translateX(-30px); } to { transform: translateX(30px); } }
+  </style>
+  <rect width="460" height="215" fill="url(#sky)"/>
+  <circle class="halo" cx="352" cy="62" r="62" fill="#F3E3C3" filter="url(#blur)"/>
+  <circle cx="352" cy="62" r="40" fill="url(#moon)"/>
+  <g class="mist" fill="#C9B9A6" opacity="0.18" filter="url(#fog)">
+    <ellipse cx="120" cy="150" rx="140" ry="16"/>
+    <ellipse cx="360" cy="160" rx="160" ry="14"/>
+  </g>
+  <polygon points="0,215 0,150 0,152 5,152 9,101 13,152 18,152 18,143 27,143 34,83 40,143 49,143 49,146 49,119 64,101 79,119 79,146 79,142 87,142 92,75 98,142 106,142 106,141 114,141 120,96 125,141 133,141 133,160 139,160 144,100 148,160 154,160 154,158 154,136 162,118 169,136 169,158 169,141 169,135 180,117 190,135 190,141 190,129 202,119 213,129 213,149 213,135 229,117 245,135 245,149 245,143 254,133 264,143 264,151 264,121 274,103 284,121 284,151 284,158 284,119 292,101 300,119 300,158 300,161 300,135 314,117 329,135 329,161 329,154 329,136 341,118 353,136 353,154 353,132 366,122 378,132 378,143 388,133 399,143 399,150 408,150 414,88 419,150 428,150 428,143 433,143 436,92 439,143 444,143 444,144 444,147 456,129 468,147 468,144 460,150 460,215" fill="#07060A"/>
+  <text x="24" y="182" font-family="'Trajan Pro', Cinzel, 'Times New Roman', Georgia, serif" font-size="38" letter-spacing="5" fill="#EADCC2">BLOODBORNE</text>
+  <text x="26" y="204" font-family="Georgia, 'Times New Roman', serif" font-size="14" font-style="italic" letter-spacing="1" fill="#C0392B">Fear the Old Blood</text>
+</svg>
