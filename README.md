@@ -119,7 +119,7 @@
 <td align="center" width="25%"><a href="https://store.steampowered.com/app/2358720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" width="200" alt="Black Myth: Wukong"/></a><br/><sub><b>Black Myth: Wukong</b></sub></td>
 <td align="center" width="25%"><a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="200" alt="Cyberpunk 2077"/></a><br/><sub><b>Cyberpunk 2077</b></sub></td>
 <td align="center" width="25%"><a href="https://store.steampowered.com/app/1174180/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg" width="200" alt="Red Dead Redemption 2"/></a><br/><sub><b>Red Dead Redemption 2</b></sub></td>
-<td align="center" width="25%"><a href="https://www.playstation.com/games/bloodborne/"><img src="./assets/bloodborne.svg" width="200" alt="Bloodborne"/></a><br/><sub><b>Bloodborne</b></sub></td>
+<td align="center" width="25%"><a href="https://www.playstation.com/games/bloodborne/"><img src="./assets/bloodborne.jpg" width="200" alt="Bloodborne"/></a><br/><sub><b>Bloodborne</b></sub></td>
 </tr>
 </table>
 </div>
