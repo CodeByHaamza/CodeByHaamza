@@ -598,18 +598,31 @@ def gen_projects(cfg: dict) -> None:
 # ------------------------------------------------------------ 6b. fun facts
 
 def gen_funfacts(cfg: dict) -> None:
+    """Les fun facts, avec le Spider-Man braille de mes dotfiles a droite.
+
+    Il est la parce qu'un des facts parle de Spider-Man, et parce que cet art
+    vit deja sur mes machines : autant qu'il serve.
+    """
     lines = cfg.get("funfacts", [])
     if not lines:
         return
+    art = (ASCII / "spiderman.txt").read_text(encoding="utf-8")
+    dot = 1.45
+    aw, ah = braille_size(art, dot)
+
     fs, lh, pad = 12.0, 19.0, 17.0
     ch = fs * 0.6
-    h = pad * 2 + 24 + len(lines) * lh + 4
+    text_h = len(lines) * lh
+    h = pad * 2 + 24 + max(text_h, ah) + 6
     i = cfg["identity"]
 
-    s = [head(W, h, "fun facts"), panel(W, h), "<style>" + WIPE_CSS + "</style>"]
-    s.append(prompt(pad, pad + 12, "cat fun-facts.txt", i["handle"], i["host"]))
+    s = [head(W, h, "fun facts"), panel(W, h), "<style>" + WIPE_CSS + "</style>",
+         prompt(pad, pad + 13, "cat fun-facts.txt", i["handle"], i["host"])]
 
-    t, y = .3, pad + 24
+    ax = W - pad - aw
+    s.append(braille_rects(art, ax, pad + 26, dot, "#5a4a7a"))
+
+    t, y = .3, pad + 26
     for ln in lines:
         y += lh
         if not ln.strip():
