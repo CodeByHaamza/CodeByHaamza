@@ -65,7 +65,7 @@
   <img src="profile-3d-contrib/profile-night-view.svg" width="100%" alt="My contribution year as an animated 3D skyline">
 </div>
 
-<img src="assets/gen/contrib-pacman.svg" alt="Pac-Man snaking through my contribution graph, eating it row by row" width="100%">
+<img src="assets/gen/contrib-pacman.svg" alt="A full game of Pac-Man played on my contribution graph: four ghosts chase him, he eats a power pellet, they turn blue and flee to the corners, and he eats them for 200, 400, 800 and 1600 points" width="100%">
 
 <img src="assets/gen/star-trail.svg" alt="A Joestar shooting star crossing the page, trailed by JoJo onomatopoeia in braille ASCII" width="100%">
 

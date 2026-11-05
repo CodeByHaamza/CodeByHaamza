@@ -771,6 +771,27 @@ def streaks(weeks: list[dict]) -> tuple[int, int]:
 
 
 def gen_pacman(gh: dict) -> None:
+    """Une partie de Pac-Man jouee sur mon graphe de contributions.
+
+    Choregraphie en fractions de boucle, pas en secondes, pour que changer
+    LOOP ne casse rien :
+
+      0.00-0.40  Pac-Man serpente les lignes 0 a 3 et mange. Les 4 fantomes
+                 le suivent, chacun avec son retard.
+      0.40       il gobe la super pac-gomme posee au bout de la ligne 3.
+      0.40-0.72  phase bleue : les fantomes fuient chacun vers un coin,
+                 Pac-Man fait le tour et les mange un par un (200, 400,
+                 800, 1600 points, comme dans le vrai jeu).
+      0.72-1.00  retour a la normale, lignes 4 a 6, les fantomes rechassent.
+
+    Les cases ne s'eteignent pas sur un animation-delay : sur une boucle de
+    LOOP secondes un delai de -LOOP equivaut a 0, donc toutes repassaient en
+    phase et le graphe clignotait d'un bloc. Le trajet est donc echantillonne
+    et chaque case recoit ses propres keyframes, calees sur l'instant ou
+    Pac-Man passe REELLEMENT dessus.
+    """
+    from math import hypot
+
     cal = gh["contributionsCollection"]["contributionCalendar"]
     weeks = cal["weeks"]
     pad, cell, gap = 17.0, 12.0, 3.0
@@ -783,91 +804,196 @@ def gen_pacman(gh: dict) -> None:
     grid_h = 7 * step - gap
     x0 = (W - grid_w) / 2
     y0 = pad + 26
-    h = y0 + grid_h + 30
+    h = y0 + grid_h + 32
+    ROWS, LOOP, last = 7, 30.0, cols - 1
+
+    def px(ci):
+        return x0 + ci * step + cell / 2
+
+    def py(ri):
+        return y0 + ri * step + cell / 2
+
+    def polyline(t0, t1, pts):
+        """Repartit [t0,t1] sur une polyligne proportionnellement aux
+        longueurs : sans ca, un saut vertical d'une ligne durerait aussi
+        longtemps qu'une traversee complete."""
+        P = [(px(a), py(b)) for a, b in pts]
+        d = [0.0]
+        for k in range(1, len(P)):
+            d.append(d[-1] + hypot(P[k][0] - P[k - 1][0], P[k][1] - P[k - 1][1]))
+        tot = d[-1] or 1.0
+        return [(t0 + (t1 - t0) * d[k] / tot, P[k][0], P[k][1])
+                for k in range(len(P))]
+
+    A_END, C_END = 0.40, 0.72
+    ptsA = []
+    for k, r in enumerate([0, 1, 2, 3]):
+        ptsA += [(0, r), (last, r)] if k % 2 == 0 else [(last, r), (0, r)]
+    corners = [(0, 0), (last, 0), (last, ROWS - 1), (0, ROWS - 1)]
+    ptsC = [(0, 3)] + corners + [(0, 4)]
+    ptsD = []
+    for k, r in enumerate([4, 5, 6]):
+        ptsD += [(0, r), (last, r)] if k % 2 == 0 else [(last, r), (0, r)]
+
+    wayA = polyline(0.0, A_END, ptsA)
+    wayC = polyline(A_END, C_END, ptsC)
+    wayD = polyline(C_END, 1.0, ptsD)
+    way = wayA + wayC[1:] + wayD[1:]
+
+    # instants ou Pac-Man atteint chaque coin : c'est la qu'un fantome tombe
+    eat_t = [wayC[1 + k][0] for k in range(4)]
+
+    def at(t):
+        """Position sur le trajet a l'instant t (fraction de boucle)."""
+        if t <= way[0][0]:
+            return way[0][1], way[0][2]
+        for k in range(1, len(way)):
+            if t <= way[k][0]:
+                t0, xa, ya = way[k - 1]
+                t1, xb, yb = way[k]
+                f = (t - t0) / ((t1 - t0) or 1)
+                return xa + (xb - xa) * f, ya + (yb - ya) * f
+        return way[-1][1], way[-1][2]
+
+    def frames(pts, flip=True):
+        """Keyframes transform depuis une liste (t, x, y)."""
+        out = []
+        for k, (t, x, y) in enumerate(pts):
+            nxt = pts[min(k + 1, len(pts) - 1)]
+            sx = -1 if (flip and nxt[1] < x - .5) else 1
+            out.append("%.3f%%{transform:translate(%.1fpx,%.1fpx) scaleX(%d)}"
+                       % (t * 100, x, y, sx))
+        return "".join(out)
+
+    css = ["@keyframes pac{%s}" % frames(way),
+           ".pac{animation:pac %ss linear infinite}" % LOOP,
+           "@keyframes chomp{0%,49%{transform:scaleY(1)}"
+           "50%,100%{transform:scaleY(.38)}}",
+           ".jaw{animation:chomp .3s steps(2,end) infinite}"]
+
+    # ---- les cases : eteintes quand Pac-Man passe dessus
+    SAMPLES = 1600
+    reach = cell * .8
+    hit = {}
+    for n in range(SAMPLES + 1):
+        t = n / SAMPLES
+        hx, hy = at(t)
+        ci = int(round((hx - x0 - cell / 2) / step))
+        ri = int(round((hy - y0 - cell / 2) / step))
+        for dc in (-1, 0, 1):
+            for dr in (-1, 0, 1):
+                c, r = ci + dc, ri + dr
+                if not (0 <= c < cols and 0 <= r < ROWS) or (c, r) in hit:
+                    continue
+                if hypot(hx - px(c), hy - py(r)) <= reach:
+                    hit[(c, r)] = t
+
+    for (c, r), t in hit.items():
+        a = max(t * 100 - .3, 0.0)
+        b = min(t * 100 + .3, 99.6)
+        css.append("@keyframes k%d_%d{0%%,%.3f%%{opacity:1}%.3f%%,100%%{opacity:.1}}"
+                   % (c, r, a, b))
+        css.append(".k%d_%d{animation:k%d_%d %ss linear infinite}"
+                   % (c, r, c, r, LOOP))
+
+    # ---- les 4 fantomes
+    GHOSTS = [("blinky", C["red"], .035), ("pinky", "#ffb8ff", .065),
+              ("inky", "#00ffff", .095), ("clyde", C["peach"], .125)]
+    BLUE = "#2121de"
+    mx, my = px(last / 2), py(3)
+    for gi, (name, col, lag) in enumerate(GHOSTS):
+        te = eat_t[gi]
+        cx_, cy_ = px(corners[gi][0]), py(corners[gi][1])
+        pts = [(0.0, at(0.0)[0], at(0.0)[1])]
+        pts += [(t + lag, x, y) for t, x, y in wayA if t + lag < A_END]
+        pts.append((A_END, at(A_END - lag)[0], at(A_END - lag)[1]))
+        pts.append((A_END + .05, cx_, cy_))   # fuite vers son coin
+        pts.append((te, cx_, cy_))            # il attend, puis se fait manger
+        pts.append((min(te + .001, C_END - .01), mx, my))
+        pts.append((C_END, mx, my))
+        pts += [(t + lag, x, y) for t, x, y in wayD if C_END < t + lag < 1.0]
+        pts.append((1.0, at(1.0 - lag)[0], at(1.0 - lag)[1]))
+        pts.sort(key=lambda q: q[0])
+        css.append("@keyframes g%d{%s}" % (gi, frames(pts)))
+        css.append(".g%d{animation:g%d %ss linear infinite}" % (gi, gi, LOOP))
+        css.append("@keyframes c%d{0%%,%.2f%%{fill:%s}%.2f%%,%.2f%%{fill:%s}"
+                   "%.2f%%,100%%{fill:%s}}"
+                   % (gi, A_END * 100, col, A_END * 100 + .5, te * 100, BLUE,
+                      C_END * 100, col))
+        css.append(".c%d{animation:c%d %ss linear infinite}" % (gi, gi, LOOP))
+        css.append("@keyframes v%d{0%%,%.2f%%{opacity:.92}%.2f%%,%.2f%%{opacity:0}"
+                   "%.2f%%,100%%{opacity:.92}}"
+                   % (gi, te * 100, te * 100 + .3, C_END * 100 - 2, C_END * 100))
+        css.append(".v%d{animation:v%d %ss linear infinite}" % (gi, gi, LOOP))
+        css.append("@keyframes s%d{0%%,%.2f%%{opacity:0;transform:none}"
+                   "%.2f%%{opacity:1}%.2f%%,100%%{opacity:0;"
+                   "transform:translateY(-15px)}}"
+                   % (gi, te * 100, te * 100 + .4, te * 100 + 4))
+        css.append(".s%d{animation:s%d %ss linear infinite}" % (gi, gi, LOOP))
+
+    # ---- la super pac-gomme
+    css.append("@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}"
+               "50%{opacity:.75;transform:scale(1.5)}}")
+    css.append("@keyframes gone{0%%,%.2f%%{opacity:1}%.2f%%,100%%{opacity:0}}"
+               % (A_END * 100, A_END * 100 + .4))
+    css.append(".pell{animation:pulse .7s ease-in-out infinite}"
+               ".pellw{animation:gone %ss linear infinite}" % LOOP)
 
     pal = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
-    hi = max((d["contributionCount"] for wk in weeks for d in wk["contributionDays"]),
-             default=1) or 1
-
-    ROWS = 7
-    LOOP = 18.0                 # une tournee complete des 7 lignes
-    span = (cols - 1) * step    # distance parcourue sur une ligne
-    eps = 0.001
-
-    # Pac-Man serpente : ligne 0 vers la droite, ligne 1 vers la gauche, etc.
-    # Avant il traversait a mi-hauteur en eteignant la colonne entiere, donc
-    # on voyait disparaitre des cases qu'il n'avait pas touchees. Ici chaque
-    # case s'eteint quand il passe REELLEMENT dessus.
-    #
-    # Un animation-delay ne peut pas exprimer ca (sur une boucle de LOOP, un
-    # delai de -LOOP equivaut a 0 : toutes les cases repassaient en phase).
-    # D'ou un jeu de keyframes par case, indexe sur sa position le long du
-    # parcours.
-    kf = []
-    for r in range(ROWS):
-        p0 = r / ROWS * 100.0
-        p1 = (r + 1) / ROWS * 100.0
-        xa, xb, sx = (0.0, span, 1) if r % 2 == 0 else (span, 0.0, -1)
-        y = r * step
-        kf.append(f"{p0:.3f}%{{transform:translate({xa:.1f}px,{y:.1f}px) "
-                  f"scaleX({sx})}}")
-        kf.append(f"{p1 - eps:.3f}%{{transform:translate({xb:.1f}px,{y:.1f}px) "
-                  f"scaleX({sx})}}")
-    css = ["@keyframes run{" + "".join(kf) + "}",
-           f".mv{{animation:run {LOOP}s linear infinite}}",
-           "@keyframes chomp{0%,49%{transform:scaleY(1)}"
-           "50%,100%{transform:scaleY(.4)}}",
-           ".jaw{animation:chomp .32s steps(2,end) infinite}"]
-
-    for ci in range(cols):
-        for ri in range(ROWS):
-            f = (ci if ri % 2 == 0 else cols - 1 - ci) / max(cols - 1, 1)
-            pct = (ri + f) / ROWS * 100.0
-            a = max(pct - 0.35, 0.0)
-            b = min(pct + 0.35, 99.5)
-            css.append(f"@keyframes k{ci}_{ri}{{0%,{a:.3f}%{{opacity:1}}"
-                       f"{b:.3f}%,100%{{opacity:.1}}}}")
-            css.append(f".k{ci}_{ri}{{animation:k{ci}_{ri} {LOOP}s linear "
-                       f"infinite}}")
-
+    hi = max((d["contributionCount"] for wk in weeks
+              for d in wk["contributionDays"]), default=1) or 1
     cur, best = streaks(weeks)
-    s = [head(W, h, "Pac-Man mange mon graphe de contributions"), panel(W, h),
-         "<style>" + "".join(css) + "</style>",
-         txt(pad, pad + 13, "./contrib-eater --sprite=pacman", C["green"], 12),
+
+    s = [head(W, h, "Une partie de Pac-Man sur mon graphe de contributions"),
+         panel(W, h), "<style>" + "".join(css) + "</style>",
+         txt(pad, pad + 13, "./contrib-eater --sprite=pacman --ghosts=4",
+             C["green"], 12),
          txt(W - pad, pad + 13,
-             f'{cal["totalContributions"]} contributions · streak {cur}d · best {best}d',
+             "%s contributions \u00b7 streak %sd \u00b7 best %sd"
+             % (cal["totalContributions"], cur, best),
              C["dim"], 10.5, anchor="end")]
 
     for ci, wk in enumerate(weeks):
         for ri, d in enumerate(wk["contributionDays"]):
             v = d["contributionCount"]
             lvl = 0 if v == 0 else min(4, 1 + int(3.0 * v / hi))
-            cls = f' class="k{ci}_{ri}"' if v else ""
-            s.append(f'<rect{cls} x="{x0 + ci * step:.2f}" '
-                     f'y="{y0 + ri * step:.2f}" width="{cell:.2f}" '
-                     f'height="{cell:.2f}" rx="{cell * .22:.2f}" '
-                     f'fill="{pal[lvl]}"/>')
+            cls = ' class="k%d_%d"' % (ci, ri) if v and (ci, ri) in hit else ""
+            s.append('<rect%s x="%.2f" y="%.2f" width="%.2f" height="%.2f" '
+                     'rx="%.2f" fill="%s"/>'
+                     % (cls, x0 + ci * step, y0 + ri * step, cell, cell,
+                        cell * .22, pal[lvl]))
 
-    # Pac-Man, puis deux fantomes qui le suivent sur le meme parcours
+    # la pac-gomme, au bout de la ligne 3
+    s.append('<g class="pellw"><circle class="pell" cx="%.2f" cy="%.2f" r="4.6" '
+             'fill="%s"/></g>' % (px(0), py(3), C["yellow"]))
+
+    # les fantomes
+    for gi, (name, col, lag) in enumerate(GHOSTS):
+        g = cell * .58
+        s.append('<g class="g%d"><g class="v%d">'
+                 '<path class="c%d" fill="%s" d="M%.2f %.2fV0'
+                 'A%.2f %.2f 0 0 1 %.2f 0V%.2f'
+                 'l%.2f %.2fl%.2f %.2fl%.2f %.2fZ"/>'
+                 '<circle cx="%.2f" cy="%.2f" r="%.2f" fill="#f8f8ff"/>'
+                 '<circle cx="%.2f" cy="%.2f" r="%.2f" fill="#f8f8ff"/>'
+                 '</g></g>'
+                 % (gi, gi, gi, col, -g, g * .55, g, g, g, g * .55,
+                    -g * .5, g * .28, -g * .5, -g * .28, -g * .5, g * .28,
+                    -g * .34, -g * .16, g * .24, g * .34, -g * .16, g * .24))
+
+    # Pac-Man
     r = cell * .72
-    base = f'translate({x0 + cell / 2:.2f},{y0 + cell / 2:.2f})'
-    s.append(f'<g transform="{base}"><g class="mv"><g class="jaw">'
-             f'<path d="M0 0L{r:.2f} {-r * .58:.2f}'
-             f'A{r:.2f} {r:.2f} 0 1 0 {r:.2f} {r * .58:.2f}Z" '
-             f'fill="{C["yellow"]}"/></g></g></g>')
-    for gi, (gc, dly) in enumerate(((C["red"], .55), (C["mauve"], 1.1))):
-        g = r * .8
-        s.append(
-            f'<g transform="{base}"><g class="mv" '
-            f'style="animation-delay:{dly}s"><g opacity=".9">'
-            f'<path d="M{-g:.2f} {g * .55:.2f}V0'
-            f'A{g:.2f} {g:.2f} 0 0 1 {g:.2f} 0V{g * .55:.2f}'
-            f'l{-g * .5:.2f} {g * .28:.2f}l{-g * .5:.2f} {-g * .28:.2f}'
-            f'l{-g * .5:.2f} {g * .28:.2f}Z" fill="{gc}"/>'
-            f'<circle cx="{-g * .34:.2f}" cy="{-g * .16:.2f}" '
-            f'r="{g * .24:.2f}" fill="#11111b"/>'
-            f'<circle cx="{g * .34:.2f}" cy="{-g * .16:.2f}" '
-            f'r="{g * .24:.2f}" fill="#11111b"/></g></g></g>')
+    s.append('<g class="pac"><g class="jaw">'
+             '<path d="M0 0L%.2f %.2fA%.2f %.2f 0 1 0 %.2f %.2fZ" fill="%s"/>'
+             '</g></g>' % (r, -r * .58, r, r, r, r * .58, C["yellow"]))
+
+    # les scores
+    for gi, score in enumerate((200, 400, 800, 1600)):
+        cxs, cys = px(corners[gi][0]), py(corners[gi][1])
+        s.append('<g class="s%d">' % gi
+                 + txt(cxs, cys - 10, str(score), "#00ffff", 11, "700", "middle")
+                 + "</g>")
+
     s.append("</svg>")
     (OUT / "contrib-pacman.svg").write_text("".join(s), encoding="utf-8")
 
