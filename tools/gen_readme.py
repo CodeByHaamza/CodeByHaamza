@@ -187,18 +187,32 @@ def txt(x: float, y: float, s: str, fill: str = None, size: float = 13,
 
 def reveal_css(sel: str, count: int, dur: float = .42, step: float = .13,
                dx: float = 6) -> str:
-    """Apparition en cascade, jouee une seule fois (fill: forwards)."""
+    """Apparition en cascade, jouee une seule fois.
+
+    L'etat ECRIT est l'etat final (visible). Les keyframes partent de
+    l'invisible et y ramenent. C'est l'inverse du reflexe habituel, et c'est
+    volontaire : si les animations ne tournent pas — rendu sans CSS, cache,
+    prefers-reduced-motion — le contenu reste lisible au lieu de disparaitre.
+    """
     out = [f"@keyframes rise{{from{{opacity:0;transform:translate({dx}px,4px)}}"
            f"to{{opacity:1;transform:none}}}}",
-           f"{sel}{{opacity:0;animation:rise {dur}s ease-out forwards}}"]
+           f"{sel}{{opacity:1;animation:rise {dur}s ease-out both}}"]
     for i in range(count):
         out.append(f"{sel}:nth-of-type({i+1}){{animation-delay:{i*step:.2f}s}}")
+    out.append("@media(prefers-reduced-motion:reduce){"
+               f"{sel}{{animation:none}}}}")
     return "".join(out)
 
 
 def wipe(x: float, y: float, w: float, h: float, delay: float, dur: float,
          bg: str = None) -> str:
-    """Un cache couleur de fond qui glisse vers la droite : effet de frappe."""
+    """Un cache couleur de fond qui glisse vers la droite : effet de frappe.
+
+    Le cache est ECRIT deja ecarte (translateX(102%)) et l'animation part de
+    0 pour y revenir. Sans animation il n'est donc nulle part, et le texte
+    se lit. Ecrit a 0 comme je l'avais fait d'abord, il masquait tout quand
+    les animations ne tournaient pas.
+    """
     return (f'<rect class="wipe" x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" '
             f'height="{h:.1f}" fill="{bg or C["bg"]}" '
             f'style="animation-delay:{delay:.2f}s;animation-duration:{dur:.2f}s"/>')
@@ -206,7 +220,9 @@ def wipe(x: float, y: float, w: float, h: float, delay: float, dur: float,
 
 WIPE_CSS = ("@keyframes wipe{from{transform:translateX(0)}"
             "to{transform:translateX(102%)}}"
-            ".wipe{animation:wipe linear forwards}")
+            ".wipe{transform:translateX(102%);animation:wipe linear both}"
+            "@media(prefers-reduced-motion:reduce){"
+            ".wipe{animation:none}}")
 
 TITLEBAR_DOTS = [(C["red"], 0), (C["yellow"], 1), (C["green"], 2)]
 
@@ -312,7 +328,7 @@ def languages(repos: list[dict], top: int = 6) -> list[tuple[str, float]]:
 # ---------------------------------------------------------------- 1. header
 
 def gen_header(cfg: dict) -> None:
-    """Fenetre de terminal : le nom en figlet, puis la phrase d'accroche.
+    """Fenetre de terminal : le nom en gros figlet, puis la phrase d'accroche.
 
     Le figlet vient de assets/ascii/hamza.txt, le banner.name.ans de mes
     dotfiles. Il est rendu en rectangles deux tons plutot qu'en <text> : les
@@ -323,30 +339,39 @@ def gen_header(cfg: dict) -> None:
     plaisait pas, le fichier reste la si on veut y revenir.
     """
     art = (ASCII / "hamza.txt").read_text(encoding="utf-8")
-    cw, chh = 9.0, 14.0
+    cw, chh = 11.5, 17.5
     fw, fh = figlet_size(art, cw, chh)
     ident = cfg["identity"]
 
-    fy = 52.0
-    tag_y = fy + fh + 26
-    h = tag_y + 20
+    fy = 58.0
+    tag_y = fy + fh + 32
+    h = tag_y + 24
 
     s = [head(W, h, "Hamza — profil GitHub"), panel(W, h),
          titlebar(W, f'{ident["handle"]}@{ident["host"]} — {ident["shell"]}'),
          "<style>" + WIPE_CSS +
          "@keyframes fade{from{opacity:0}to{opacity:1}}"
-         ".fi{opacity:0;animation:fade .5s ease-out forwards}</style>"]
+         ".fi{opacity:1;animation:fade .5s ease-out both}"
+         "@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}"
+         ".cur{animation:blink 1.15s steps(1,end) infinite}</style>",
+         f'<defs><linearGradient id="nm" x1="0" y1="0" x2="1" y2="1">'
+         f'<stop offset="0" stop-color="{C["blue"]}"/>'
+         f'<stop offset=".55" stop-color="{C["mauve"]}"/>'
+         f'<stop offset="1" stop-color="{C["red"]}"/></linearGradient>'
+         f'<clipPath id="cf"><rect x="0" y="{fy - 3:.1f}" width="{W}" '
+         f'height="{fh + 6:.1f}"/></clipPath></defs>']
 
+    fx = (W - fw) / 2
     s.append('<g clip-path="url(#cf)">')
-    s.append(figlet_rects(art, (W - fw) / 2, fy, cw, chh, C["blue"], "#3a4a6b"))
+    s.append(figlet_rects(art, fx, fy, cw, chh, "url(#nm)", "#33406b"))
     s.append("</g>")
-    s.append(f'<clipPath id="cf"><rect x="0" y="{fy - 2:.1f}" width="{W}" '
-             f'height="{fh + 4:.1f}"/></clipPath>')
-    s.append(wipe((W - fw) / 2 - 1, fy - 2, fw + 2, fh + 4, 0.0, 1.0))
+    s.append(wipe(fx - 2, fy - 3, fw + 4, fh + 6, 0.0, 1.05))
 
-    s.append('<g class="fi" style="animation-delay:1.0s">'
-             + txt(W / 2, tag_y, ident["tagline"], C["dim"], 12,
+    s.append('<g class="fi" style="animation-delay:1.05s">'
+             + txt(W / 2, tag_y, ident["tagline"], C["dim"], 12.5,
                    anchor="middle") + "</g>")
+    s.append(f'<rect class="cur" x="{W / 2 + 4:.1f}" y="{tag_y + 7:.1f}" '
+             f'width="8" height="2.5" fill="{C["dim"]}" opacity=".7"/>')
     s.append("</svg>")
     (OUT / "header.svg").write_text("".join(s), encoding="utf-8")
 
@@ -632,7 +657,7 @@ def gen_stats(cfg: dict, gh: dict) -> None:
          "<style>" + WIPE_CSS +
          "@keyframes pop{from{opacity:0;transform:scale(.82)}"
          "to{opacity:1;transform:none}}"
-         ".pop{opacity:0;animation:pop .5s cubic-bezier(.2,1.4,.3,1) forwards}"
+         ".pop{opacity:1;animation:pop .5s cubic-bezier(.2,1.4,.3,1) both}"
          + reveal_css(".rv", 12, step=.055) + "</style>"]
     i = cfg["identity"]
     s.append(prompt(pad, pad + 13, "git stats --self-hosted", i["handle"],
