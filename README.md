@@ -1,8 +1,6 @@
 <div align="center">
 
-<img src="assets/matrix-name.svg" width="800" alt="HAMZA">
-
-<img src="assets/gen/header.svg" alt="CS student, ships a project every two weeks, ROM hacker" width="100%">
+<img src="assets/gen/header.svg" alt="Hamza — CS student, ships a project every two weeks, ROM hacker" width="100%">
 
 [![personadle.net](assets/gen/link-personadle-net.svg)](https://personadle.net)
 [![discord](assets/gen/link-discord.svg)](https://discord.gg/personadle)
@@ -63,20 +61,14 @@
 
 <img src="assets/gen/stats.svg" alt="GitHub stats and streak, generated in-repo with no external service" width="100%">
 
-<img src="assets/gen/contrib-pacman.svg" alt="Pac-Man eating my contribution graph" width="100%">
+<div align="center">
+  <img src="profile-3d-contrib/profile-night-view.svg" width="100%" alt="My contribution year as an animated 3D skyline">
+</div>
+
+<img src="assets/gen/contrib-pacman.svg" alt="Pac-Man snaking through my contribution graph, eating it row by row" width="100%">
 
 <img src="assets/gen/star-trail.svg" alt="A Joestar shooting star crossing the page, trailed by JoJo onomatopoeia in braille ASCII" width="100%">
 
 <div align="right">
   <img src="assets/to-be-continued.svg" width="360" alt="To Be Continued">
 </div>
-
-<div align="center"><sub>
-
-Every generated image on this page comes from
-[`tools/gen_readme.py`](tools/gen_readme.py) and
-[`data/profile.json`](data/profile.json), refreshed daily by a GitHub Action —
-no third-party badge service, no external font. The hand-made SVGs in
-[`assets/`](assets/) are mine too.
-
-</sub></div>

@@ -312,22 +312,42 @@ def languages(repos: list[dict], top: int = 6) -> list[tuple[str, float]]:
 # ---------------------------------------------------------------- 1. header
 
 def gen_header(cfg: dict) -> None:
-    """Un bandeau de fenetre de terminal, avec la phrase d'accroche.
+    """Fenetre de terminal : le nom en figlet, puis la phrase d'accroche.
 
-    Le nom lui-meme n'est plus ici : c'est assets/matrix-name.svg, fait main,
-    qui le porte dans le README. Deux bannieres de nom l'une sur l'autre se
-    seraient battues. Le figlet de assets/ascii/hamza.txt reste disponible
-    (figlet_rects sait encore le dessiner) si on veut revenir en arriere.
+    Le figlet vient de assets/ascii/hamza.txt, le banner.name.ans de mes
+    dotfiles. Il est rendu en rectangles deux tons plutot qu'en <text> : les
+    metriques d'une police varient d'une machine a l'autre et les colonnes
+    d'un figlet se desalignent au premier pixel d'ecart.
+
+    assets/matrix-name.svg faisait ce travail un temps ; son animation ne
+    plaisait pas, le fichier reste la si on veut y revenir.
     """
+    art = (ASCII / "hamza.txt").read_text(encoding="utf-8")
+    cw, chh = 9.0, 14.0
+    fw, fh = figlet_size(art, cw, chh)
     ident = cfg["identity"]
-    h = 60.0
-    s = [head(W, h, "terminal de Hamza"), panel(W, h),
+
+    fy = 52.0
+    tag_y = fy + fh + 26
+    h = tag_y + 20
+
+    s = [head(W, h, "Hamza — profil GitHub"), panel(W, h),
          titlebar(W, f'{ident["handle"]}@{ident["host"]} — {ident["shell"]}'),
-         "<style>@keyframes fade{from{opacity:0}to{opacity:1}}"
-         ".fi{opacity:0;animation:fade .6s ease-out forwards}</style>",
-         f'<g class="fi" style="animation-delay:.25s">'
-         + txt(W / 2, 46, ident["tagline"], C["dim"], 12, anchor="middle")
-         + "</g>", "</svg>"]
+         "<style>" + WIPE_CSS +
+         "@keyframes fade{from{opacity:0}to{opacity:1}}"
+         ".fi{opacity:0;animation:fade .5s ease-out forwards}</style>"]
+
+    s.append('<g clip-path="url(#cf)">')
+    s.append(figlet_rects(art, (W - fw) / 2, fy, cw, chh, C["blue"], "#3a4a6b"))
+    s.append("</g>")
+    s.append(f'<clipPath id="cf"><rect x="0" y="{fy - 2:.1f}" width="{W}" '
+             f'height="{fh + 4:.1f}"/></clipPath>')
+    s.append(wipe((W - fw) / 2 - 1, fy - 2, fw + 2, fh + 4, 0.0, 1.0))
+
+    s.append('<g class="fi" style="animation-delay:1.0s">'
+             + txt(W / 2, tag_y, ident["tagline"], C["dim"], 12,
+                   anchor="middle") + "</g>")
+    s.append("</svg>")
     (OUT / "header.svg").write_text("".join(s), encoding="utf-8")
 
 
@@ -731,29 +751,46 @@ def gen_pacman(gh: dict) -> None:
     hi = max((d["contributionCount"] for wk in weeks for d in wk["contributionDays"]),
              default=1) or 1
 
-    LOOP = 13.0          # une traversee complete
-    lead = cell * 3      # Pac-Man demarre hors grille, a gauche
-    travel = grid_w + lead * 2
+    ROWS = 7
+    LOOP = 18.0                 # une tournee complete des 7 lignes
+    span = (cols - 1) * step    # distance parcourue sur une ligne
+    eps = 0.001
 
-    # Une cellule doit s'eteindre quand Pac-Man l'atteint, pas avant. Un
-    # animation-delay negatif ne peut pas exprimer ca : sur une periode de
-    # LOOP secondes, -LOOP equivaut a 0, donc toutes les colonnes repassaient
-    # en phase et le graphe clignotait d'un bloc. On genere donc un jeu de
-    # keyframes par colonne, ou le pourcentage du changement vaut la position
-    # de la colonne sur le trajet.
-    css = [f"@keyframes run{{from{{transform:translateX(0)}}"
-           f"to{{transform:translateX({travel:.1f}px)}}}}",
-           f".pac{{animation:run {LOOP}s linear infinite}}",
+    # Pac-Man serpente : ligne 0 vers la droite, ligne 1 vers la gauche, etc.
+    # Avant il traversait a mi-hauteur en eteignant la colonne entiere, donc
+    # on voyait disparaitre des cases qu'il n'avait pas touchees. Ici chaque
+    # case s'eteint quand il passe REELLEMENT dessus.
+    #
+    # Un animation-delay ne peut pas exprimer ca (sur une boucle de LOOP, un
+    # delai de -LOOP equivaut a 0 : toutes les cases repassaient en phase).
+    # D'ou un jeu de keyframes par case, indexe sur sa position le long du
+    # parcours.
+    kf = []
+    for r in range(ROWS):
+        p0 = r / ROWS * 100.0
+        p1 = (r + 1) / ROWS * 100.0
+        xa, xb, sx = (0.0, span, 1) if r % 2 == 0 else (span, 0.0, -1)
+        y = r * step
+        kf.append(f"{p0:.3f}%{{transform:translate({xa:.1f}px,{y:.1f}px) "
+                  f"scaleX({sx})}}")
+        kf.append(f"{p1 - eps:.3f}%{{transform:translate({xb:.1f}px,{y:.1f}px) "
+                  f"scaleX({sx})}}")
+    css = ["@keyframes run{" + "".join(kf) + "}",
+           f".mv{{animation:run {LOOP}s linear infinite}}",
            "@keyframes chomp{0%,49%{transform:scaleY(1)}"
-           "50%,100%{transform:scaleY(.42)}}",
-           ".jaw{animation:chomp .36s steps(2,end) infinite}"]
+           "50%,100%{transform:scaleY(.4)}}",
+           ".jaw{animation:chomp .32s steps(2,end) infinite}"]
+
     for ci in range(cols):
-        pct = (lead + ci * step) / travel * 100.0
-        a = max(pct - 1.0, 0.0)
-        b = min(pct + 1.0, 99.0)
-        css.append(f"@keyframes e{ci}{{0%,{a:.2f}%{{opacity:1}}"
-                   f"{b:.2f}%,100%{{opacity:.1}}}}")
-        css.append(f".e{ci}{{animation:e{ci} {LOOP}s linear infinite}}")
+        for ri in range(ROWS):
+            f = (ci if ri % 2 == 0 else cols - 1 - ci) / max(cols - 1, 1)
+            pct = (ri + f) / ROWS * 100.0
+            a = max(pct - 0.35, 0.0)
+            b = min(pct + 0.35, 99.5)
+            css.append(f"@keyframes k{ci}_{ri}{{0%,{a:.3f}%{{opacity:1}}"
+                       f"{b:.3f}%,100%{{opacity:.1}}}}")
+            css.append(f".k{ci}_{ri}{{animation:k{ci}_{ri} {LOOP}s linear "
+                       f"infinite}}")
 
     cur, best = streaks(weeks)
     s = [head(W, h, "Pac-Man mange mon graphe de contributions"), panel(W, h),
@@ -767,37 +804,33 @@ def gen_pacman(gh: dict) -> None:
         for ri, d in enumerate(wk["contributionDays"]):
             v = d["contributionCount"]
             lvl = 0 if v == 0 else min(4, 1 + int(3.0 * v / hi))
-            cls = f' class="e{ci}"' if v else ""
+            cls = f' class="k{ci}_{ri}"' if v else ""
             s.append(f'<rect{cls} x="{x0 + ci * step:.2f}" '
                      f'y="{y0 + ri * step:.2f}" width="{cell:.2f}" '
                      f'height="{cell:.2f}" rx="{cell * .22:.2f}" '
                      f'fill="{pal[lvl]}"/>')
 
-    # Pac-Man sur la ligne du milieu, deux fantomes a sa suite
-    py = y0 + 3 * step + cell / 2
-    r = cell * .95
-    s.append(f'<g class="pac" transform="translate({x0 - lead:.1f},0)">')
-    s.append(f'<g transform="translate(0,{py:.1f})">'
-             f'<g class="jaw">'
+    # Pac-Man, puis deux fantomes qui le suivent sur le meme parcours
+    r = cell * .72
+    base = f'translate({x0 + cell / 2:.2f},{y0 + cell / 2:.2f})'
+    s.append(f'<g transform="{base}"><g class="mv"><g class="jaw">'
              f'<path d="M0 0L{r:.2f} {-r * .58:.2f}'
              f'A{r:.2f} {r:.2f} 0 1 0 {r:.2f} {r * .58:.2f}Z" '
-             f'fill="{C["yellow"]}"/></g></g>')
-    for gi, gc in enumerate((C["red"], C["mauve"])):
-        gx = -(gi + 1) * cell * 2.6
-        g = r * .82
+             f'fill="{C["yellow"]}"/></g></g></g>')
+    for gi, (gc, dly) in enumerate(((C["red"], .55), (C["mauve"], 1.1))):
+        g = r * .8
         s.append(
-            f'<g transform="translate({gx:.2f},{py:.2f})" opacity=".9">'
-            # corps : demi-cercle en haut, jupe crenelee en bas
+            f'<g transform="{base}"><g class="mv" '
+            f'style="animation-delay:{dly}s"><g opacity=".9">'
             f'<path d="M{-g:.2f} {g * .55:.2f}V0'
-            f'A{g:.2f} {g:.2f} 0 0 1 {g:.2f} 0'
-            f'V{g * .55:.2f}l{-g * .5:.2f} {g * .28:.2f}'
-            f'l{-g * .5:.2f} {-g * .28:.2f}'
+            f'A{g:.2f} {g:.2f} 0 0 1 {g:.2f} 0V{g * .55:.2f}'
+            f'l{-g * .5:.2f} {g * .28:.2f}l{-g * .5:.2f} {-g * .28:.2f}'
             f'l{-g * .5:.2f} {g * .28:.2f}Z" fill="{gc}"/>'
-            f'<circle cx="{-g * .34:.2f}" cy="{-g * .16:.2f}" r="{g * .26:.2f}" '
-            f'fill="#11111b"/>'
-            f'<circle cx="{g * .34:.2f}" cy="{-g * .16:.2f}" r="{g * .26:.2f}" '
-            f'fill="#11111b"/></g>')
-    s.append("</g></svg>")
+            f'<circle cx="{-g * .34:.2f}" cy="{-g * .16:.2f}" '
+            f'r="{g * .24:.2f}" fill="#11111b"/>'
+            f'<circle cx="{g * .34:.2f}" cy="{-g * .16:.2f}" '
+            f'r="{g * .24:.2f}" fill="#11111b"/></g></g></g>')
+    s.append("</svg>")
     (OUT / "contrib-pacman.svg").write_text("".join(s), encoding="utf-8")
 
 
