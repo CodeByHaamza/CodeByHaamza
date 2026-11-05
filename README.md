@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/gen/header.svg" alt="Hamza — CS student, ships a project every two weeks, ROM hacker" width="100%">
+<img src="assets/gen/header.svg" alt="HAMZA, in a Spider-Verse style with cyan and magenta chromatic offset, surrounded by motifs of my hobbies: a spider, a Persona tarot arcana, code brackets, a dumbbell and manga speed lines" width="100%">
 
 [![personadle.net](assets/gen/link-personadle-net.svg)](https://personadle.net)
 [![discord](assets/gen/link-discord.svg)](https://discord.gg/personadle)

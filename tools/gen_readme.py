@@ -327,51 +327,155 @@ def languages(repos: list[dict], top: int = 6) -> list[tuple[str, float]]:
 
 # ---------------------------------------------------------------- 1. header
 
+# Les cinq lettres, dessinees en polygones sur une grille de 100 x 140.
+# Pourquoi pas du <text> : un SVG affiche via <img> ne charge aucune police,
+# donc le rendu dependrait de ce que la machine du visiteur possede. Arial
+# Black existe sous Windows et macOS, pas sous Linux, et la graisse change
+# tout a l'effet de decalage chromatique. En chemins, c'est identique partout.
+GLYPHS = {
+    "H": "M0 0H28V56H72V0H100V140H72V84H28V140H0Z",
+    "A": ("M50 0 100 140H70L61 112H39L30 140H0ZM50 44 40 86H60Z"),
+    "M": "M0 140V0H26L50 58 74 0H100V140H78V50L58 94H42L22 50V140Z",
+    "Z": "M0 0H100V26L40 114H100V140H0V114L60 26H0Z",
+}
+NAME = "HAMZA"
+GW, GH, ADV = 100.0, 140.0, 108.0
+
+
+def name_path(scale: float) -> tuple:
+    """Le mot entier en un seul chemin, plus sa largeur rendue."""
+    subs = []
+    for k, chx in enumerate(NAME):
+        d = GLYPHS[chx]
+        subs.append(f'<path d="{d}" transform="translate({k * ADV:.1f},0)"/>')
+    return "".join(subs), (len(NAME) - 1) * ADV + GW
+
+
+def hobby_glyphs(cx_: float, cy_: float, side: int) -> list:
+    """Motifs de mes hobbies, chacun centre sur (0,0) pour que le scale de
+    l'animation tourne autour de son propre centre sans transform-origin."""
+    out = []
+    # araignee (Spider-Man)
+    spider = ('<g stroke="#f4f4ff" stroke-width="2.1" fill="none" '
+              'stroke-linecap="round">'
+              '<path d="M-13-9-5-2M13-9 5-2M-15 1-6 1M15 1 6 1'
+              'M-13 11-5 4M13 11 5 4"/></g>'
+              '<ellipse cx="0" cy="1" rx="4.6" ry="6" fill="#f4f4ff"/>')
+    # arcane Persona : une carte avec son chiffre romain
+    tarot = ('<rect x="-9" y="-12.5" width="18" height="25" rx="2" '
+             'fill="none" stroke="#c9a227" stroke-width="2"/>'
+             '<path d="M0-7 2.1-1.6 7.6-1.6 3.2 1.9 4.9 7.3 0 4 -4.9 7.3'
+             '-3.2 1.9 -7.6-1.6 -2.1-1.6Z" fill="#c9a227"/>')
+    # le code
+    code = ('<g stroke="#a6e3a1" stroke-width="2.4" fill="none" '
+            'stroke-linecap="round" stroke-linejoin="round">'
+            '<path d="M-5-8-13 0-5 8M5-8 13 0 5 8M1.5-10-1.5 10"/></g>')
+    # haltere
+    gym = ('<g fill="#89b4fa">'
+           '<rect x="-14" y="-7" width="4.5" height="14" rx="1.5"/>'
+           '<rect x="-8.5" y="-10" width="4.5" height="20" rx="1.5"/>'
+           '<rect x="4" y="-10" width="4.5" height="20" rx="1.5"/>'
+           '<rect x="9.5" y="-7" width="4.5" height="14" rx="1.5"/>'
+           '<rect x="-4.5" y="-2" width="9" height="4"/></g>')
+    # lignes de vitesse (manga)
+    speed = ('<g stroke="#f38ba8" stroke-width="2" stroke-linecap="round">'
+             '<path d="M-14-7H2M-14 0H8M-14 7H-1"/></g>')
+    return [spider, tarot, code, gym, speed]
+
+
 def gen_header(cfg: dict) -> None:
-    """Fenetre de terminal : le nom en gros figlet, puis la phrase d'accroche.
+    """Le nom a la Spider-Verse : trame de points, decalage chromatique
+    cyan/magenta qui converge a l'apparition, et des motifs de mes hobbies
+    qui popent autour.
 
-    Le figlet vient de assets/ascii/hamza.txt, le banner.name.ans de mes
-    dotfiles. Il est rendu en rectangles deux tons plutot qu'en <text> : les
-    metriques d'une police varient d'une machine a l'autre et les colonnes
-    d'un figlet se desalignent au premier pixel d'ecart.
+    Les lettres sont des polygones (voir GLYPHS) et non du texte : pas de
+    police a charger, donc le meme rendu partout. Les ゴゴゴ viennent de
+    l'art braille de mes dotfiles.
 
-    assets/matrix-name.svg faisait ce travail un temps ; son animation ne
-    plaisait pas, le fichier reste la si on veut y revenir.
+    Comme partout ici, l'etat ECRIT est l'etat final. Les keyframes partent
+    du decale/invisible et y ramenent : sans animations, le nom se lit.
     """
-    art = (ASCII / "hamza.txt").read_text(encoding="utf-8")
-    cw, chh = 11.5, 17.5
-    fw, fh = figlet_size(art, cw, chh)
     ident = cfg["identity"]
+    ono = (ASCII / "jojo-onomatope").with_suffix(".txt").read_text(encoding="utf-8")
 
-    fy = 58.0
-    tag_y = fy + fh + 32
-    h = tag_y + 24
+    scale = 0.60
+    letters, raw_w = name_path(scale)
+    nw, nh = raw_w * scale, GH * scale
+    nx, ny = (W - nw) / 2, 46.0
+    tag_y = ny + nh + 34
+    h = tag_y + 26
 
-    s = [head(W, h, "Hamza — profil GitHub"), panel(W, h),
+    SKEW = -11          # l'italique
+    CY, MG, INK = "#00e5ff", "#ff2e63", "#0a0a12"
+
+    css = ("@keyframes cyIn{from{opacity:0;transform:translate(-40px,13px)}"
+           "to{opacity:1;transform:translate(-5px,3px)}}"
+           "@keyframes mgIn{from{opacity:0;transform:translate(40px,-13px)}"
+           "to{opacity:1;transform:translate(5px,-3px)}}"
+           "@keyframes fgIn{from{opacity:0;transform:scale(1.08)}"
+           "to{opacity:1;transform:scale(1)}}"
+           "@keyframes jit{0%,100%{transform:translate(0,0)}"
+           "20%{transform:translate(-3px,1px)}40%{transform:translate(3px,-1px)}"
+           "60%{transform:translate(-2px,0)}80%{transform:translate(2px,1px)}}"
+           "@keyframes pop{from{opacity:0;transform:scale(.3) rotate(-25deg)}"
+           "to{opacity:1;transform:scale(1) rotate(0)}}"
+           "@keyframes fade{from{opacity:0}to{opacity:1}}"
+           f".cy{{opacity:1;transform:translate(-5px,3px);"
+           f"animation:cyIn .8s cubic-bezier(.2,1.1,.3,1) both}}"
+           f".mg{{opacity:1;transform:translate(5px,-3px);"
+           f"animation:mgIn .8s cubic-bezier(.2,1.1,.3,1) both}}"
+           ".fg{opacity:1;animation:fgIn .55s ease-out both;animation-delay:.5s}"
+           ".gl{animation:jit .45s steps(5,end) 1 both;animation-delay:.8s}"
+           ".hb{opacity:1;animation:pop .5s cubic-bezier(.2,1.5,.3,1) both}"
+           ".tg{opacity:1;animation:fade .6s ease-out both;animation-delay:1.1s}"
+           "@media(prefers-reduced-motion:reduce){"
+           ".cy,.mg,.fg,.gl,.hb,.tg{animation:none}}")
+
+    s = [head(W, h, "HAMZA — " + ident["tagline"]), panel(W, h),
          titlebar(W, f'{ident["handle"]}@{ident["host"]} — {ident["shell"]}'),
-         "<style>" + WIPE_CSS +
-         "@keyframes fade{from{opacity:0}to{opacity:1}}"
-         ".fi{opacity:1;animation:fade .5s ease-out both}"
-         "@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}"
-         ".cur{animation:blink 1.15s steps(1,end) infinite}</style>",
-         f'<defs><linearGradient id="nm" x1="0" y1="0" x2="1" y2="1">'
-         f'<stop offset="0" stop-color="{C["blue"]}"/>'
-         f'<stop offset=".55" stop-color="{C["mauve"]}"/>'
-         f'<stop offset="1" stop-color="{C["red"]}"/></linearGradient>'
-         f'<clipPath id="cf"><rect x="0" y="{fy - 3:.1f}" width="{W}" '
-         f'height="{fh + 6:.1f}"/></clipPath></defs>']
+         "<style>" + css + "</style>",
+         '<defs><pattern id="ht" width="8" height="8" '
+         'patternUnits="userSpaceOnUse">'
+         f'<circle cx="2" cy="2" r="1.15" fill="{MG}" opacity=".3"/>'
+         '</pattern>'
+         f'<clipPath id="pan"><rect x="1" y="27" width="{W-2}" '
+         f'height="{h-28:.1f}"/></clipPath></defs>',
+         f'<g clip-path="url(#pan)">'
+         f'<rect x="1" y="27" width="{W-2}" height="{h-28:.1f}" '
+         f'fill="url(#ht)"/>']
 
-    fx = (W - fw) / 2
-    s.append('<g clip-path="url(#cf)">')
-    s.append(figlet_rects(art, fx, fy, cw, chh, "url(#nm)", "#33406b"))
+    # trois calques du meme mot : cyan et magenta decales, blanc par-dessus
+    base = (f'translate({nx:.1f},{ny:.1f}) scale({scale:.4f}) '
+            f'skewX({SKEW})')
+    s.append('<g class="gl">')
+    for cls, col in (("cy", CY), ("mg", MG)):
+        s.append(f'<g class="{cls}"><g transform="{base}" fill="{col}" '
+                 f'fill-rule="evenodd">{letters}</g></g>')
+    s.append(f'<g class="fg"><g transform="{base}" fill="none" stroke="{INK}" '
+             f'stroke-width="9" stroke-linejoin="round" '
+             f'fill-rule="evenodd">{letters}</g>'
+             f'<g transform="{base}" fill="#f4f4ff" '
+             f'fill-rule="evenodd">{letters}</g></g>')
     s.append("</g>")
-    s.append(wipe(fx - 2, fy - 3, fw + 4, fh + 6, 0.0, 1.05))
 
-    s.append('<g class="fi" style="animation-delay:1.05s">'
-             + txt(W / 2, tag_y, ident["tagline"], C["dim"], 12.5,
+    # les hobbies, de part et d'autre du nom
+    glyphs = hobby_glyphs(0, 0, 1)
+    spots = [(nx - 54, ny + 26), (nx - 40, ny + 70), (nx - 62, ny + 110),
+             (nx + nw + 48, ny + 30), (nx + nw + 40, ny + 78)]
+    for k, (gx, gy) in enumerate(spots):
+        s.append(f'<g transform="translate({gx:.1f},{gy:.1f})">'
+                 f'<g class="hb" style="animation-delay:{.95 + k * .11:.2f}s">'
+                 f'{glyphs[k]}</g></g>')
+
+    # les ゴゴゴ de mes dotfiles, derriere a droite
+    ow, oh = braille_size(ono, 1.0)
+    s.append(f'<g class="hb" style="animation-delay:1.5s" opacity=".5">'
+             + braille_rects(ono, W - ow - 26, ny - 8, 1.0, MG) + "</g>")
+
+    s.append(f'<g class="tg">'
+             + txt(W / 2, tag_y, ident["tagline"], "#8b93a8", 12.5,
                    anchor="middle") + "</g>")
-    s.append(f'<rect class="cur" x="{W / 2 + 4:.1f}" y="{tag_y + 7:.1f}" '
-             f'width="8" height="2.5" fill="{C["dim"]}" opacity=".7"/>')
+    s.append("</g>")   # ferme le groupe de rognage du panneau
     s.append("</svg>")
     (OUT / "header.svg").write_text("".join(s), encoding="utf-8")
 
