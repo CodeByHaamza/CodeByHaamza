@@ -1,136 +1,40 @@
-![header](https://capsule-render.vercel.app/api?type=waving&color=0:70A5FD,100:1A1B27&height=120&section=header)
-
 <div align="center">
 
-<img src="./assets/matrix-name.svg" width="800" alt="HAMZA"/>
+<img src="assets/gen/header.svg" alt="Hamza — CS student, ships a project every two weeks, ROM hacker" width="100%">
 
-![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&pause=1000&color=70A5FD&center=true&vCenter=true&width=600&lines=Web+Developer+%7C+BUT+Informatique;Creator+of+PersonaDLE;ROM+Hacker+%7C+Translator;Tech+%26+Gaming+Enthusiast)
-
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:hamza.karrouchi.dev@gmail.com)
-![Visit Count](https://komarev.com/ghpvc/?username=CodeByHaamza&icon=0&color=70A5FD&style=for-the-badge)
+[![personadle.net](assets/gen/link-personadle-net.svg)](https://personadle.net)
+[![discord](assets/gen/link-discord.svg)](https://discord.gg/personadle)
+[![steam](assets/gen/link-steam.svg)](https://steamcommunity.com/id/codebyhaamza)
+[![mail](assets/gen/link-mail.svg)](mailto:hamza.karrouchi.dev@gmail.com)
 
 </div>
 
-<div align="center"><img src="./assets/divider.svg" width="100%" alt=""/></div>
+<img src="assets/gen/whoami.svg" alt="Third-year CS student (BUT Informatique), work-study, France. I build small complete things: a daily game, a gesture engine, a fighting game, and French fan translations of PSP-era Megaten titles.  Everything ships with Docker, tests and a changelog. I don't leave projects half-finished — I just start too many of them." width="100%">
 
-## 💫 About Me
+<img src="assets/gen/neofetch.svg" alt="My two machines: PC-HAMZA (Windows 11, Ryzen 9 9950X3D, RTX 5080, 32 GB DDR5) and karrouchi-server (Ubuntu 26.04, running backups, a Discord bot, game servers and scrapers)" width="100%">
 
-- 🎓 Third-year Computer Science student (BUT Informatique) in a work-study program, aiming for an engineering degree or a master's next
-- 🔭 Currently working on **[PersonaDLE](https://personadle.net)**, a daily guessing game based on the Persona series (Vanilla JS, PHP, MariaDB, Docker)
-- 🌍 Translating Persona 1 (PSP) into French, digging into reverse-engineering and tooling along the way
-- ⚛️ Learned React during my internship and now use it in my personal projects
-- 🌱 Currently learning Kubernetes and exploring new tools across the stack
-- 👯 Open to collaborating on fan translation projects, game-related web apps and dev tools
-- 💬 Ask me about the Persona / Shin Megami Tensei series, ROM hacking or Docker setups
-- 🎮 Passionate about video games, manga & anime, tech and sports
-- 🏋️ Back at the gym, and planning to build a website to track my progress
-- ⚡ Fun fact: my PC took 5+ years to build: not because of the assembly, but because of the saving and the endless component research
+<img src="assets/gen/stack.svg" alt="Stack by category: languages: typescript, python, php, javascript, java, c, bash / web: react, three.js, vite, node, nestjs, pwa / data: mariadb, mysql, mongodb, pandas, numpy / infra: docker, compose, github actions, apache, cloudflare, ubuntu / quality: vitest, playwright, pytest, ruff, eslint, prettier / rabbit holes: mediapipe, onnxruntime-web, pygame-ce, psp eboot" width="100%">
 
-<details>
-<summary><b>🔥 My Rig & Setup (The 5-Year Build)</b></summary>
-<br>
+<img src="assets/gen/projects.svg" alt="My projects: Grimoire du Cœur — French Persona / SMT / Atlus community — I run it; Persona_GRUB_Themes — 70+ bootloader themes for Persona fans; personadle — daily Persona guessing game, 6 modes; kagami — anime hand-signs recognised by your webcam; jojo-arena — 1v1 top-down pixel arena fighter; p2is-relecture — proofreading webapp for the Persona 2 translation; ViscoCrowd — particle simulation of a panicking pool evacuation; five_nights_at_fabron — point-and-click horror survival game" width="100%">
 
-*Good things come to those who wait.*
+<div align="center"><sub>[Grimoire du Cœur](https://github.com/Grimoire-du-Coeur) · [Persona_GRUB_Themes](https://github.com/CodeByHaamza/Persona_GRUB_Themes) · [personadle](https://github.com/CodeByHaamza/personadle) · [kagami](https://github.com/CodeByHaamza/kagami) · [jojo-arena](https://github.com/CodeByHaamza/jojo-arena) · [p2is-relecture](https://github.com/CodeByHaamza/p2is-relecture) · [ViscoCrowd](https://github.com/ViscoCrowd/ViscoCrowd-simulation) · [five_nights_at_fabron](https://github.com/damien-ledain/five_nights_at_fabron)</sub></div>
 
-- **CPU:** AMD Ryzen 9 9950X3D
-- **GPU:** NVIDIA RTX 5080
-- **Homelab:** Dockerized ecosystem running custom apps, web scraping tools and game servers
+<img src="assets/gen/funfacts.svg" alt="My bootloader runs a Persona theme. I wrote the pack — 70+ of them. My gym sessions live in a git repo as versioned JSON, with e1RM maths and a rank scale. Yes, I review my own pull requests on leg day. To translate Persona 1 and 2 into French I had to take PSP EBOOT binaries apart, find the script tables and write the reinjector myself. Nobody had done it for these games in French before. My homeserver greets me with a JoJo onomatopoeia in braille ASCII. It's the thing flying across the bottom of this page." width="100%">
 
-</details>
-
-<div align="center"><img src="./assets/divider.svg" width="100%" alt=""/></div>
-
-## 💻 Tech Stack
+<img src="assets/gen/prompt-games.svg" alt="cat passions/games.md" width="100%">
 
 <div align="center">
 
-**Languages**
-
-<img src="https://skillicons.dev/icons?i=c,java,js,ts,php,py,bash&theme=dark" alt="Languages"/>
-
-**Frontend**
-
-<img src="https://skillicons.dev/icons?i=html,css,react,threejs&theme=dark" alt="Frontend"/>
-
-**Backend & Databases**
-
-<img src="https://skillicons.dev/icons?i=nodejs,nestjs,mysql,mongodb&theme=dark" alt="Backend & Databases"/>
-
-**DevOps & Tools**
-
-<img src="https://skillicons.dev/icons?i=docker,git,githubactions,cloudflare&theme=dark" alt="DevOps & Tools"/>
-
-**And also**
-
-![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=mariadb&logoColor=white) ![Apache](https://img.shields.io/badge/apache-%23D42029.svg?style=flat-square&logo=apache&logoColor=white) ![Playwright](https://img.shields.io/badge/-playwright-%232EAD33?style=flat-square&logo=playwright&logoColor=white) ![Vitest](https://img.shields.io/badge/-Vitest-252529?style=flat-square&logo=vitest&logoColor=FCC72B) ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=flat-square&logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=flat-square&logo=numpy&logoColor=white) ![Claude](https://img.shields.io/badge/Claude-D97757?style=flat-square&logo=claude&logoColor=white)
+<a href="https://store.steampowered.com/app/1687950/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1687950/header.jpg" width="138" alt="Persona 5 Royal"></a>
+<a href="https://store.steampowered.com/app/2161700/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2161700/header.jpg" width="138" alt="Persona 3 Reload"></a>
+<a href="https://store.steampowered.com/app/1113000/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1113000/header.jpg" width="138" alt="Persona 4 Golden"></a>
+<a href="https://store.steampowered.com/app/1245620/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg" width="138" alt="Elden Ring"></a>
+<a href="https://store.steampowered.com/app/2358720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" width="138" alt="Black Myth: Wukong"></a>
+<a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="138" alt="Cyberpunk 2077"></a>
 
 </div>
 
-<div align="center"><img src="./assets/divider.svg" width="100%" alt=""/></div>
-
-## 📊 GitHub Analytics
-
-<div align="center">
-  <img height="170" src="https://github-readme-stats.vercel.app/api?username=CodeByHaamza&show_icons=true&include_all_commits=true&theme=tokyonight&hide_border=true" alt="GitHub Stats"/>
-  <img height="170" src="https://streak-stats.demolab.com/?user=CodeByHaamza&theme=tokyonight&hide_border=true" alt="GitHub Streak"/>
-</div>
-
-<br/>
-
-<div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=CodeByHaamza&theme=tokyo-night&hide_border=true&area=true" alt="Activity Graph"/>
-</div>
-
-<br/>
-
-<div align="center">
-  <img src="./profile-3d-contrib/profile-night-view.svg" alt="3D Contributions"/>
-</div>
-
-<br/>
-
-<div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/CodeByHaamza/CodeByHaamza/output/snake-dark.svg"/>
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/CodeByHaamza/CodeByHaamza/output/snake-light.svg"/>
-    <img alt="Snake eating my contributions" src="https://raw.githubusercontent.com/CodeByHaamza/CodeByHaamza/output/snake-dark.svg"/>
-  </picture>
-</div>
-
-<br/>
-
-<div align="center"><img src="./assets/divider.svg" width="100%" alt=""/></div>
-
-## 🎮 Gaming Corner
-
-<div align="center">
-  <img src="./assets/take-your-time.svg" alt="Take Your Time"/>
-</div>
-
-<div align="center">
-<table>
-<tr>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/1687950/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1687950/header.jpg" width="200" alt="Persona 5 Royal"/></a><br/><sub><b>Persona 5 Royal</b></sub></td>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/2161700/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2161700/header.jpg" width="200" alt="Persona 3 Reload"/></a><br/><sub><b>Persona 3 Reload</b></sub></td>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/1113000/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1113000/header.jpg" width="200" alt="Persona 4 Golden"/></a><br/><sub><b>Persona 4 Golden</b></sub></td>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/1245620/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg" width="200" alt="Elden Ring"/></a><br/><sub><b>Elden Ring</b></sub></td>
-</tr>
-<tr>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/2358720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" width="200" alt="Black Myth: Wukong"/></a><br/><sub><b>Black Myth: Wukong</b></sub></td>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="200" alt="Cyberpunk 2077"/></a><br/><sub><b>Cyberpunk 2077</b></sub></td>
-<td align="center" width="25%"><a href="https://store.steampowered.com/app/1174180/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg" width="200" alt="Red Dead Redemption 2"/></a><br/><sub><b>Red Dead Redemption 2</b></sub></td>
-<td align="center" width="25%"><a href="https://www.playstation.com/games/bloodborne/"><img src="./assets/bloodborne.jpg" width="200" alt="Bloodborne"/></a><br/><sub><b>Bloodborne</b></sub></td>
-</tr>
-</table>
-</div>
-
-<div align="center"><img src="./assets/divider.svg" width="100%" alt=""/></div>
-
-## 🍥 Manga & Anime Corner
-
-<div align="center">
-  <img src="./assets/menacing.svg" width="720" alt="ゴゴゴ Is that a JoJo reference?"/>
-</div>
+<img src="assets/gen/prompt-manga.svg" alt="cat passions/manga.md — auto-updated from AniList" width="100%">
 
 <!-- anime-favorites start -->
 <div align="center">
@@ -145,10 +49,62 @@
 </div>
 <!-- anime-favorites end -->
 
-<br/>
+<img src="assets/gen/stats.svg" alt="GitHub stats, generated in-repo with no external service" width="100%">
 
-<div align="right">
-  <img src="./assets/to-be-continued.svg" width="360" alt="To Be Continued"/>
-</div>
+<img src="assets/gen/contrib-pacman.svg" alt="Pac-Man eating my contribution graph" width="100%">
 
-![footer](https://capsule-render.vercel.app/api?type=waving&color=0:1A1B27,100:70A5FD&height=120&section=footer)
+<img src="assets/gen/star-trail.svg" alt="A Joestar shooting star crossing the page, trailed by JoJo onomatopoeia in braille ASCII" width="100%">
+
+<details>
+<summary><sub>Plain-text version — every block above is a generated SVG, so here is the same content as selectable text</sub></summary>
+
+```
+hamza@PC-HAMZA
+  os        Windows 11 Home · build 26300
+  cpu       AMD Ryzen 9 9950X3D  (16c / 32t)
+  gpu       NVIDIA RTX 5080 · 16 GB GDDR7
+  ram       32 GB G.Skill DDR5-6000 CL36
+  board     Gigabyte B850 AORUS ELITE WIFI7
+  disk      2× Samsung 990 EVO Plus 2 TB · IronWolf 8 TB
+  shell     pwsh 7 + oh-my-posh
+  display   2× 27" 1440p
+  built     5 years of saving up, not of assembling
+hamza@karrouchi-server
+  os        Ubuntu 26.04 · bash
+  runs      backups · PersonaDLE Discord bot
+            game servers · scrapers
+  stack     docker compose, all of it
+
+stack
+languages      typescript · python · php · javascript · java · c · bash
+web            react · three.js · vite · node · nestjs · pwa
+data           mariadb · mysql · mongodb · pandas · numpy
+infra          docker · compose · github actions · apache · cloudflare · ubuntu
+quality        vitest · playwright · pytest · ruff · eslint · prettier
+rabbit holes   mediapipe · onnxruntime-web · pygame-ce · psp eboot
+gym            full body 3×/week, tracked in a repo like everything else
+
+projects
+Grimoire du Cœur       French Persona / SMT / Atlus community — I run it    https://github.com/Grimoire-du-Coeur
+Persona_GRUB_Themes    70+ bootloader themes for Persona fans               https://github.com/CodeByHaamza/Persona_GRUB_Themes
+personadle             daily Persona guessing game, 6 modes                 https://github.com/CodeByHaamza/personadle
+kagami                 anime hand-signs recognised by your webcam           https://github.com/CodeByHaamza/kagami
+jojo-arena             1v1 top-down pixel arena fighter                     https://github.com/CodeByHaamza/jojo-arena
+p2is-relecture         proofreading webapp for the Persona 2 translation    https://github.com/CodeByHaamza/p2is-relecture
+ViscoCrowd             particle simulation of a panicking pool evacuation   https://github.com/ViscoCrowd/ViscoCrowd-simulation
+five_nights_at_fabron  point-and-click horror survival game                 https://github.com/damien-ledain/five_nights_at_fabron
+
+private        suivi-muscu · P1-FR · P5RS mod · personadle-discord
+```
+
+</details>
+
+<div align="center"><sub>
+
+Every image on this page is generated by
+[`tools/gen_readme.py`](tools/gen_readme.py) from
+[`data/profile.json`](data/profile.json) and refreshed by a GitHub Action.
+No third-party badge service, no external font, no external image — except the
+Steam and AniList covers above.
+
+</sub></div>

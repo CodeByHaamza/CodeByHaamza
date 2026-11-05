@@ -1,0 +1,146 @@
+{
+  "identity": {
+    "handle": "hamza",
+    "host": "PC-HAMZA",
+    "shell": "pwsh",
+    "tagline": "CS student  ·  ships a project every two weeks  ·  ROM hacker",
+    "links": [
+      { "label": "personadle.net", "url": "https://personadle.net", "icon": null },
+      { "label": "discord", "url": "https://discord.gg/personadle", "icon": "discord" },
+      { "label": "steam", "url": "https://steamcommunity.com/id/codebyhaamza", "icon": "steam" },
+      { "label": "mail", "url": "mailto:hamza.karrouchi.dev@gmail.com", "icon": null }
+    ]
+  },
+
+  "whoami": [
+    "Third-year CS student (BUT Informatique), work-study, France.",
+    "I build small complete things: a daily game, a gesture engine, a",
+    "fighting game, and French fan translations of PSP-era Megaten titles.",
+    "",
+    "Everything ships with Docker, tests and a changelog. I don't leave",
+    "projects half-finished — I just start too many of them."
+  ],
+
+  "machines": [
+    {
+      "user": "hamza", "host": "PC-HAMZA", "accent": "blue",
+      "specs": [
+        ["os",      "Windows 11 Home · build 26300"],
+        ["cpu",     "AMD Ryzen 9 9950X3D  (16c / 32t)"],
+        ["gpu",     "NVIDIA RTX 5080 · 16 GB GDDR7"],
+        ["ram",     "32 GB G.Skill DDR5-6000 CL36"],
+        ["board",   "Gigabyte B850 AORUS ELITE WIFI7"],
+        ["disk",    "2× Samsung 990 EVO Plus 2 TB · IronWolf 8 TB"],
+        ["shell",   "pwsh 7 + oh-my-posh"],
+        ["display", "2× 27\" 1440p"],
+        ["built",   "5 years of saving up, not of assembling"]
+      ]
+    },
+    {
+      "user": "hamza", "host": "karrouchi-server", "accent": "green",
+      "specs": [
+        ["os",    "Ubuntu 26.04 · bash"],
+        ["runs",  "backups · PersonaDLE Discord bot"],
+        ["",      "game servers · scrapers"],
+        ["stack", "docker compose, all of it"]
+      ]
+    }
+  ],
+
+  "stack": [
+    { "cat": "languages", "items": [
+      ["typescript", "typescript"], ["python", "python"], ["php", "php"],
+      ["javascript", "javascript"], ["java", "openjdk"], ["c", "c"], ["bash", "gnubash"]
+    ]},
+    { "cat": "web", "items": [
+      ["react", "react"], ["three.js", "threedotjs"], ["vite", "vite"],
+      ["node", "nodedotjs"], ["nestjs", "nestjs"], ["pwa", "pwa"]
+    ]},
+    { "cat": "data", "items": [
+      ["mariadb", "mariadb"], ["mysql", "mysql"], ["mongodb", "mongodb"],
+      ["pandas", "pandas"], ["numpy", "numpy"]
+    ]},
+    { "cat": "infra", "items": [
+      ["docker", "docker"], ["compose", null], ["github actions", "githubactions"],
+      ["apache", "apache"], ["cloudflare", "cloudflare"], ["ubuntu", "ubuntu"]
+    ]},
+    { "cat": "quality", "items": [
+      ["vitest", "vitest"], ["playwright", "playwright"], ["pytest", "pytest"],
+      ["ruff", "ruff"], ["eslint", "eslint"], ["prettier", "prettier"]
+    ]},
+    { "cat": "rabbit holes", "items": [
+      ["mediapipe", "mediapipe"], ["onnxruntime-web", "onnx"],
+      ["pygame-ce", "__pygame"], ["psp eboot", null]
+    ]}
+  ],
+
+  "gym": "full body 3×/week, tracked in a repo like everything else",
+
+  "projects": [
+    { "name": "Grimoire du Cœur", "kind": "org",
+      "url": "https://github.com/Grimoire-du-Coeur", "stars": 71,
+      "desc": "French Persona / SMT / Atlus community — I run it",
+      "meta": "7 public repos · game + manga translations, tools, portal" },
+
+    { "name": "Persona_GRUB_Themes", "kind": "repo",
+      "url": "https://github.com/CodeByHaamza/Persona_GRUB_Themes", "stars": 23,
+      "desc": "70+ bootloader themes for Persona fans",
+      "meta": "python · grub2 · P5R, P5X and P3R covered" },
+
+    { "name": "personadle", "kind": "repo",
+      "url": "https://github.com/CodeByHaamza/personadle", "stars": 6,
+      "desc": "daily Persona guessing game, 6 modes",
+      "meta": "vanilla js · php · mariadb · docker  →  personadle.net" },
+
+    { "name": "kagami", "kind": "repo",
+      "url": "https://github.com/CodeByHaamza/kagami", "stars": 0,
+      "desc": "anime hand-signs recognised by your webcam",
+      "meta": "typescript strict · mediapipe · 440 tests · offline pwa" },
+
+    { "name": "jojo-arena", "kind": "repo",
+      "url": "https://github.com/CodeByHaamza/jojo-arena", "stars": 0,
+      "desc": "1v1 top-down pixel arena fighter",
+      "meta": "python · pygame-ce · 959 tests · 94% cov · deterministic 60 fps" },
+
+    { "name": "p2is-relecture", "kind": "repo",
+      "url": "https://github.com/CodeByHaamza/p2is-relecture", "stars": 2,
+      "desc": "proofreading webapp for the Persona 2 translation",
+      "meta": "vanilla js · static site · Discord-sourced suggestions" }
+  ],
+
+  "uni": [
+    { "name": "ViscoCrowd", "kind": "org",
+      "url": "https://github.com/ViscoCrowd/ViscoCrowd-simulation",
+      "desc": "particle simulation of a panicking pool evacuation",
+      "meta": "python · R5.12 mathematical modelling, BUT 3" },
+
+    { "name": "five_nights_at_fabron", "kind": "repo",
+      "url": "https://github.com/damien-ledain/five_nights_at_fabron",
+      "desc": "point-and-click horror survival game",
+      "meta": "spring boot · vanilla js · strict client-server · IUT R401" }
+  ],
+
+  "private_note": "suivi-muscu · P1-FR · P5RS mod · personadle-discord",
+
+  "funfacts": [
+    "My bootloader runs a Persona theme. I wrote the pack — 70+ of them.",
+    "My gym sessions live in a git repo as versioned JSON, with e1RM maths",
+    "and a rank scale. Yes, I review my own pull requests on leg day.",
+    "",
+    "To translate Persona 1 and 2 into French I had to take PSP EBOOT",
+    "binaries apart, find the script tables and write the reinjector myself.",
+    "Nobody had done it for these games in French before.",
+    "",
+    "My homeserver greets me with a JoJo onomatopoeia in braille ASCII.",
+    "It's the thing flying across the bottom of this page."
+  ],
+
+  "games": [
+    { "appid": "1687950", "name": "Persona 5 Royal" },
+    { "appid": "2161700", "name": "Persona 3 Reload" },
+    { "appid": "1113000", "name": "Persona 4 Golden" },
+    { "appid": "1245620", "name": "Elden Ring" },
+    { "appid": "2358720", "name": "Black Myth: Wukong" },
+    { "appid": "1091500", "name": "Cyberpunk 2077" }
+  ]
+}

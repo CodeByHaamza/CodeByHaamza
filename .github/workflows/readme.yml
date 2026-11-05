@@ -1,0 +1,71 @@
+name: Generate README SVGs
+
+on:
+  schedule:
+    # tous les jours a 4h12 UTC — une heure creuse, et pas pile a l'heure
+    # ronde ou GitHub met tous les crons du monde en file d'attente
+    - cron: "12 4 * * *"
+  push:
+    branches: [main]
+    paths:
+      - data/profile.json
+      - tools/gen_readme.py
+      - assets/ascii/**
+      - assets/icons/**
+      - .github/workflows/readme.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: readme-svgs
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Regenerate the SVGs
+        env:
+          # PROFILE_TOKEN est un PAT classique avec le scope read:user.
+          # Sans lui on retombe sur GITHUB_TOKEN, qui ne voit que le public :
+          # restrictedContributionsCount revient alors a 0 et le total des
+          # commits est sous-estime. Tout le reste est correct.
+          GH_TOKEN: ${{ secrets.PROFILE_TOKEN || secrets.GITHUB_TOKEN }}
+          GH_LOGIN: ${{ github.repository_owner }}
+          PYTHONIOENCODING: utf-8
+        run: python tools/gen_readme.py --fetch
+
+      - name: Check the SVGs are well-formed
+        run: |
+          python - <<'EOF'
+          import glob, sys, xml.etree.ElementTree as ET
+          bad = []
+          for f in sorted(glob.glob("assets/gen/*.svg")):
+              try:
+                  ET.parse(f)
+              except Exception as e:
+                  bad.append(f"{f}: {e}")
+          if bad:
+              print("\n".join(bad)); sys.exit(1)
+          print(f"{len(glob.glob('assets/gen/*.svg'))} SVG valides")
+          EOF
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/gen data/gh-raw.json
+          if git diff --staged --quiet; then
+            echo "rien a committer"
+          else
+            git commit -m "Regenerate profile SVGs"
+            git push
+          fi
