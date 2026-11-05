@@ -34,10 +34,11 @@ jobs:
 
       - name: Regenerate the SVGs
         env:
-          # PROFILE_TOKEN est un PAT classique avec le scope read:user.
-          # Sans lui on retombe sur GITHUB_TOKEN, qui ne voit que le public :
-          # restrictedContributionsCount revient alors a 0 et le total des
-          # commits est sous-estime. Tout le reste est correct.
+          # GITHUB_TOKEN suffit : verifie le 2026-11-05, il renvoie bien
+          # restrictedContributionsCount (705), parce que l'affichage des
+          # contributions privees est active sur le profil. Si un jour ce
+          # reglage est coupe, ce compte tombera a 0 ; PROFILE_TOKEN (un PAT
+          # avec le scope read:user) le rattraperait alors.
           GH_TOKEN: ${{ secrets.PROFILE_TOKEN || secrets.GITHUB_TOKEN }}
           GH_LOGIN: ${{ github.repository_owner }}
           PYTHONIOENCODING: utf-8
