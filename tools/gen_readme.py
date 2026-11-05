@@ -312,37 +312,22 @@ def languages(repos: list[dict], top: int = 6) -> list[tuple[str, float]]:
 # ---------------------------------------------------------------- 1. header
 
 def gen_header(cfg: dict) -> None:
-    art = (ASCII / "hamza.txt").read_text(encoding="utf-8")
-    cw, chh = 9.0, 14.0
-    fw, fh = figlet_size(art, cw, chh)
+    """Un bandeau de fenetre de terminal, avec la phrase d'accroche.
+
+    Le nom lui-meme n'est plus ici : c'est assets/matrix-name.svg, fait main,
+    qui le porte dans le README. Deux bannieres de nom l'une sur l'autre se
+    seraient battues. Le figlet de assets/ascii/hamza.txt reste disponible
+    (figlet_rects sait encore le dessiner) si on veut revenir en arriere.
+    """
     ident = cfg["identity"]
-
-    fy = 26.0 + 26
-    tag_y = fy + fh + 26
-    h = tag_y + 20
-
-    s = [head(W, h, "Hamza — profil GitHub"), panel(W, h),
-         titlebar(W, f'{ident["handle"]}@{ident["host"]} — {ident["shell"]}')]
-    s.append("<style>" + WIPE_CSS +
-             "@keyframes fade{from{opacity:0}to{opacity:1}}"
-             ".fi{opacity:0;animation:fade .5s ease-out forwards}"
-             "@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}"
-             ".cur{animation:blink 1.1s steps(1,end) infinite}"
-             "</style>")
-
-    # le figlet se devoile de gauche a droite
-    s.append(f'<g clip-path="url(#cf)">')
-    s.append(figlet_rects(art, (W - fw) / 2, fy, cw, chh,
-                          C["blue"], "#3a4a6b"))
-    s.append("</g>")
-    s.append(f'<clipPath id="cf"><rect x="0" y="{fy-2:.1f}" width="{W}" '
-             f'height="{fh+4:.1f}"/></clipPath>')
-    s.append(wipe((W - fw) / 2 - 1, fy - 2, fw + 2, fh + 4, 0.0, 1.1))
-
-    s.append(f'<g class="fi" style="animation-delay:1.1s">'
-             + txt(W / 2, tag_y, ident["tagline"], C["dim"], 12,
-                   anchor="middle") + "</g>")
-    s.append("</svg>")
+    h = 60.0
+    s = [head(W, h, "terminal de Hamza"), panel(W, h),
+         titlebar(W, f'{ident["handle"]}@{ident["host"]} — {ident["shell"]}'),
+         "<style>@keyframes fade{from{opacity:0}to{opacity:1}}"
+         ".fi{opacity:0;animation:fade .6s ease-out forwards}</style>",
+         f'<g class="fi" style="animation-delay:.25s">'
+         + txt(W / 2, 46, ident["tagline"], C["dim"], 12, anchor="middle")
+         + "</g>", "</svg>"]
     (OUT / "header.svg").write_text("".join(s), encoding="utf-8")
 
 
@@ -597,6 +582,7 @@ def gen_funfacts(cfg: dict) -> None:
 
 def gen_stats(cfg: dict, gh: dict) -> None:
     cc = gh["contributionsCollection"]
+    cal = cc["contributionCalendar"]
     repos = gh["repositories"]["nodes"]
     commits = cc["totalCommitContributions"] + cc["restrictedContributionsCount"]
     prs = cc["totalPullRequestContributions"]
@@ -606,53 +592,97 @@ def gen_stats(cfg: dict, gh: dict) -> None:
     followers = gh["followers"]["totalCount"]
     rk = rank(commits, prs, issues, reviews, stars, followers)
     langs = languages(repos)
+    cur, best = streaks(cal["weeks"])
 
-    fs, pad, lh = 12.0, 17.0, 19.0
+    def num(n: int) -> str:
+        return f"{n:,}".replace(",", " ")  # fine space, pas de virgule
+
+    pad, fs = 17.0, 12.0
     ch = fs * 0.6
-    h = pad * 2 + 24 + 2 * lh + 14 + len(langs) * lh + 10
+    card_h = 124.0
+    gapx = 14.0
+    lw = (W - pad * 2 - gapx) * 0.56
+    rw = W - pad * 2 - gapx - lw
+    rx = pad + lw + gapx
+    top = pad + 30
+    lh = 19.0
+    h = top + card_h + 16 + len(langs) * lh + pad
 
     s = [head(W, h, "mes statistiques GitHub"), panel(W, h),
-         "<style>" + WIPE_CSS + reveal_css(".rv", 8, step=.07) + "</style>"]
+         "<style>" + WIPE_CSS +
+         "@keyframes pop{from{opacity:0;transform:scale(.82)}"
+         "to{opacity:1;transform:none}}"
+         ".pop{opacity:0;animation:pop .5s cubic-bezier(.2,1.4,.3,1) forwards}"
+         + reveal_css(".rv", 12, step=.055) + "</style>"]
     i = cfg["identity"]
-    s.append(prompt(pad, pad + 12, "git stats --self-hosted",
-                    i["handle"], i["host"]))
-    s.append(txt(W - pad, pad + 12, "generated in-repo · no external service",
+    s.append(prompt(pad, pad + 13, "git stats --self-hosted", i["handle"],
+                    i["host"]))
+    s.append(txt(W - pad, pad + 13, "generated in-repo · no external service",
                  C["faint"], 10, anchor="end"))
 
-    y = pad + 30 + lh
-    cells = [("rank", rk, C["yellow"]), ("commits", f"{commits:,}".replace(",", " "), C["text"]),
-             ("stars", str(stars), C["text"]), ("PRs", str(prs), C["text"])]
-    x = pad
-    for k, v, col in cells:
-        s.append('<g class="rv">' + txt(x, y, k, C["mauve"], fs)
-                 + txt(x + (len(k) + 1) * ch, y, v, col, fs, "700") + "</g>")
-        x += (len(k) + len(v) + 4) * ch + 22
-    y += lh
-    cells2 = [("repos", str(gh["repositories"]["totalCount"])),
-              ("reviews", str(reviews)), ("issues", str(issues)),
-              ("followers", str(followers)),
-              ("contributions/12mo", f'{cc["contributionCalendar"]["totalContributions"]:,}'.replace(",", " "))]
-    x = pad
-    for k, v in cells2:
-        s.append('<g class="rv">' + txt(x, y, k, C["mauve"], fs)
-                 + txt(x + (len(k) + 1) * ch, y, v, C["text"], fs) + "</g>")
-        x += (len(k) + len(v) + 4) * ch + 18
+    def card(x: float, w: float, title: str) -> None:
+        s.append(f'<rect x="{x:.1f}" y="{top:.1f}" width="{w:.1f}" '
+                 f'height="{card_h:.1f}" rx="7" fill="{C["panel"]}" '
+                 f'stroke="{C["edge"]}"/>')
+        s.append(txt(x + 13, top + 19, title, C["faint"], 9.5))
 
-    # barres de langages : pleines, puis devoilees par un cache qui glisse
-    y += 20
+    # ---- carte de gauche : le rang et les totaux
+    card(pad, lw, "OVERALL")
+    cxr = pad + 52
+    cyr = top + 70
+    s.append(f'<g class="pop"><circle cx="{cxr:.1f}" cy="{cyr:.1f}" r="31" '
+             f'fill="none" stroke="{C["line"]}" stroke-width="4"/>'
+             f'<circle cx="{cxr:.1f}" cy="{cyr:.1f}" r="31" fill="none" '
+             f'stroke="{C["yellow"]}" stroke-width="4" stroke-linecap="round" '
+             f'stroke-dasharray="{195 * 0.84:.0f} 400" '
+             f'transform="rotate(-90 {cxr:.1f} {cyr:.1f})"/>'
+             + txt(cxr, cyr + 9, rk, C["yellow"], 26, "700", "middle")
+             + "</g>")
+    s.append(txt(cxr, cyr + 31, "rank", C["faint"], 9.5, anchor="middle"))
+
+    grid = [("commits", num(commits)), ("stars", num(stars)),
+            ("PRs", num(prs)), ("reviews", num(reviews)),
+            ("repos", num(gh["repositories"]["totalCount"])),
+            ("issues", num(issues)), ("followers", num(followers)),
+            ("12-mo", num(cal["totalContributions"]))]
+    gx0 = pad + 104
+    colw = (lw - 118) / 2
+    for n, (k, v) in enumerate(grid):
+        gx = gx0 + (n % 2) * colw
+        gy = top + 40 + (n // 2) * 21
+        s.append('<g class="rv">' + txt(gx, gy, k, C["mauve"], 11.5)
+                 + txt(gx + colw - 16, gy, v, C["text"], 11.5, "700",
+                       anchor="end") + "</g>")
+
+    # ---- carte de droite : les series
+    card(rx, rw, "STREAK")
+    s.append(f'<g class="pop" style="animation-delay:.12s">'
+             + txt(rx + rw / 2, top + 72, str(cur), C["peach"], 42, "700",
+                   "middle") + "</g>")
+    s.append(txt(rx + rw / 2, top + 90, "days, current", C["sub"], 10.5,
+                 anchor="middle"))
+    s.append(f'<rect x="{rx + 20:.1f}" y="{top + 100:.1f}" '
+             f'width="{rw - 40:.1f}" height="1" fill="{C["edge"]}"/>')
+    s.append('<g class="rv">'
+             + txt(rx + 20, top + 115, "longest", C["mauve"], 11)
+             + txt(rx + rw - 20, top + 115, f"{best} days", C["text"], 11,
+                   "700", anchor="end") + "</g>")
+
+    # ---- barres de langages
+    y = top + card_h + 10
     bar_x = pad + 13 * ch
-    bar_w = W - bar_x - pad - 70
+    bar_w = W - bar_x - pad - 62
     for n, (name, pctv) in enumerate(langs):
         y += lh
         s.append(txt(pad, y, name, C["teal"], fs))
-        fillw = max(bar_w * pctv / 100.0, 2)
-        s.append(f'<rect x="{bar_x:.1f}" y="{y-8:.1f}" width="{bar_w:.1f}" '
+        s.append(f'<rect x="{bar_x:.1f}" y="{y - 8:.1f}" width="{bar_w:.1f}" '
                  f'height="7" rx="3.5" fill="{C["line"]}"/>')
         col = [C["blue"], C["yellow"], C["mauve"], C["green"], C["peach"],
                C["red"], C["teal"]][n % 7]
-        s.append(f'<rect x="{bar_x:.1f}" y="{y-8:.1f}" width="{fillw:.1f}" '
-                 f'height="7" rx="3.5" fill="{col}"/>')
-        s.append(wipe(bar_x - .5, y - 9, bar_w + 2, 9, .25 + n * .1, .85))
+        s.append(f'<rect x="{bar_x:.1f}" y="{y - 8:.1f}" '
+                 f'width="{max(bar_w * pctv / 100.0, 2):.1f}" height="7" '
+                 f'rx="3.5" fill="{col}"/>')
+        s.append(wipe(bar_x - .5, y - 9.5, bar_w + 2, 10, .3 + n * .1, .85))
         s.append(txt(W - pad, y, f"{pctv:.1f}%", C["sub"], 11.5, anchor="end"))
     s.append("</svg>")
     (OUT / "stats.svg").write_text("".join(s), encoding="utf-8")
@@ -660,74 +690,114 @@ def gen_stats(cfg: dict, gh: dict) -> None:
 
 # -------------------------------------------------- 7. pacman + contributions
 
+def streaks(weeks: list[dict]) -> tuple[int, int]:
+    """(serie en cours, plus longue serie) sur le calendrier fourni.
+
+    La serie en cours tolere un dernier jour vide : la journee n'est pas
+    finie, et un profil ne doit pas afficher 0 a 9h du matin.
+    """
+    days = [d for wk in weeks for d in wk["contributionDays"]]
+    best = run = 0
+    for d in days:
+        run = run + 1 if d["contributionCount"] > 0 else 0
+        best = max(best, run)
+    cur = 0
+    for d in reversed(days):
+        if d["contributionCount"] > 0:
+            cur += 1
+        elif cur == 0:
+            continue  # aujourd'hui pas encore commence
+        else:
+            break
+    return cur, best
+
+
 def gen_pacman(gh: dict) -> None:
-    weeks = gh["contributionsCollection"]["contributionCalendar"]["weeks"]
+    cal = gh["contributionsCollection"]["contributionCalendar"]
+    weeks = cal["weeks"]
     pad, cell, gap = 17.0, 12.0, 3.0
     cols = len(weeks)
-    grid_w = cols * (cell + gap) - gap
-    scale = min(1.0, (W - 2 * pad) / grid_w)
+    scale = min(1.0, (W - 2 * pad) / (cols * (cell + gap) - gap))
     cell *= scale
     gap *= scale
-    grid_w = cols * (cell + gap) - gap
-    grid_h = 7 * (cell + gap) - gap
+    step = cell + gap
+    grid_w = cols * step - gap
+    grid_h = 7 * step - gap
     x0 = (W - grid_w) / 2
-    y0 = pad + 24
-    h = y0 + grid_h + 34
+    y0 = pad + 26
+    h = y0 + grid_h + 30
 
     pal = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
-    counts = [d["contributionCount"] for wk in weeks for d in wk["contributionDays"]]
-    hi = max(counts) or 1
+    hi = max((d["contributionCount"] for wk in weeks for d in wk["contributionDays"]),
+             default=1) or 1
 
-    LOOP = 14.0  # secondes pour une traversee
-    s = [head(W, h, "Pac-Man mange mes contributions"), panel(W, h)]
-    s.append("<style>"
-             f"@keyframes eat{{0%,100%{{opacity:1}}6%{{opacity:1}}10%,96%{{opacity:.12}}}}"
-             f".c{{animation:eat {LOOP}s linear infinite}}"
-             f"@keyframes run{{from{{transform:translateX(0)}}"
-             f"to{{transform:translateX({grid_w + cell*2:.1f}px)}}}}"
-             f".pac{{animation:run {LOOP}s linear infinite}}"
-             "@keyframes chomp{0%,49%{transform:scale(1,1)}"
-             "50%,100%{transform:scale(1,.45)}}"
-             ".jaw{animation:chomp .4s steps(2,end) infinite;"
-             "transform-origin:center}"
-             "</style>")
-    s.append(txt(pad, pad + 12, "./contrib-eater --sprite=pacman", C["green"], 12))
-    s.append(txt(W - pad, pad + 12,
-                 f'{gh["contributionsCollection"]["contributionCalendar"]["totalContributions"]} contributions, 12 months',
-                 C["dim"], 10.5, anchor="end"))
+    LOOP = 13.0          # une traversee complete
+    lead = cell * 3      # Pac-Man demarre hors grille, a gauche
+    travel = grid_w + lead * 2
+
+    # Une cellule doit s'eteindre quand Pac-Man l'atteint, pas avant. Un
+    # animation-delay negatif ne peut pas exprimer ca : sur une periode de
+    # LOOP secondes, -LOOP equivaut a 0, donc toutes les colonnes repassaient
+    # en phase et le graphe clignotait d'un bloc. On genere donc un jeu de
+    # keyframes par colonne, ou le pourcentage du changement vaut la position
+    # de la colonne sur le trajet.
+    css = [f"@keyframes run{{from{{transform:translateX(0)}}"
+           f"to{{transform:translateX({travel:.1f}px)}}}}",
+           f".pac{{animation:run {LOOP}s linear infinite}}",
+           "@keyframes chomp{0%,49%{transform:scaleY(1)}"
+           "50%,100%{transform:scaleY(.42)}}",
+           ".jaw{animation:chomp .36s steps(2,end) infinite}"]
+    for ci in range(cols):
+        pct = (lead + ci * step) / travel * 100.0
+        a = max(pct - 1.0, 0.0)
+        b = min(pct + 1.0, 99.0)
+        css.append(f"@keyframes e{ci}{{0%,{a:.2f}%{{opacity:1}}"
+                   f"{b:.2f}%,100%{{opacity:.1}}}}")
+        css.append(f".e{ci}{{animation:e{ci} {LOOP}s linear infinite}}")
+
+    cur, best = streaks(weeks)
+    s = [head(W, h, "Pac-Man mange mon graphe de contributions"), panel(W, h),
+         "<style>" + "".join(css) + "</style>",
+         txt(pad, pad + 13, "./contrib-eater --sprite=pacman", C["green"], 12),
+         txt(W - pad, pad + 13,
+             f'{cal["totalContributions"]} contributions · streak {cur}d · best {best}d',
+             C["dim"], 10.5, anchor="end")]
 
     for ci, wk in enumerate(weeks):
-        # chaque colonne s'eteint quand Pac-Man la croise
-        delay = -LOOP + (ci / max(cols - 1, 1)) * LOOP
         for ri, d in enumerate(wk["contributionDays"]):
             v = d["contributionCount"]
             lvl = 0 if v == 0 else min(4, 1 + int(3.0 * v / hi))
-            x = x0 + ci * (cell + gap)
-            y = y0 + ri * (cell + gap)
-            cls = ' class="c"' if v else ""
-            st = (f' style="animation-delay:{delay:.2f}s"' if v else "")
-            s.append(f'<rect{cls}{st} x="{x:.2f}" y="{y:.2f}" '
-                     f'width="{cell:.2f}" height="{cell:.2f}" rx="{cell*.22:.2f}" '
+            cls = f' class="e{ci}"' if v else ""
+            s.append(f'<rect{cls} x="{x0 + ci * step:.2f}" '
+                     f'y="{y0 + ri * step:.2f}" width="{cell:.2f}" '
+                     f'height="{cell:.2f}" rx="{cell * .22:.2f}" '
                      f'fill="{pal[lvl]}"/>')
 
-    # Pac-Man et deux fantomes, sur la ligne du milieu
-    py = y0 + 3 * (cell + gap) + cell / 2
-    r = cell * .85
-    s.append(f'<g class="pac" transform="translate({x0 - cell*2:.1f},0)">')
-    s.append(f'<g class="jaw" transform="translate({0:.1f},{py:.1f})">')
-    s.append(f'<path d="M0,0 L{r:.1f},{-r*.62:.1f} A{r:.1f},{r:.1f} 0 1,0 '
-             f'{r:.1f},{r*.62:.1f} Z" fill="{C["yellow"]}"/></g>')
-    for gi, gc in enumerate((C["red"], C["peach"])):
-        gx = -(gi + 1) * cell * 2.4
-        s.append(f'<g transform="translate({gx:.1f},{py:.1f})" opacity=".85">'
-                 f'<path d="M{-r*.7:.1f},{r*.7:.1f} v{-r*.9:.1f} '
-                 f'a{r*.7:.1f},{r*.7:.1f} 0 0 1 {r*1.4:.1f},0 '
-                 f'v{r*.9:.1f} l{-r*.23:.1f},{-r*.23:.1f} '
-                 f'l{-r*.23:.1f},{r*.23:.1f} l{-r*.24:.1f},{-r*.23:.1f} '
-                 f'l{-r*.23:.1f},{r*.23:.1f} l{-r*.24:.1f},{-r*.23:.1f} Z" '
-                 f'fill="{gc}"/></g>')
-    s.append("</g>")
-    s.append("</svg>")
+    # Pac-Man sur la ligne du milieu, deux fantomes a sa suite
+    py = y0 + 3 * step + cell / 2
+    r = cell * .95
+    s.append(f'<g class="pac" transform="translate({x0 - lead:.1f},0)">')
+    s.append(f'<g transform="translate(0,{py:.1f})">'
+             f'<g class="jaw">'
+             f'<path d="M0 0L{r:.2f} {-r * .58:.2f}'
+             f'A{r:.2f} {r:.2f} 0 1 0 {r:.2f} {r * .58:.2f}Z" '
+             f'fill="{C["yellow"]}"/></g></g>')
+    for gi, gc in enumerate((C["red"], C["mauve"])):
+        gx = -(gi + 1) * cell * 2.6
+        g = r * .82
+        s.append(
+            f'<g transform="translate({gx:.2f},{py:.2f})" opacity=".9">'
+            # corps : demi-cercle en haut, jupe crenelee en bas
+            f'<path d="M{-g:.2f} {g * .55:.2f}V0'
+            f'A{g:.2f} {g:.2f} 0 0 1 {g:.2f} 0'
+            f'V{g * .55:.2f}l{-g * .5:.2f} {g * .28:.2f}'
+            f'l{-g * .5:.2f} {-g * .28:.2f}'
+            f'l{-g * .5:.2f} {g * .28:.2f}Z" fill="{gc}"/>'
+            f'<circle cx="{-g * .34:.2f}" cy="{-g * .16:.2f}" r="{g * .26:.2f}" '
+            f'fill="#11111b"/>'
+            f'<circle cx="{g * .34:.2f}" cy="{-g * .16:.2f}" r="{g * .26:.2f}" '
+            f'fill="#11111b"/></g>')
+    s.append("</g></svg>")
     (OUT / "contrib-pacman.svg").write_text("".join(s), encoding="utf-8")
 
 
