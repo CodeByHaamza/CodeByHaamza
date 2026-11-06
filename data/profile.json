@@ -11,6 +11,11 @@
         "icon": null
       },
       {
+        "label": "discord",
+        "icon": "discord",
+        "url": "https://discord.com/users/690536004758536192"
+      },
+      {
         "label": "steam",
         "url": "https://steamcommunity.com/profiles/76561199179744533/",
         "icon": "steam"
