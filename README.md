@@ -3,8 +3,7 @@
 <img src="assets/gen/header.svg" alt="HAMZA, in a Spider-Verse style with cyan and magenta chromatic offset, surrounded by motifs of my hobbies: a spider, a Persona tarot arcana, code brackets, a dumbbell and manga speed lines" width="100%">
 
 [![personadle.net](assets/gen/link-personadle-net.svg)](https://personadle.net)
-[![discord](assets/gen/link-discord.svg)](https://discord.gg/personadle)
-[![steam](assets/gen/link-steam.svg)](https://steamcommunity.com/id/codebyhaamza)
+[![steam](assets/gen/link-steam.svg)](https://steamcommunity.com/profiles/76561199179744533/)
 [![mail](assets/gen/link-mail.svg)](mailto:hamza.karrouchi.dev@gmail.com)
 
 </div>
