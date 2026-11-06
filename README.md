@@ -6,6 +6,7 @@
 [![discord](assets/gen/link-discord.svg)](https://discord.com/users/690536004758536192)
 [![steam](assets/gen/link-steam.svg)](https://steamcommunity.com/profiles/76561199179744533/)
 [![mail](assets/gen/link-mail.svg)](mailto:hamza.karrouchi.dev@gmail.com)
+[![linkedin](assets/gen/link-linkedin.svg)](https://www.linkedin.com/in/hamza-karrouchi/)
 
 </div>
 

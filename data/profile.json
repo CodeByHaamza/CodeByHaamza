@@ -24,6 +24,11 @@
         "label": "mail",
         "url": "mailto:hamza.karrouchi.dev@gmail.com",
         "icon": null
+      },
+      {
+        "label": "linkedin",
+        "icon": "linkedin",
+        "url": "https://www.linkedin.com/in/hamza-karrouchi/"
       }
     ]
   },
