@@ -402,8 +402,8 @@ def gen_header(cfg: dict) -> None:
     letters, raw_w = name_path(scale)
     nw, nh = raw_w * scale, GH * scale
     nx, ny = (W - nw) / 2, 46.0
-    tag_y = ny + nh + 34
-    h = tag_y + 26
+    tag_y = ny + nh + 40
+    h = tag_y + 28
 
     SKEW = -11          # l'italique
     CY, MG, INK = "#00e5ff", "#ff2e63", "#0a0a12"
@@ -460,17 +460,21 @@ def gen_header(cfg: dict) -> None:
 
     # les hobbies, de part et d'autre du nom
     glyphs = hobby_glyphs(0, 0, 1)
-    spots = [(nx - 54, ny + 26), (nx - 40, ny + 70), (nx - 62, ny + 110),
-             (nx + nw + 48, ny + 30), (nx + nw + 40, ny + 78)]
+    # Bornes voulues : rien sous ny+95, sinon le glyphe mord sur l'accroche
+    # (c'etait le cas de </> au premier rendu).
+    spots = [(nx - 62, ny + 20), (nx - 44, ny + 58), (nx - 66, ny + 94),
+             (nx + nw + 44, ny + 26), (nx + nw + 34, ny + 70)]
     for k, (gx, gy) in enumerate(spots):
         s.append(f'<g transform="translate({gx:.1f},{gy:.1f})">'
                  f'<g class="hb" style="animation-delay:{.95 + k * .11:.2f}s">'
                  f'{glyphs[k]}</g></g>')
 
     # les ゴゴゴ de mes dotfiles, derriere a droite
-    ow, oh = braille_size(ono, 1.0)
-    s.append(f'<g class="hb" style="animation-delay:1.5s" opacity=".5">'
-             + braille_rects(ono, W - ow - 26, ny - 8, 1.0, MG) + "</g>")
+    # a dot=1.0 les go-go-go n'etaient qu'une tache rose : illisibles.
+    odot = 1.9
+    ow, oh = braille_size(ono, odot)
+    s.append(f'<g class="hb" style="animation-delay:1.5s" opacity=".45">'
+             + braille_rects(ono, W - ow - 22, ny + 2, odot, MG) + "</g>")
 
     s.append(f'<g class="tg">'
              + txt(W / 2, tag_y, ident["tagline"], "#8b93a8", 12.5,
@@ -874,25 +878,73 @@ def streaks(weeks: list[dict]) -> tuple[int, int]:
     return cur, best
 
 
+# Police pixel 5x7, seulement les lettres dont j'ai besoin.
+PIXFONT = {
+    "C": ("01110", "10001", "10000", "10000", "10000", "10001", "01110"),
+    "O": ("01110", "10001", "10001", "10001", "10001", "10001", "01110"),
+    "N": ("10001", "11001", "11001", "10101", "10011", "10011", "10001"),
+    "G": ("01110", "10001", "10000", "10111", "10001", "10001", "01111"),
+    "R": ("11110", "10001", "10001", "11110", "10100", "10010", "10001"),
+    "A": ("01110", "10001", "10001", "11111", "10001", "10001", "10001"),
+    "T": ("11111", "00100", "00100", "00100", "00100", "00100", "00100"),
+    "U": ("10001", "10001", "10001", "10001", "10001", "10001", "01110"),
+    "L": ("10000", "10000", "10000", "10000", "10000", "10000", "11111"),
+    "I": ("11111", "00100", "00100", "00100", "00100", "00100", "11111"),
+    "S": ("01111", "10000", "10000", "01110", "00001", "00001", "11110"),
+    "!": ("00100", "00100", "00100", "00100", "00100", "00000", "00100"),
+    " ": ("00000",) * 7,
+}
+
+
+def pixel_text(word, x, y, u, fill):
+    """Ecrit un mot en blocs de u pixels, un <path> par mot."""
+    subs = []
+    for i, chx in enumerate(word):
+        rows = PIXFONT.get(chx, PIXFONT[" "])
+        ox = x + i * 6 * u
+        for ry, row in enumerate(rows):
+            cx_ = None
+            for rx in range(6):
+                on = rx < 5 and row[rx] == "1"
+                if on and cx_ is None:
+                    cx_ = rx
+                elif not on and cx_ is not None:
+                    subs.append("M%.1f %.1fh%.1fv%.1fh-%.1fz"
+                                % (ox + cx_ * u, y + ry * u, (rx - cx_) * u,
+                                   u, (rx - cx_) * u))
+                    cx_ = None
+    return '<path fill="%s" d="%s"/>' % (fill, "".join(subs))
+
+
+def pixel_width(word, u):
+    return len(word) * 6 * u
+
+
+STYLE_MARK = "@@CSS@@"
+
+
 def gen_pacman(gh: dict) -> None:
     """Une partie de Pac-Man jouee sur mon graphe de contributions.
 
-    Choregraphie en fractions de boucle, pas en secondes, pour que changer
-    LOOP ne casse rien :
+      0.00-0.40  il serpente les lignes 0 a 3 et mange. Les 4 fantomes le
+                 collent, en meute serree.
+      0.40       il gobe la super pac-gomme au bout de la ligne 3.
+      0.40-0.70  phase bleue : les fantomes fuient aux quatre coins, il fait
+                 le tour du perimetre et les mange un par un (200, 400, 800,
+                 1600 points).
+      0.70-1.00  retour a la normale, lignes 4 a 6.
 
-      0.00-0.40  Pac-Man serpente les lignes 0 a 3 et mange. Les 4 fantomes
-                 le suivent, chacun avec son retard.
-      0.40       il gobe la super pac-gomme posee au bout de la ligne 3.
-      0.40-0.72  phase bleue : les fantomes fuient chacun vers un coin,
-                 Pac-Man fait le tour et les mange un par un (200, 400,
-                 800, 1600 points, comme dans le vrai jeu).
-      0.72-1.00  retour a la normale, lignes 4 a 6, les fantomes rechassent.
+    Tout est axe : jamais de diagonale, sinon ca ne ressemble plus a un jeu
+    de grille. La choregraphie est en fractions de boucle, pas en secondes.
 
-    Les cases ne s'eteignent pas sur un animation-delay : sur une boucle de
-    LOOP secondes un delai de -LOOP equivaut a 0, donc toutes repassaient en
-    phase et le graphe clignotait d'un bloc. Le trajet est donc echantillonne
-    et chaque case recoit ses propres keyframes, calees sur l'instant ou
-    Pac-Man passe REELLEMENT dessus.
+    Deux pieges rencontres et corriges :
+
+    - Le retournement du sprite ne peut pas etre un simple scaleX pose sur
+      chaque point : CSS interpole, donc Pac-Man passait continument de -1 a
+      1 en s'ecrasant a plat au milieu du trajet. Chaque virage recoit donc
+      une keyframe doublee, un cheveu avant, pour que le flip soit instantane.
+    - Le bleu d'effroi d'origine (#2121de) disparait sur fond sombre. Il est
+      eclairci, et les fantomes ont un contour.
     """
     from math import hypot
 
@@ -909,7 +961,7 @@ def gen_pacman(gh: dict) -> None:
     x0 = (W - grid_w) / 2
     y0 = pad + 26
     h = y0 + grid_h + 32
-    ROWS, LOOP, last = 7, 30.0, cols - 1
+    ROWS, LOOP, last = 7, 26.0, cols - 1
 
     def px(ci):
         return x0 + ci * step + cell / 2
@@ -918,9 +970,8 @@ def gen_pacman(gh: dict) -> None:
         return y0 + ri * step + cell / 2
 
     def polyline(t0, t1, pts):
-        """Repartit [t0,t1] sur une polyligne proportionnellement aux
-        longueurs : sans ca, un saut vertical d'une ligne durerait aussi
-        longtemps qu'une traversee complete."""
+        """Repartit [t0,t1] proportionnellement aux longueurs : sinon un saut
+        d'une ligne durerait aussi longtemps qu'une traversee."""
         P = [(px(a), py(b)) for a, b in pts]
         d = [0.0]
         for k in range(1, len(P)):
@@ -929,10 +980,11 @@ def gen_pacman(gh: dict) -> None:
         return [(t0 + (t1 - t0) * d[k] / tot, P[k][0], P[k][1])
                 for k in range(len(P))]
 
-    A_END, C_END = 0.40, 0.72
+    A_END, C_END, WIN = 0.36, 0.62, 0.86
     ptsA = []
     for k, r in enumerate([0, 1, 2, 3]):
         ptsA += [(0, r), (last, r)] if k % 2 == 0 else [(last, r), (0, r)]
+    # tour du perimetre : que des deplacements axes, comme dans un vrai jeu
     corners = [(0, 0), (last, 0), (last, ROWS - 1), (0, ROWS - 1)]
     ptsC = [(0, 3)] + corners + [(0, 4)]
     ptsD = []
@@ -941,14 +993,11 @@ def gen_pacman(gh: dict) -> None:
 
     wayA = polyline(0.0, A_END, ptsA)
     wayC = polyline(A_END, C_END, ptsC)
-    wayD = polyline(C_END, 1.0, ptsD)
+    wayD = polyline(C_END, WIN, ptsD)
     way = wayA + wayC[1:] + wayD[1:]
-
-    # instants ou Pac-Man atteint chaque coin : c'est la qu'un fantome tombe
     eat_t = [wayC[1 + k][0] for k in range(4)]
 
     def at(t):
-        """Position sur le trajet a l'instant t (fraction de boucle)."""
         if t <= way[0][0]:
             return way[0][1], way[0][2]
         for k in range(1, len(way)):
@@ -960,22 +1009,43 @@ def gen_pacman(gh: dict) -> None:
         return way[-1][1], way[-1][2]
 
     def frames(pts, flip=True):
-        """Keyframes transform depuis une liste (t, x, y)."""
-        out = []
+        """Keyframes transform, avec flip instantane aux virages.
+
+        Pour chaque point on connait la direction du segment QUI PART de lui.
+        On pose donc, un cheveu avant le point, une keyframe qui garde encore
+        la direction precedente : le scaleX bascule d'un coup au lieu d'etre
+        interpole en passant par zero."""
+        dirs = []
+        for k in range(len(pts)):
+            nx = pts[min(k + 1, len(pts) - 1)][1]
+            # Le sprite est dessine bouche a GAUCHE (verifie au rendu, mon
+            # raisonnement sur le sens de l'arc etait faux) : c'est donc
+            # scaleX(-1) qui le fait regarder a droite.
+            d = 1 if (flip and nx < pts[k][1] - .5) else -1
+            dirs.append(d)
+        out, prev = [], dirs[0]
         for k, (t, x, y) in enumerate(pts):
-            nxt = pts[min(k + 1, len(pts) - 1)]
-            sx = -1 if (flip and nxt[1] < x - .5) else 1
-            out.append("%.3f%%{transform:translate(%.1fpx,%.1fpx) scaleX(%d)}"
-                       % (t * 100, x, y, sx))
+            if dirs[k] != prev and t > 0.0005:
+                out.append("%.4f%%{transform:translate(%.1fpx,%.1fpx) "
+                           "scaleX(%d)}" % ((t - .0004) * 100, x, y, prev))
+            out.append("%.4f%%{transform:translate(%.1fpx,%.1fpx) scaleX(%d)}"
+                       % (t * 100, x, y, dirs[k]))
+            prev = dirs[k]
         return "".join(out)
 
     css = ["@keyframes pac{%s}" % frames(way),
            ".pac{animation:pac %ss linear infinite}" % LOOP,
+           # Sans ca, il saute de la fin de la ligne 6 (a droite) au debut de
+           # la ligne 0 (a gauche) a chaque boucle. On le masque derriere
+           # l'ecran de fin, et la boucle redemarre proprement.
+           "@keyframes pacv{0%%,%.2f%%{opacity:1}%.2f%%,99.5%%{opacity:0}"
+           "100%%{opacity:1}}" % (WIN * 100, WIN * 100 + .6),
+           ".pacv{animation:pacv %ss linear infinite}" % LOOP,
            "@keyframes chomp{0%,49%{transform:scaleY(1)}"
-           "50%,100%{transform:scaleY(.38)}}",
-           ".jaw{animation:chomp .3s steps(2,end) infinite}"]
+           "50%,100%{transform:scaleY(.4)}}",
+           ".jaw{animation:chomp .26s steps(2,end) infinite}"]
 
-    # ---- les cases : eteintes quand Pac-Man passe dessus
+    # ---- les cases s'eteignent quand il passe reellement dessus
     SAMPLES = 1600
     reach = cell * .8
     hit = {}
@@ -991,53 +1061,67 @@ def gen_pacman(gh: dict) -> None:
                     continue
                 if hypot(hx - px(c), hy - py(r)) <= reach:
                     hit[(c, r)] = t
-
+    # Les cases repoussent pendant l'ecran de fin, au lieu de se rallumer
+    # d'un coup a la boucle : c'etait un des sauts d'image.
+    REGROW = 93.0
     for (c, r), t in hit.items():
         a = max(t * 100 - .3, 0.0)
-        b = min(t * 100 + .3, 99.6)
-        css.append("@keyframes k%d_%d{0%%,%.3f%%{opacity:1}%.3f%%,100%%{opacity:.1}}"
-                   % (c, r, a, b))
+        b = min(t * 100 + .3, 99.0)
+        css.append("@keyframes k%d_%d{0%%,%.3f%%{opacity:1}"
+                   "%.3f%%,%.1f%%{opacity:.1}100%%{opacity:1}}"
+                   % (c, r, a, b, REGROW))
         css.append(".k%d_%d{animation:k%d_%d %ss linear infinite}"
                    % (c, r, c, r, LOOP))
 
-    # ---- les 4 fantomes
-    GHOSTS = [("blinky", C["red"], .035), ("pinky", "#ffb8ff", .065),
-              ("inky", "#00ffff", .095), ("clyde", C["peach"], .125)]
-    BLUE = "#2121de"
+    # ---- les 4 fantomes, en meute serree (un tiers de ligne au plus)
+    GHOSTS = [(C["red"], .010), ("#ffb8ff", .019),
+              ("#4fd6ff", .028), (C["peach"], .037)]
+    BLUE, INK = "#5571ff", "#0b0d16"
     mx, my = px(last / 2), py(3)
-    for gi, (name, col, lag) in enumerate(GHOSTS):
+    for gi, (col, lag) in enumerate(GHOSTS):
         te = eat_t[gi]
-        cx_, cy_ = px(corners[gi][0]), py(corners[gi][1])
+        cxg, cyg = px(corners[gi][0]), py(corners[gi][1])
+        hx, hy = at(A_END - lag)
         pts = [(0.0, at(0.0)[0], at(0.0)[1])]
-        pts += [(t + lag, x, y) for t, x, y in wayA if t + lag < A_END]
-        pts.append((A_END, at(A_END - lag)[0], at(A_END - lag)[1]))
-        pts.append((A_END + .05, cx_, cy_))   # fuite vers son coin
-        pts.append((te, cx_, cy_))            # il attend, puis se fait manger
-        pts.append((min(te + .001, C_END - .01), mx, my))
+        pts += [(t + lag, x, y) for t, x, y in wayA if 0 < t + lag < A_END]
+        pts.append((A_END, hx, hy))
+        # fuite vers son coin, en L : vertical puis horizontal, jamais en biais
+        pts.append((A_END + .030, hx, cyg))
+        pts.append((A_END + .060, cxg, cyg))
+        pts.append((te, cxg, cyg))
+        # Le retour au centre doit avoir lieu APRES la disparition complete
+        # (opacite nulle a te+0.3%), sinon on voyait le fantome sauter.
+        pts.append((min(te + .006, C_END - .005), mx, my))
         pts.append((C_END, mx, my))
-        pts += [(t + lag, x, y) for t, x, y in wayD if C_END < t + lag < 1.0]
-        pts.append((1.0, at(1.0 - lag)[0], at(1.0 - lag)[1]))
-        pts.sort(key=lambda q: q[0])
-        css.append("@keyframes g%d{%s}" % (gi, frames(pts)))
+        pts += [(t + lag, x, y) for t, x, y in wayD if C_END < t + lag < WIN]
+        pts.append((WIN, at(WIN - lag)[0], at(WIN - lag)[1]))
+        pts.append((1.0, at(WIN - lag)[0], at(WIN - lag)[1]))
+        seen, uniq = set(), []
+        for q in sorted(pts, key=lambda z: z[0]):
+            key = round(q[0], 5)
+            if key not in seen:
+                seen.add(key)
+                uniq.append(q)
+        css.append("@keyframes g%d{%s}" % (gi, frames(uniq, flip=False)))
         css.append(".g%d{animation:g%d %ss linear infinite}" % (gi, gi, LOOP))
         css.append("@keyframes c%d{0%%,%.2f%%{fill:%s}%.2f%%,%.2f%%{fill:%s}"
                    "%.2f%%,100%%{fill:%s}}"
-                   % (gi, A_END * 100, col, A_END * 100 + .5, te * 100, BLUE,
+                   % (gi, A_END * 100, col, A_END * 100 + .4, te * 100, BLUE,
                       C_END * 100, col))
         css.append(".c%d{animation:c%d %ss linear infinite}" % (gi, gi, LOOP))
-        css.append("@keyframes v%d{0%%,%.2f%%{opacity:.92}%.2f%%,%.2f%%{opacity:0}"
-                   "%.2f%%,100%%{opacity:.92}}"
-                   % (gi, te * 100, te * 100 + .3, C_END * 100 - 2, C_END * 100))
+        css.append("@keyframes v%d{0%%,%.2f%%{opacity:1}%.2f%%,%.2f%%{opacity:0}"
+                   "%.2f%%,%.2f%%{opacity:1}%.2f%%,100%%{opacity:0}}"
+                   % (gi, te * 100, te * 100 + .3, C_END * 100 - 1.5,
+                      C_END * 100, WIN * 100, WIN * 100 + .6))
         css.append(".v%d{animation:v%d %ss linear infinite}" % (gi, gi, LOOP))
         css.append("@keyframes s%d{0%%,%.2f%%{opacity:0;transform:none}"
                    "%.2f%%{opacity:1}%.2f%%,100%%{opacity:0;"
-                   "transform:translateY(-15px)}}"
+                   "transform:translateY(-16px)}}"
                    % (gi, te * 100, te * 100 + .4, te * 100 + 4))
         css.append(".s%d{animation:s%d %ss linear infinite}" % (gi, gi, LOOP))
 
-    # ---- la super pac-gomme
     css.append("@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}"
-               "50%{opacity:.75;transform:scale(1.5)}}")
+               "50%{opacity:.7;transform:scale(1.45)}}")
     css.append("@keyframes gone{0%%,%.2f%%{opacity:1}%.2f%%,100%%{opacity:0}}"
                % (A_END * 100, A_END * 100 + .4))
     css.append(".pell{animation:pulse .7s ease-in-out infinite}"
@@ -1049,7 +1133,7 @@ def gen_pacman(gh: dict) -> None:
     cur, best = streaks(weeks)
 
     s = [head(W, h, "Une partie de Pac-Man sur mon graphe de contributions"),
-         panel(W, h), "<style>" + "".join(css) + "</style>",
+         panel(W, h), "<style>" + STYLE_MARK + "</style>",
          txt(pad, pad + 13, "./contrib-eater --sprite=pacman --ghosts=4",
              C["green"], 12),
          txt(W - pad, pad + 13,
@@ -1067,39 +1151,64 @@ def gen_pacman(gh: dict) -> None:
                      % (cls, x0 + ci * step, y0 + ri * step, cell, cell,
                         cell * .22, pal[lvl]))
 
-    # la pac-gomme, au bout de la ligne 3
-    s.append('<g class="pellw"><circle class="pell" cx="%.2f" cy="%.2f" r="4.6" '
-             'fill="%s"/></g>' % (px(0), py(3), C["yellow"]))
+    # Le cercle est a l'origine d'un groupe translate : un transform:scale
+    # sur un <circle> positionne par cx/cy met a l'echelle depuis l'origine
+    # du SVG et le DEPLACE, au lieu de le faire pulser sur place.
+    s.append('<g transform="translate(%.2f,%.2f)"><g class="pellw">'
+             '<g class="pell"><circle r="4.6" fill="%s"/></g></g></g>'
+             % (px(0), py(3), C["yellow"]))
 
-    # les fantomes
-    for gi, (name, col, lag) in enumerate(GHOSTS):
-        g = cell * .58
+    for gi, (col, lag) in enumerate(GHOSTS):
+        g = cell * .72
         s.append('<g class="g%d"><g class="v%d">'
-                 '<path class="c%d" fill="%s" d="M%.2f %.2fV0'
-                 'A%.2f %.2f 0 0 1 %.2f 0V%.2f'
+                 '<path class="c%d" fill="%s" stroke="%s" stroke-width="1.4" '
+                 'd="M%.2f %.2fV0A%.2f %.2f 0 0 1 %.2f 0V%.2f'
                  'l%.2f %.2fl%.2f %.2fl%.2f %.2fZ"/>'
                  '<circle cx="%.2f" cy="%.2f" r="%.2f" fill="#f8f8ff"/>'
                  '<circle cx="%.2f" cy="%.2f" r="%.2f" fill="#f8f8ff"/>'
+                 '<circle cx="%.2f" cy="%.2f" r="%.2f" fill="%s"/>'
+                 '<circle cx="%.2f" cy="%.2f" r="%.2f" fill="%s"/>'
                  '</g></g>'
-                 % (gi, gi, gi, col, -g, g * .55, g, g, g, g * .55,
+                 % (gi, gi, gi, col, INK, -g, g * .55, g, g, g, g * .55,
                     -g * .5, g * .28, -g * .5, -g * .28, -g * .5, g * .28,
-                    -g * .34, -g * .16, g * .24, g * .34, -g * .16, g * .24))
+                    -g * .33, -g * .18, g * .27, g * .33, -g * .18, g * .27,
+                    -g * .33, -g * .18, g * .13, INK,
+                    g * .33, -g * .18, g * .13, INK))
 
-    # Pac-Man
-    r = cell * .72
-    s.append('<g class="pac"><g class="jaw">'
+    r = cell * .78
+    s.append('<g class="pacv"><g class="pac"><g class="jaw">'
              '<path d="M0 0L%.2f %.2fA%.2f %.2f 0 1 0 %.2f %.2fZ" fill="%s"/>'
-             '</g></g>' % (r, -r * .58, r, r, r, r * .58, C["yellow"]))
+             '</g></g></g>' % (r, -r * .58, r, r, r, r * .58, C["yellow"]))
 
-    # les scores
     for gi, score in enumerate((200, 400, 800, 1600)):
         cxs, cys = px(corners[gi][0]), py(corners[gi][1])
         s.append('<g class="s%d">' % gi
-                 + txt(cxs, cys - 10, str(score), "#00ffff", 11, "700", "middle")
+                 + txt(cxs, cys - 11, str(score), "#7ef0ff", 11, "700", "middle")
                  + "</g>")
 
+    # ---- l'ecran de fin
+    word = "CONGRATULATIONS!"
+    u = 3.3
+    wpx = pixel_width(word, u)
+    wy = y0 + grid_h / 2 - 7 * u / 2 - 7
+    css.append("@keyframes win{0%%,%.2f%%{opacity:0}%.2f%%,99%%{opacity:1}"
+               "100%%{opacity:0}}" % (WIN * 100, WIN * 100 + 1.2))
+    css.append(".win{animation:win %ss linear infinite}" % LOOP)
+    css.append("@keyframes wink{0%,100%{opacity:1}50%{opacity:.25}}")
+    css.append(".wink{animation:wink .5s steps(1,end) infinite}")
+    s.append('<g class="win"><g class="wink">'
+             + pixel_text(word, (W - wpx) / 2, wy, u, C["yellow"])
+             + "</g>"
+             + txt(W / 2, wy + 7 * u + 20,
+                   "%s contributions cleared" % cal["totalContributions"],
+                   "#7ef0ff", 11.5, "700", "middle")
+             + "</g>")
+
     s.append("</svg>")
-    (OUT / "contrib-pacman.svg").write_text("".join(s), encoding="utf-8")
+    # le CSS a grossi apres coup : on le reinjecte
+    out = "".join(s).replace("<style>%s</style>" % STYLE_MARK,
+                             "<style>%s</style>" % "".join(css))
+    (OUT / "contrib-pacman.svg").write_text(out, encoding="utf-8")
 
 
 # --------------------------------------------------------- 8. etoile filante
