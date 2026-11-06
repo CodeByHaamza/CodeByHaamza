@@ -961,7 +961,10 @@ def gen_pacman(gh: dict) -> None:
     x0 = (W - grid_w) / 2
     y0 = pad + 26
     h = y0 + grid_h + 32
-    ROWS, LOOP, last = 7, 26.0, cols - 1
+    # 48 s : environ 12 cases par seconde en phase de parcours, ce qui
+    # est la vitesse d'un vrai Pac-Man. A 26 s il filait deux fois
+    # trop vite pour qu'on suive quoi que ce soit.
+    ROWS, LOOP, last = 7, 48.0, cols - 1
 
     def px(ci):
         return x0 + ci * step + cell / 2
@@ -1018,10 +1021,10 @@ def gen_pacman(gh: dict) -> None:
         dirs = []
         for k in range(len(pts)):
             nx = pts[min(k + 1, len(pts) - 1)][1]
-            # Le sprite est dessine bouche a GAUCHE (verifie au rendu, mon
-            # raisonnement sur le sens de l'arc etait faux) : c'est donc
-            # scaleX(-1) qui le fait regarder a droite.
-            d = 1 if (flip and nx < pts[k][1] - .5) else -1
+            # Verifie par un rendu isole des deux orientations cote a cote :
+            # scaleX(1) ouvre la bouche a DROITE. (J'avais inverse cette
+            # convention une fois, a tort, en lisant mal une capture.)
+            d = -1 if (flip and nx < pts[k][1] - .5) else 1
             dirs.append(d)
         out, prev = [], dirs[0]
         for k, (t, x, y) in enumerate(pts):
@@ -1041,9 +1044,15 @@ def gen_pacman(gh: dict) -> None:
            "@keyframes pacv{0%%,%.2f%%{opacity:1}%.2f%%,99.5%%{opacity:0}"
            "100%%{opacity:1}}" % (WIN * 100, WIN * 100 + .6),
            ".pacv{animation:pacv %ss linear infinite}" % LOOP,
-           "@keyframes chomp{0%,49%{transform:scaleY(1)}"
-           "50%,100%{transform:scaleY(.4)}}",
-           ".jaw{animation:chomp .26s steps(2,end) infinite}"]
+           # Deux demi-disques qui pivotent, et non un scaleY : ecraser le
+           # sprite en hauteur le deformait en galette au lieu d'ouvrir une
+           # bouche. La rotation se fait autour de (0,0), son centre.
+           "@keyframes jawU{0%,100%{transform:rotate(-3deg)}"
+           "50%{transform:rotate(-34deg)}}",
+           "@keyframes jawD{0%,100%{transform:rotate(3deg)}"
+           "50%{transform:rotate(34deg)}}",
+           ".jawU{animation:jawU .42s ease-in-out infinite}"
+           ".jawD{animation:jawD .42s ease-in-out infinite}"]
 
     # ---- les cases s'eteignent quand il passe reellement dessus
     SAMPLES = 1600
@@ -1176,9 +1185,13 @@ def gen_pacman(gh: dict) -> None:
                     g * .33, -g * .18, g * .13, INK))
 
     r = cell * .78
-    s.append('<g class="pacv"><g class="pac"><g class="jaw">'
-             '<path d="M0 0L%.2f %.2fA%.2f %.2f 0 1 0 %.2f %.2fZ" fill="%s"/>'
-             '</g></g></g>' % (r, -r * .58, r, r, r, r * .58, C["yellow"]))
+    s.append('<g class="pacv"><g class="pac">'
+             '<g class="jawU"><path d="M%.2f 0A%.2f %.2f 0 0 1 %.2f 0Z" '
+             'fill="%s"/></g>'
+             '<g class="jawD"><path d="M%.2f 0A%.2f %.2f 0 0 1 %.2f 0Z" '
+             'fill="%s"/></g>'
+             '</g></g>' % (-r, r, r, r, C["yellow"],
+                           r, r, r, -r, C["yellow"]))
 
     for gi, score in enumerate((200, 400, 800, 1600)):
         cxs, cys = px(corners[gi][0]), py(corners[gi][1])
