@@ -1018,13 +1018,18 @@ def gen_pacman(gh: dict) -> None:
         On pose donc, un cheveu avant le point, une keyframe qui garde encore
         la direction precedente : le scaleX bascule d'un coup au lieu d'etre
         interpole en passant par zero."""
-        dirs = []
+        dirs, keep = [], 1
         for k in range(len(pts)):
             nx = pts[min(k + 1, len(pts) - 1)][1]
-            # Verifie par un rendu isole des deux orientations cote a cote :
-            # scaleX(1) ouvre la bouche a DROITE. (J'avais inverse cette
-            # convention une fois, a tort, en lisant mal une capture.)
-            d = -1 if (flip and nx < pts[k][1] - .5) else 1
+            dx = nx - pts[k][1]
+            if not flip or abs(dx) < .5:
+                # Segment vertical : on garde le sens horizontal precedent.
+                # Repartir a droite par defaut le faisait pivoter sans
+                # raison pendant le tour du perimetre.
+                d = keep
+            else:
+                d = -1 if dx < 0 else 1
+                keep = d
             dirs.append(d)
         out, prev = [], dirs[0]
         for k, (t, x, y) in enumerate(pts):
@@ -1047,10 +1052,14 @@ def gen_pacman(gh: dict) -> None:
            # Deux demi-disques qui pivotent, et non un scaleY : ecraser le
            # sprite en hauteur le deformait en galette au lieu d'ouvrir une
            # bouche. La rotation se fait autour de (0,0), son centre.
-           "@keyframes jawU{0%,100%{transform:rotate(-3deg)}"
-           "50%{transform:rotate(-34deg)}}",
-           "@keyframes jawD{0%,100%{transform:rotate(3deg)}"
+           # Le sens d'ouverture depend UNIQUEMENT du signe de ces deux
+           # rotations. Verifie au banc d'essai : avec jawU positif et jawD
+           # negatif, scaleX(1) ouvre la bouche a droite. L'inverse la
+           # renvoyait a gauche, et Pac-Man mangeait de dos.
+           "@keyframes jawU{0%,100%{transform:rotate(3deg)}"
            "50%{transform:rotate(34deg)}}",
+           "@keyframes jawD{0%,100%{transform:rotate(-3deg)}"
+           "50%{transform:rotate(-34deg)}}",
            ".jawU{animation:jawU .42s ease-in-out infinite}"
            ".jawD{animation:jawD .42s ease-in-out infinite}"]
 
