@@ -308,7 +308,7 @@
       "url": "https://github.com/CodeByHaamza/kagami",
       "stars": 0,
       "desc": "anime hand-signs recognised by your webcam",
-      "meta": "typescript strict · mediapipe · 440 tests · offline pwa"
+      "meta": "typescript strict · mediapipe · 440 tests  →  try it at codebyhaamza.github.io/kagami"
     },
     {
       "name": "jojo-arena",
