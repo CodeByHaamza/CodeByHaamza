@@ -1,47 +1,41 @@
 <div align="center">
 
-<img src="assets/gen/header.svg" alt="HAMZA, in a Spider-Verse style with cyan and magenta chromatic offset, surrounded by motifs of my hobbies: a spider, a Persona tarot arcana, code brackets, a dumbbell and manga speed lines" width="100%">
+<img src="assets/gen/cover.svg" width="100%" alt="Comic book cover, Spider-Verse style: THE AMAZING HAMZA, issue 3. The title glitches in cyan and magenta, a spider swings on its thread with a THWIP!, and the caption reads: CS student, work-study, France. Ships a project every two weeks. Starts too many of them.">
 
-[![personadle.net](assets/gen/link-personadle-net.svg)](https://personadle.net)
-[![discord](assets/gen/link-discord.svg)](https://discord.com/users/690536004758536192)
-[![steam](assets/gen/link-steam.svg)](https://steamcommunity.com/profiles/76561199179744533/)
-[![mail](assets/gen/link-mail.svg)](mailto:hamza.karrouchi.dev@gmail.com)
-[![linkedin](assets/gen/link-linkedin.svg)](https://www.linkedin.com/in/hamza-karrouchi/)
+<a href="https://personadle.net"><img src="assets/gen/link-personadle-net.svg" height="46" alt="personadle.net"></a> <a href="https://discord.com/users/690536004758536192"><img src="assets/gen/link-discord.svg" height="46" alt="Discord"></a> <a href="https://steamcommunity.com/profiles/76561199179744533/"><img src="assets/gen/link-steam.svg" height="46" alt="Steam"></a> <a href="mailto:hamza.karrouchi.dev@gmail.com"><img src="assets/gen/link-mail.svg" height="46" alt="Mail"></a> <a href="https://www.linkedin.com/in/hamza-karrouchi/"><img src="assets/gen/link-linkedin.svg" height="46" alt="LinkedIn"></a>
 
 </div>
 
-<div align="center"><img src="assets/divider.svg" width="100%" alt=""></div>
+<img src="assets/gen/origin.svg" width="100%" alt="Origin story in four comic panels. Middle school: Scratch, a coding club, and an Asteroids clone with collision maths worked out by hand. Eight years of saving: we picked every part and built the PC by hand. Today: third-year CS student (BUT), work-study, building small complete things — a daily game, a gesture engine, a fighting game, PSP-era Megaten fan translations. Secret identity: Spider-Man is my guy, Spider-Verse is my favourite film, around 300 manga volumes and too many Spider-Man Lego sets.">
 
-<img src="assets/gen/whoami.svg" alt="Third-year CS student (BUT Informatique), work-study, France. I build small complete things: a daily game, a gesture engine, a fighting game, and French fan translations of PSP-era Megaten titles.  Everything ships with Docker, tests and a changelog. I don't leave projects half-finished — I just start too many of them." width="100%">
+<img src="assets/gen/spider-sense.svg" width="100%" alt="Spider-sense: my stack as a spider web, one branch per category">
 
-<img src="assets/gen/neofetch.svg" alt="My two machines: PC-HAMZA (Windows 11, Ryzen 9 9950X3D, RTX 5080, 32 GB DDR5-6000) and karrouchi-server (Ubuntu 26.04, running backups, a Discord bot, game servers and scrapers), with my stack folded in" width="100%">
+<sub>**languages** typescript, python, php, javascript, java, c, bash · **web** react, three.js, vite, node, nestjs, pwa · **data** mariadb, mysql, mongodb, pandas, numpy · **infra** docker, compose, github actions, apache, cloudflare, ubuntu · **quality** vitest, playwright, pytest, ruff, eslint, prettier · **rabbit holes** mediapipe, onnxruntime-web, pygame-ce, psp eboot</sub>
 
-<img src="assets/gen/stack.svg" alt="Stack by category — languages: typescript, python, php, javascript, java, c, bash / web: react, three.js, vite, node, nestjs, pwa / data: mariadb, mysql, mongodb, pandas, numpy / infra: docker, compose, github actions, apache, cloudflare, ubuntu / quality: vitest, playwright, pytest, ruff, eslint, prettier / rabbit holes: mediapipe, onnxruntime-web, pygame-ce, psp eboot" width="100%">
+<img src="assets/gen/multiverse.svg" width="100%" alt="The multiverse: each project is its own Earth">
 
-<div align="center"><img src="assets/divider.svg" width="100%" alt=""></div>
+| Earth | Project | What it does | Built with |
+| :-- | :-- | :-- | :-- |
+| `EARTH‑5376` | **[Grimoire du Cœur](https://github.com/Grimoire-du-Coeur)** | French Persona / SMT / Atlus community — I run it | 7 public repos · game + manga translations, tools, portal |
+| `EARTH‑2936` | **[Persona_GRUB_Themes](https://github.com/CodeByHaamza/Persona_GRUB_Themes)** | 70+ bootloader themes for Persona fans | python · grub2 · P5R, P5X and P3R covered |
+| `EARTH‑9120` | **[personadle](https://github.com/CodeByHaamza/personadle)** | daily Persona guessing game, 6 modes | vanilla js · php · mariadb · docker  →  personadle.net |
+| `EARTH‑2214` | **[kagami](https://github.com/CodeByHaamza/kagami)** | anime hand-signs recognised by your webcam | typescript strict · mediapipe · 440 tests  →  try it at codebyhaamza.github.io/kagami |
+| `EARTH‑7823` | **[jojo-arena](https://github.com/CodeByHaamza/jojo-arena)** | 1v1 top-down pixel arena fighter | python · pygame-ce · 959 tests · 94% cov · deterministic 60 fps |
+| `EARTH‑8986` | **[p2is-relecture](https://github.com/CodeByHaamza/p2is-relecture)** | proofreading webapp for the Persona 2 translation | vanilla js · static site · Discord-sourced suggestions |
+| `EARTH‑9308` | **[ViscoCrowd](https://github.com/ViscoCrowd/ViscoCrowd-simulation)** | particle simulation of a panicking pool evacuation | python · R5.12 mathematical modelling, BUT 3 |
+| `EARTH‑8224` | **[five_nights_at_fabron](https://github.com/damien-ledain/five_nights_at_fabron)** | point-and-click horror survival game | spring boot · vanilla js · strict client-server · IUT R401 |
 
-<img src="assets/gen/projects.svg" alt="My projects — Grimoire du Cœur — French Persona / SMT / Atlus community — I run it; Persona_GRUB_Themes — 70+ bootloader themes for Persona fans; personadle — daily Persona guessing game, 6 modes; kagami — anime hand-signs recognised by your webcam; jojo-arena — 1v1 top-down pixel arena fighter; p2is-relecture — proofreading webapp for the Persona 2 translation; ViscoCrowd — particle simulation of a panicking pool evacuation; five_nights_at_fabron — point-and-click horror survival game" width="100%">
+<sub>Also in the lab, private for now: suivi-muscu · P1-FR · P5RS mod · personadle-discord.</sub>
 
-<img src="assets/gen/funfacts.svg" alt="We picked every part ourselves, saved up for 8 years, then built the whole thing by hand, piece by piece. The assembly took an afternoon. The waiting took most of my teens. Scratch is where I met programming. In middle school I started a coding club, and we shipped Asteroids in it — drag-and-drop blocks, collision maths worked out by hand, and a room full of people who had never written a line. Spider-Man is my guy. The Spider-Verse films are my favourite films, full stop — nothing else animates like that. And yes, I own more Spider-Man Lego sets than a third-year student should admit to. My manga shelves hold around 300 volumes — among them exclusives, collector printings and limited editions. The gallery above only shows what I rate highly. It doesn't show the wall behind me." width="100%">
+<img src="assets/gen/villains.svg" width="100%" alt="This year's villains: my GitHub stats for the last twelve months as comic bursts — commits, pull requests, issues, reviews, stars and best streak — with my languages as power levels. Refreshed every night.">
 
-<div align="center"><img src="assets/divider.svg" width="100%" alt=""></div>
+<img src="assets/gen/web-of-days.svg" width="100%" alt="Web of days: my contribution calendar as halftone dots, with a spider hanging over my busiest day">
 
-<div align="center">
-
-<img src="assets/take-your-time.svg" width="420" alt="Take your time">
-
-<a href="https://store.steampowered.com/app/1687950/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1687950/header.jpg" width="138" alt="Persona 5 Royal"></a>
-<a href="https://store.steampowered.com/app/2161700/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2161700/header.jpg" width="138" alt="Persona 3 Reload"></a>
-<a href="https://store.steampowered.com/app/1113000/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1113000/header.jpg" width="138" alt="Persona 4 Golden"></a>
-<a href="https://store.steampowered.com/app/1245620/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg" width="138" alt="Elden Ring"></a>
-<a href="https://store.steampowered.com/app/2358720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" width="138" alt="Black Myth: Wukong"></a>
-<a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="138" alt="Cyberpunk 2077"></a>
-
-</div>
+<img src="assets/gen/offduty.svg" width="100%" alt="Meanwhile, off duty…">
 
 <div align="center">
 
-<img src="assets/menacing.svg" width="620" alt="ゴゴゴ — is that a JoJo reference?">
+<a href="https://store.steampowered.com/app/1687950/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1687950/header.jpg" width="138" alt="Persona 5 Royal"></a> <a href="https://store.steampowered.com/app/2161700/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2161700/header.jpg" width="138" alt="Persona 3 Reload"></a> <a href="https://store.steampowered.com/app/1113000/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1113000/header.jpg" width="138" alt="Persona 4 Golden"></a> <a href="https://store.steampowered.com/app/1245620/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg" width="138" alt="Elden Ring"></a> <a href="https://store.steampowered.com/app/2358720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" width="138" alt="Black Myth: Wukong"></a> <a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="138" alt="Cyberpunk 2077"></a>
 
 </div>
 
@@ -58,18 +52,8 @@
 </div>
 <!-- anime-favorites end -->
 
-<div align="center"><img src="assets/divider.svg" width="100%" alt=""></div>
-
-<img src="assets/gen/stats.svg" alt="GitHub stats and streak, generated in-repo with no external service" width="100%">
-
-<div align="center">
-  <img src="profile-3d-contrib/profile-night-view.svg" width="100%" alt="My contribution year as an animated 3D skyline">
-</div>
-
-<img src="assets/gen/contrib-pacman.svg" alt="A full game of Pac-Man played on my contribution graph: four ghosts chase him, he eats a power pellet, they turn blue and flee to the corners where he eats them for 200, 400, 800 and 1600 points, and it ends on a CONGRATULATIONS screen" width="100%">
-
-<img src="assets/gen/star-trail.svg" alt="A Joestar shooting star crossing the page, trailed by JoJo onomatopoeia in braille ASCII" width="100%">
-
 <div align="right">
-  <img src="assets/to-be-continued.svg" width="360" alt="To Be Continued">
+  <img src="assets/gen/continued.svg" width="470" alt="To be continued in issue #4…">
 </div>
+
+<sub>Every panel on this page is an SVG generated in this repo by <a href="tools/gen_readme.py"><code>tools/gen_readme.py</code></a> and refreshed every night by GitHub Actions — no external service. Comic lettering: Bangers (SIL Open Font License). Logos: Simple Icons (CC0). Spider-Man belongs to Marvel and Sony; this page is a fan-made homage.</sub>
