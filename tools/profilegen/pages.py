@@ -8,6 +8,7 @@ from __future__ import annotations
 import html
 import re
 
+from . import arrow
 from .kit import DATA, REPO_URL, ROOT
 
 START, END = "<!-- anime-favorites start -->", "<!-- anime-favorites end -->"
@@ -38,10 +39,23 @@ def linked(url: str, inner: str) -> str:
 
 
 def games(cfg: dict) -> str:
+    """Les jeux, sans style de console ni de manga : trois grandes vignettes Steam par ligne."""
     cells = [linked(f"https://store.steampowered.com/app/{g['appid']}/",
                     f'<img src="https://cdn.cloudflare.steamstatic.com/steam/apps/{g["appid"]}/header.jpg" '
-                    f'width="122" alt="{a(g["name"])}">') for g in cfg["games"]]
-    return '<div align="center">\n\n' + " ".join(cells) + "\n\n</div>"
+                    f'width="32%" alt="{a(g["name"])}">') for g in cfg["games"]]
+    return '<h3 align="center">Favourite games</h3>\n\n<p align="center">\n' + "\n".join(cells) + "\n</p>"
+
+
+def picture(name: str, alt: str) -> str:
+    """Une image en deux versions, claire et sombre : le thème GitHub du visiteur choisit."""
+    return (f'<picture><source media="(prefers-color-scheme: dark)" srcset="assets/gen/{name}-dark.svg">'
+            f'<img src="assets/gen/{name}-light.svg" width="100%" alt="{a(alt)}"></picture>')
+
+
+SNAKE = ('<picture><source media="(prefers-color-scheme: dark)" '
+         f'srcset="https://raw.githubusercontent.com/CodeByHaamza/CodeByHaamza/output/snake-dark.svg">'
+         '<img src="https://raw.githubusercontent.com/CodeByHaamza/CodeByHaamza/output/snake-light.svg" width="100%" '
+         'alt="A snake eating my contribution graph"></picture>')
 
 
 def write_readme(cfg: dict, links: list, projects: list, block: str) -> None:
@@ -62,15 +76,18 @@ def write_readme(cfg: dict, links: list, projects: list, block: str) -> None:
         img("grades.svg", "My GitHub year graded from A to E: trophies in console mode, a Stand card 「HELLO WORLD」 in manga mode"), "",
         img("projects.svg", "Projects"),
         *[linked(url, img(n, f"{label}: {descs[label]}")) for n, url, label in projects],
-        "", img("games.svg", "Games"), "", games(cfg), "",
-        img("stats.svg", "My GitHub stats for the last twelve months"), "",
-        img("calendar.svg", "My contribution calendar for the last year"), "",
-        '<img src="profile-3d-contrib/profile-night-view.svg" width="100%" alt="My contribution year as an animated 3D skyline">',
-        "", START, block, END, "",
+        "", games(cfg), "",
+        picture("stats", "My GitHub stats for the last twelve months: rank, totals, streaks and languages"), "",
+        picture("calendar", "My contribution calendar for the last year"), "",
+        '<h3 align="center">Stand Arrow</h3>', "",
+        arrow.readme_block(), "",
+        START, block, END, "",
+        SNAKE, "",
         "<sub>Every panel on this page is an SVG generated in this repo by "
         f'<a href="{REPO_URL}/tree/main/tools"><code>tools/gen_readme.py</code></a> and refreshed every night by GitHub Actions. '
         "Fonts: M PLUS Rounded 1c, Dela Gothic One, Anton (SIL Open Font License). Logos: Simple Icons (CC0). "
-        "Steel ball artwork from <i>Steel Ball Run</i> © Hirohiko Araki / Shueisha, used as a fan homage.</sub>",
+        "Stand images from <a href=\"https://jojowiki.com\">JoJo's Bizarre Encyclopedia</a>. "
+        "<i>JoJo's Bizarre Adventure</i> and its artwork © Hirohiko Araki / Shueisha, used as a fan homage.</sub>",
         "",
     ]
     (ROOT / "README.md").write_text("\n".join(out), encoding="utf-8")

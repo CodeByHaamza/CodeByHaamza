@@ -384,16 +384,3 @@ def chapter_row(cfg: dict, i: int, pr: dict, H: float) -> tuple:
         q.b.append(A.text(str(pr["stars"]), W - 30, cy + 8, 24, INK, anchor="end") + txt(W - 36 - sw, cy + 7, "★", SPOT, 16, 700, "end"))
     q.b.append("</g>")
     return q.layer()
-
-
-# ---------------------------------------------------------------- 8. en-tête « hors service »
-
-def offduty(cfg: dict, H: float) -> tuple:
-    p = Page(H)
-    D, A = p.D, p.A
-    y = (H - 50) / 2
-    p.b.append(f'<g transform="rotate(-1.5 {W / 2} {H / 2})"><rect x="{W / 2 - 230}" y="{y + 6}" width="460" height="50" fill="{INK}"/>'
-               f'<rect x="{W / 2 - 236}" y="{y}" width="460" height="50" fill="#fff" stroke="{INK}" stroke-width="3"/>'
-               + D.text("休日", W / 2 - 214, y + 36, 22, INK) + A.text("MEANWHILE, OFF DUTY…", W / 2 - 150, y + 36, 24, INK, track=2)
-               + "</g>")
-    return p.layer()

@@ -1,0 +1,34 @@
+name: Snake
+
+# Le serpent qui mange le calendrier de contributions, en bas du profil.
+# Les deux SVG (clair et sombre) sont publiés sur la branche « output ».
+on:
+  schedule:
+    - cron: "40 4 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/snake.yml
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/snake-light.svg
+            dist/snake-dark.svg?palette=github-dark
+
+      - uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+          commit_message: Update snake
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

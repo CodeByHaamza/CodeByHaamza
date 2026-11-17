@@ -19,7 +19,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from profilegen import dual, footer, kit, manga, pages, xmb  # noqa: E402
+from profilegen import arrow, dual, footer, kit, manga, pages, xmb  # noqa: E402
 from profilegen.kit import W  # noqa: E402
 
 
@@ -56,10 +56,11 @@ def main() -> None:
         dual.wipe(name, W, 76, pr["name"], f"{pr['desc']} — {pr['meta']}",
                   xmb.project_row(cfg, st, i, pr, 76), manga.chapter_row(cfg, i, pr, 76))
         rows.append((name, pr["url"], pr["name"]))
-    dual.wipe("games.svg", W, 92, "Games", "", xmb.games_head(cfg, 92), manga.offduty(cfg, 92))
-
     footer.stats_card(cfg, st)
     footer.calendar(st)
+
+    arrow.button()
+    arrow.build_cards()
 
     pages.write_readme(cfg, links, rows, pages.anime_block())
 
