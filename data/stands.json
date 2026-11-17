@@ -100,6 +100,344 @@
    ]
   },
   {
+   "id": "tower-of-gray",
+   "part": 3,
+   "user": "Gray Fly",
+   "stages": [
+    {
+     "id": "tower-of-gray",
+     "name": "Tower of Gray",
+     "image": "Tower of Gray Infobox Anime.png",
+     "text": "A stag beetle Stand too fast to catch, tearing out tongues mid-flight."
+    }
+   ]
+  },
+  {
+   "id": "dark-blue-moon",
+   "part": 3,
+   "user": "Imposter Captain Tennille",
+   "stages": [
+    {
+     "id": "dark-blue-moon",
+     "name": "Dark Blue Moon",
+     "image": "Dark Blue Moon Infobox Anime.png",
+     "text": "An underwater fighter with razor scales and a whirlpool that strips you bare."
+    }
+   ]
+  },
+  {
+   "id": "strength",
+   "part": 3,
+   "user": "Forever",
+   "stages": [
+    {
+     "id": "strength",
+     "name": "Strength",
+     "image": "Strength Infobox Anime.png",
+     "text": "A whole freighter that is secretly a Stand. Welcome aboard."
+    }
+   ]
+  },
+  {
+   "id": "ebony-devil",
+   "part": 3,
+   "user": "Devo the Cursed",
+   "stages": [
+    {
+     "id": "ebony-devil",
+     "name": "Ebony Devil",
+     "image": "Ebony Devil Infobox Anime.png",
+     "text": "Possesses a doll and grows stronger with every grudge its user holds."
+    }
+   ]
+  },
+  {
+   "id": "yellow-temperance",
+   "part": 3,
+   "user": "Rubber Soul",
+   "stages": [
+    {
+     "id": "yellow-temperance",
+     "name": "Yellow Temperance",
+     "image": "Yellow Temperance Infobox Anime.png",
+     "text": "A living slime that devours whatever it touches and can wear any face."
+    }
+   ]
+  },
+  {
+   "id": "hanged-man",
+   "part": 3,
+   "user": "J. Geil",
+   "stages": [
+    {
+     "id": "hanged-man",
+     "name": "Hanged Man",
+     "image": "Hanged Man Infobox Anime.png",
+     "text": "Lives in reflections and strikes from inside mirrors, eyes and puddles."
+    }
+   ]
+  },
+  {
+   "id": "emperor",
+   "part": 3,
+   "user": "Hol Horse",
+   "stages": [
+    {
+     "id": "emperor",
+     "name": "Emperor",
+     "image": "Emperor Infobox Anime.png",
+     "text": "A Stand revolver whose bullets turn mid-flight. Number two is best."
+    }
+   ]
+  },
+  {
+   "id": "empress",
+   "part": 3,
+   "user": "Nena",
+   "stages": [
+    {
+     "id": "empress",
+     "name": "Empress",
+     "image": "Empress Infobox Anime.png",
+     "text": "Grows on your body like a tumour, then starts talking back."
+    }
+   ]
+  },
+  {
+   "id": "wheel-of-fortune",
+   "part": 3,
+   "user": "ZZ",
+   "stages": [
+    {
+     "id": "wheel-of-fortune",
+     "name": "Wheel of Fortune",
+     "image": "Wheel of Fortune Infobox Anime.png",
+     "text": "A car that rebuilds itself, climbs cliffs and fires gasoline bullets."
+    }
+   ]
+  },
+  {
+   "id": "justice",
+   "part": 3,
+   "user": "Enya the Hag",
+   "stages": [
+    {
+     "id": "justice",
+     "name": "Justice",
+     "image": "Justice Infobox Anime.png",
+     "text": "A fog that turns anyone with a wound into a puppet on strings."
+    }
+   ]
+  },
+  {
+   "id": "lovers",
+   "part": 3,
+   "user": "Steely Dan",
+   "stages": [
+    {
+     "id": "lovers",
+     "name": "Lovers",
+     "image": "Lovers Infobox Anime.png",
+     "text": "Microscopic, but from inside your brain every pain it feels is yours, multiplied."
+    }
+   ]
+  },
+  {
+   "id": "sun",
+   "part": 3,
+   "user": "Arabia Fats",
+   "stages": [
+    {
+     "id": "sun",
+     "name": "Sun",
+     "image": "Sun Infobox Anime.png",
+     "text": "A miniature sun hanging over the desert, roasting everyone below."
+    }
+   ]
+  },
+  {
+   "id": "death-thirteen",
+   "part": 3,
+   "user": "Mannish Boy",
+   "stages": [
+    {
+     "id": "death-thirteen",
+     "name": "Death Thirteen",
+     "image": "Death Thirteen Infobox Anime.png",
+     "text": "A reaper that kills you in your dreams. You won't remember it when you wake."
+    }
+   ]
+  },
+  {
+   "id": "judgement",
+   "part": 3,
+   "user": "Cameo",
+   "stages": [
+    {
+     "id": "judgement",
+     "name": "Judgement",
+     "image": "Judgement Infobox Anime.png",
+     "text": "A genie that grants three wishes, then turns them into killer clay."
+    }
+   ]
+  },
+  {
+   "id": "high-priestess",
+   "part": 3,
+   "user": "Midler",
+   "stages": [
+    {
+     "id": "high-priestess",
+     "name": "High Priestess",
+     "image": "High Priestess Infobox Anime.png",
+     "text": "Takes the shape of anything made of metal or glass, even the seabed."
+    }
+   ]
+  },
+  {
+   "id": "geb",
+   "part": 3,
+   "user": "N'Doul",
+   "stages": [
+    {
+     "id": "geb",
+     "name": "Geb",
+     "image": "Geb Infobox Anime.png",
+     "text": "A blade of water that hunts by sound from kilometres away across the desert."
+    }
+   ]
+  },
+  {
+   "id": "khnum",
+   "part": 3,
+   "user": "Oingo",
+   "stages": [
+    {
+     "id": "khnum",
+     "name": "Khnum",
+     "image": "Khnum Infobox Anime.png",
+     "text": "Turns its user's face into anyone else's. Perfect for a bad disguise."
+    }
+   ]
+  },
+  {
+   "id": "tohth",
+   "part": 3,
+   "user": "Boingo",
+   "stages": [
+    {
+     "id": "tohth",
+     "name": "Tohth",
+     "image": "Tohth Infobox Anime.png",
+     "text": "A comic book whose prophecies always come true, one way or another."
+    }
+   ]
+  },
+  {
+   "id": "anubis",
+   "part": 3,
+   "user": "Chaka",
+   "stages": [
+    {
+     "id": "anubis",
+     "name": "Anubis",
+     "image": "Anubis Infobox Anime.png",
+     "text": "A cursed sword that remembers every move it has seen and never loses twice."
+    }
+   ]
+  },
+  {
+   "id": "bastet",
+   "part": 3,
+   "user": "Mariah",
+   "stages": [
+    {
+     "id": "bastet",
+     "name": "Bastet",
+     "image": "Bastet Infobox Anime.png",
+     "text": "A power socket that magnetises anyone who touches it until metal crushes them."
+    }
+   ]
+  },
+  {
+   "id": "sethan",
+   "part": 3,
+   "user": "Alessi",
+   "stages": [
+    {
+     "id": "sethan",
+     "name": "Sethan",
+     "image": "Sethan Infobox Anime.png",
+     "text": "Its shadow turns its victims back into children."
+    }
+   ]
+  },
+  {
+   "id": "osiris",
+   "part": 3,
+   "user": "Daniel J. D'Arby",
+   "stages": [
+    {
+     "id": "osiris",
+     "name": "Osiris",
+     "image": "Osiris Infobox Anime.png",
+     "text": "Lose a bet to D'Arby and your soul ends up as a poker chip."
+    }
+   ]
+  },
+  {
+   "id": "horus",
+   "part": 3,
+   "user": "Pet Shop",
+   "stages": [
+    {
+     "id": "horus",
+     "name": "Horus",
+     "image": "Horus Infobox Anime.png",
+     "text": "A falcon's ice Stand: frozen spears, walls and claws of ice."
+    }
+   ]
+  },
+  {
+   "id": "atum",
+   "part": 3,
+   "user": "Telence T. D'Arby",
+   "stages": [
+    {
+     "id": "atum",
+     "name": "Atum",
+     "image": "Atum Infobox Anime.png",
+     "text": "Reads your soul with a yes-or-no question, then traps it in a doll."
+    }
+   ]
+  },
+  {
+   "id": "tenore-sax",
+   "part": 3,
+   "user": "Kenny G.",
+   "stages": [
+    {
+     "id": "tenore-sax",
+     "name": "Tenore Sax",
+     "image": "Tenore Sax Infobox Anime.png",
+     "text": "Turns DIO's mansion into an endless labyrinth of illusions."
+    }
+   ]
+  },
+  {
+   "id": "cream",
+   "part": 3,
+   "user": "Vanilla Ice",
+   "stages": [
+    {
+     "id": "cream",
+     "name": "Cream",
+     "image": "Cream Infobox Anime.png",
+     "text": "Swallows its user and erases everything it rolls through into the void."
+    }
+   ]
+  },
+  {
    "id": "crazy-diamond",
    "part": 4,
    "user": "Josuke Higashikata",
@@ -174,6 +512,279 @@
      "name": "Killer Queen",
      "image": "Killer Queen Infobox Anime.png",
      "text": "Anything it touches becomes a bomb. All Kira wants is a quiet life."
+    }
+   ]
+  },
+  {
+   "id": "sheer-heart-attack",
+   "part": 4,
+   "user": "Yoshikage Kira",
+   "stages": [
+    {
+     "id": "sheer-heart-attack",
+     "name": "Sheer Heart Attack",
+     "image": "Sheer Heart Attack Infobox Anime.png",
+     "text": "Look over here! A tiny tank that chases heat and explodes on contact."
+    }
+   ]
+  },
+  {
+   "id": "bites-the-dust",
+   "part": 4,
+   "user": "Yoshikage Kira",
+   "stages": [
+    {
+     "id": "bites-the-dust",
+     "name": "Bites the Dust",
+     "image": "Bites the Dust Infobox Anime.png",
+     "text": "A bomb hidden in a witness: time rewinds one hour and fate repeats itself."
+    }
+   ]
+  },
+  {
+   "id": "aqua-necklace",
+   "part": 4,
+   "user": "Anjuro Katagiri",
+   "stages": [
+    {
+     "id": "aqua-necklace",
+     "name": "Aqua Necklace",
+     "image": "Aqua Necklace Infobox Anime.png",
+     "text": "A Stand made of water that hides in steam, rain or your drink."
+    }
+   ]
+  },
+  {
+   "id": "bad-company",
+   "part": 4,
+   "user": "Keicho Nijimura",
+   "stages": [
+    {
+     "id": "bad-company",
+     "name": "Bad Company",
+     "image": "Bad Company Infobox Anime.png",
+     "text": "A whole army of tiny soldiers, tanks and helicopters."
+    }
+   ]
+  },
+  {
+   "id": "the-lock",
+   "part": 4,
+   "user": "Tamami Kobayashi",
+   "stages": [
+    {
+     "id": "the-lock",
+     "name": "The Lock",
+     "image": "The Lock Infobox Anime.png",
+     "text": "Guilt becomes a padlock on your chest, and it keeps getting heavier."
+    }
+   ]
+  },
+  {
+   "id": "surface",
+   "part": 4,
+   "user": "Toshikazu Hazamada",
+   "stages": [
+    {
+     "id": "surface",
+     "name": "Surface",
+     "image": "Surface Infobox Anime.png",
+     "text": "A wooden mannequin that becomes your exact copy, and makes you mirror it."
+    }
+   ]
+  },
+  {
+   "id": "love-deluxe",
+   "part": 4,
+   "user": "Yukako Yamagishi",
+   "stages": [
+    {
+     "id": "love-deluxe",
+     "name": "Love Deluxe",
+     "image": "Love Deluxe Infobox Anime.png",
+     "text": "Unbreakable hair that grows, grabs and never lets go."
+    }
+   ]
+  },
+  {
+   "id": "red-hot-chili-pepper",
+   "part": 4,
+   "user": "Akira Otoishi",
+   "stages": [
+    {
+     "id": "red-hot-chili-pepper",
+     "name": "Red Hot Chili Pepper",
+     "image": "RHCP Infobox Anime.png",
+     "text": "Lives in the power lines and travels at the speed of electricity."
+    }
+   ]
+  },
+  {
+   "id": "ratt",
+   "part": 4,
+   "user": "Bug-Eaten",
+   "stages": [
+    {
+     "id": "ratt",
+     "name": "Ratt",
+     "image": "Ratt Infobox Anime.png",
+     "text": "A rat's tiny cannon that melts its targets into jelly."
+    }
+   ]
+  },
+  {
+   "id": "harvest",
+   "part": 4,
+   "user": "Shigekiyo Yangu",
+   "stages": [
+    {
+     "id": "harvest",
+     "name": "Harvest",
+     "image": "Harvest Infobox Anime.png",
+     "text": "Five hundred little helpers that collect coins, keys and anything else you want."
+    }
+   ]
+  },
+  {
+   "id": "atom-heart-father",
+   "part": 4,
+   "user": "Yoshihiro Kira",
+   "stages": [
+    {
+     "id": "atom-heart-father",
+     "name": "Atom Heart Father",
+     "image": "Atom Heart Father Infobox Anime.png",
+     "text": "A ghost living in a photograph that traps anyone who walks into the picture."
+    }
+   ]
+  },
+  {
+   "id": "boy-ii-man",
+   "part": 4,
+   "user": "Ken Oyanagi",
+   "stages": [
+    {
+     "id": "boy-ii-man",
+     "name": "Boy II Man",
+     "image": "Boy II Man Infobox Anime.png",
+     "text": "Lose at rock-paper-scissors and it steals a third of your Stand."
+    }
+   ]
+  },
+  {
+   "id": "highway-star",
+   "part": 4,
+   "user": "Yuya Fungami",
+   "stages": [
+    {
+     "id": "highway-star",
+     "name": "Highway Star",
+     "image": "Highway Star Infobox Anime.png",
+     "text": "A trail of footprints chasing you at 60 km/h to drain your nutrients."
+    }
+   ]
+  },
+  {
+   "id": "super-fly",
+   "part": 4,
+   "user": "Toyohiro Kanedaichi",
+   "stages": [
+    {
+     "id": "super-fly",
+     "name": "Super Fly",
+     "image": "Super Fly Infobox Anime.png",
+     "text": "A steel tower that won't let its prisoner leave until someone takes their place."
+    }
+   ]
+  },
+  {
+   "id": "enigma",
+   "part": 4,
+   "user": "Terunosuke Miyamoto",
+   "stages": [
+    {
+     "id": "enigma",
+     "name": "Enigma",
+     "image": "Enigma Infobox Anime.png",
+     "text": "Seals people inside paper the moment they show their fear."
+    }
+   ]
+  },
+  {
+   "id": "cheap-trick",
+   "part": 4,
+   "user": "Masazo Kinoto",
+   "stages": [
+    {
+     "id": "cheap-trick",
+     "name": "Cheap Trick",
+     "image": "Cheap Trick Infobox Anime.png",
+     "text": "Clings to your back, never lets anyone see it, and whispers your secrets."
+    }
+   ]
+  },
+  {
+   "id": "pearl-jam",
+   "part": 4,
+   "user": "Tonio Trussardi",
+   "stages": [
+    {
+     "id": "pearl-jam",
+     "name": "Pearl Jam",
+     "image": "Pearl Jam Infobox Anime.png",
+     "text": "Italian cooking that cures anything. The side effects are spectacular."
+    }
+   ]
+  },
+  {
+   "id": "achtung-baby",
+   "part": 4,
+   "user": "Shizuka Joestar",
+   "stages": [
+    {
+     "id": "achtung-baby",
+     "name": "Achtung Baby",
+     "image": "Achtung Baby Infobox Anime.png",
+     "text": "Makes its user, and everything she touches, completely invisible."
+    }
+   ]
+  },
+  {
+   "id": "earth-wind-and-fire",
+   "part": 4,
+   "user": "Mikitaka Hazekura",
+   "stages": [
+    {
+     "id": "earth-wind-and-fire",
+     "name": "Earth Wind and Fire",
+     "image": "EWF Infobox Anime.png",
+     "text": "Shapeshifts into any object. He says he's an alien."
+    }
+   ]
+  },
+  {
+   "id": "cinderella",
+   "part": 4,
+   "user": "Aya Tsuji",
+   "stages": [
+    {
+     "id": "cinderella",
+     "name": "Cinderella",
+     "image": "Cinderella Infobox Anime.png",
+     "text": "Remakes your face to bring you love. Don't break the rules."
+    }
+   ]
+  },
+  {
+   "id": "stray-cat",
+   "part": 4,
+   "user": "Tama",
+   "stages": [
+    {
+     "id": "stray-cat",
+     "name": "Stray Cat",
+     "image": "Stray Cat Original Infobox Anime.png",
+     "text": "A cat-plant hybrid that shoots invisible air bubbles."
     }
    ]
   },
@@ -302,6 +913,214 @@
    ]
   },
   {
+   "id": "mr-president",
+   "part": 5,
+   "user": "Coco Jumbo",
+   "stages": [
+    {
+     "id": "mr-president",
+     "name": "Mr.President",
+     "image": "Mr.President Infobox Anime.png",
+     "text": "A turtle with a fully furnished room inside the key on its shell."
+    }
+   ]
+  },
+  {
+   "id": "black-sabbath",
+   "part": 5,
+   "user": "Polpo",
+   "stages": [
+    {
+     "id": "black-sabbath",
+     "name": "Black Sabbath",
+     "image": "Black Sabbath Infobox Anime.png",
+     "text": "Lives in shadows and pierces anyone who sees the lighter go out."
+    }
+   ]
+  },
+  {
+   "id": "soft-machine",
+   "part": 5,
+   "user": "Mario Zucchero",
+   "stages": [
+    {
+     "id": "soft-machine",
+     "name": "Soft Machine",
+     "image": "Soft Machine Infobox Anime.png",
+     "text": "One stab of its rapier and you deflate like a balloon."
+    }
+   ]
+  },
+  {
+   "id": "kraft-work",
+   "part": 5,
+   "user": "Sale",
+   "stages": [
+    {
+     "id": "kraft-work",
+     "name": "Kraft Work",
+     "image": "Kraft Work Infobox Anime.png",
+     "text": "Fixes anything it touches in place, even bullets in midair."
+    }
+   ]
+  },
+  {
+   "id": "little-feet",
+   "part": 5,
+   "user": "Formaggio",
+   "stages": [
+    {
+     "id": "little-feet",
+     "name": "Little Feet",
+     "image": "Little Feet Infobox Anime.png",
+     "text": "One cut and you start shrinking, smaller and smaller."
+    }
+   ]
+  },
+  {
+   "id": "man-in-the-mirror",
+   "part": 5,
+   "user": "Illuso",
+   "stages": [
+    {
+     "id": "man-in-the-mirror",
+     "name": "Man in the Mirror",
+     "image": "Man in the Mirror Infobox Anime.png",
+     "text": "Pulls you into a mirror world where only what it allows can follow."
+    }
+   ]
+  },
+  {
+   "id": "beach-boy",
+   "part": 5,
+   "user": "Pesci",
+   "stages": [
+    {
+     "id": "beach-boy",
+     "name": "Beach Boy",
+     "image": "Beach Boy Infobox Anime.png",
+     "text": "A fishing rod whose line passes through walls to hook your heart."
+    }
+   ]
+  },
+  {
+   "id": "the-grateful-dead",
+   "part": 5,
+   "user": "Prosciutto",
+   "stages": [
+    {
+     "id": "the-grateful-dead",
+     "name": "The Grateful Dead",
+     "image": "The Grateful Dead Infobox Anime.png",
+     "text": "Ages everyone around it. Ice is the only way to slow it down."
+    }
+   ]
+  },
+  {
+   "id": "baby-face",
+   "part": 5,
+   "user": "Melone",
+   "stages": [
+    {
+     "id": "baby-face",
+     "name": "Baby Face",
+     "image": "Baby Face PC Infobox Anime.png",
+     "text": "A laptop that raises a Stand child from a stranger's DNA."
+    }
+   ]
+  },
+  {
+   "id": "white-album",
+   "part": 5,
+   "user": "Ghiaccio",
+   "stages": [
+    {
+     "id": "white-album",
+     "name": "White Album",
+     "image": "White Album Infobox Manga.png",
+     "text": "A suit of ice that freezes everything close to absolute zero."
+    }
+   ]
+  },
+  {
+   "id": "clash",
+   "part": 5,
+   "user": "Squalo",
+   "stages": [
+    {
+     "id": "clash",
+     "name": "Clash",
+     "image": "Clash Infobox Anime.png",
+     "text": "A shark that jumps between any puddle, cup or pool of liquid."
+    }
+   ]
+  },
+  {
+   "id": "talking-head",
+   "part": 5,
+   "user": "Tizzano",
+   "stages": [
+    {
+     "id": "talking-head",
+     "name": "Talking Head",
+     "image": "Talking Head Infobox Anime.png",
+     "text": "A tongue that makes its target say only the opposite of the truth."
+    }
+   ]
+  },
+  {
+   "id": "notorious-b-i-g",
+   "part": 5,
+   "user": "Carne",
+   "stages": [
+    {
+     "id": "notorious-b-i-g",
+     "name": "Notorious B.I.G",
+     "image": "Notorious B.I.G Normal Infobox Manga.png",
+     "text": "Wakes up when its user dies and devours anything that moves."
+    }
+   ]
+  },
+  {
+   "id": "green-day",
+   "part": 5,
+   "user": "Cioccolata",
+   "stages": [
+    {
+     "id": "green-day",
+     "name": "Green Day",
+     "image": "Green Day Infobox Anime.png",
+     "text": "A mould that eats anyone who goes lower than where they stood."
+    }
+   ]
+  },
+  {
+   "id": "oasis",
+   "part": 5,
+   "user": "Secco",
+   "stages": [
+    {
+     "id": "oasis",
+     "name": "Oasis",
+     "image": "Oasis Infobox Anime.png",
+     "text": "A suit that turns the ground into mud you can swim through."
+    }
+   ]
+  },
+  {
+   "id": "rolling-stones",
+   "part": 5,
+   "user": "Scolippi",
+   "stages": [
+    {
+     "id": "rolling-stones",
+     "name": "Rolling Stones",
+     "image": "Rolling Stones Infobox Anime.png",
+     "text": "A stone sculpture that shows you how you are fated to die."
+    }
+   ]
+  },
+  {
    "id": "stone-free",
    "part": 6,
    "user": "Jolyne Cujoh",
@@ -393,6 +1212,214 @@
    ]
   },
   {
+   "id": "burning-down-the-house",
+   "part": 6,
+   "user": "Emporio Alnino",
+   "stages": [
+    {
+     "id": "burning-down-the-house",
+     "name": "Burning Down the House",
+     "image": "BDtH Infobox Anime.png",
+     "text": "A ghost room hidden in the prison, full of things that no longer exist."
+    }
+   ]
+  },
+  {
+   "id": "goo-goo-dolls",
+   "part": 6,
+   "user": "Gwess",
+   "stages": [
+    {
+     "id": "goo-goo-dolls",
+     "name": "Goo Goo Dolls",
+     "image": "Goo Goo Dolls Infobox Anime.png",
+     "text": "Shrinks people down to the size of a mouse."
+    }
+   ]
+  },
+  {
+   "id": "manhattan-transfer",
+   "part": 6,
+   "user": "Johngalli A.",
+   "stages": [
+    {
+     "id": "manhattan-transfer",
+     "name": "Manhattan Transfer",
+     "image": "Manhattan Transfer Infobox Anime.png",
+     "text": "A drone that bounces bullets around any corner, perfectly on target."
+    }
+   ]
+  },
+  {
+   "id": "highway-to-hell",
+   "part": 6,
+   "user": "Thunder McQueen",
+   "stages": [
+    {
+     "id": "highway-to-hell",
+     "name": "Highway to Hell",
+     "image": "Highway to Hell Infobox Anime.png",
+     "text": "Wants company for its suicide: whatever happens to him happens to you."
+    }
+   ]
+  },
+  {
+   "id": "marilyn-manson",
+   "part": 6,
+   "user": "Miraschon",
+   "stages": [
+    {
+     "id": "marilyn-manson",
+     "name": "Marilyn Manson",
+     "image": "Marilyn Manson Infobox Anime.png",
+     "text": "A debt collector that takes payment from your body if you lose a bet."
+    }
+   ]
+  },
+  {
+   "id": "jumpin-jack-flash",
+   "part": 6,
+   "user": "Lang Rangler",
+   "stages": [
+    {
+     "id": "jumpin-jack-flash",
+     "name": "Jumpin' Jack Flash",
+     "image": "Jumpin' Jack Flash Infobox Anime.png",
+     "text": "Takes gravity away until your blood boils like in outer space."
+    }
+   ]
+  },
+  {
+   "id": "limp-bizkit",
+   "part": 6,
+   "user": "Sports Maxx",
+   "stages": [
+    {
+     "id": "limp-bizkit",
+     "name": "Limp Bizkit",
+     "image": "Limp Bizkit Infobox Anime.png",
+     "text": "Brings the dead back as invisible zombies."
+    }
+   ]
+  },
+  {
+   "id": "survivor",
+   "part": 6,
+   "user": "Guccio",
+   "stages": [
+    {
+     "id": "survivor",
+     "name": "Survivor",
+     "image": "Survivor Infobox Anime.png",
+     "text": "Makes everyone around it lose control and fight each other for no reason."
+    }
+   ]
+  },
+  {
+   "id": "planet-waves",
+   "part": 6,
+   "user": "Viviano Westwood",
+   "stages": [
+    {
+     "id": "planet-waves",
+     "name": "Planet Waves",
+     "image": "Planet Waves Infobox Anime.png",
+     "text": "Calls meteorites down from the sky onto its target."
+    }
+   ]
+  },
+  {
+   "id": "dragon-s-dream",
+   "part": 6,
+   "user": "Kenzou",
+   "stages": [
+    {
+     "id": "dragon-s-dream",
+     "name": "Dragon's Dream",
+     "image": "Dragon's Dream Infobox Anime.png",
+     "text": "A neutral feng shui dragon that shows the lucky and unlucky directions."
+    }
+   ]
+  },
+  {
+   "id": "yo-yo-ma",
+   "part": 6,
+   "user": "D an G",
+   "stages": [
+    {
+     "id": "yo-yo-ma",
+     "name": "Yo-Yo Ma",
+     "image": "Yo-Yo Ma Infobox Anime.png",
+     "text": "A butler that serves you dinner, then tries to dissolve you with acid."
+    }
+   ]
+  },
+  {
+   "id": "green-green-grass-of-home",
+   "part": 6,
+   "user": "The Green Baby",
+   "stages": [
+    {
+     "id": "green-green-grass-of-home",
+     "name": "Green, Green Grass of Home",
+     "image": "G3oH Infobox Anime.png",
+     "text": "The closer you get, the smaller you become. You'll never reach it."
+    }
+   ]
+  },
+  {
+   "id": "jail-house-lock",
+   "part": 6,
+   "user": "Miuccia Miuller",
+   "stages": [
+    {
+     "id": "jail-house-lock",
+     "name": "Jail House Lock",
+     "image": "Jail House Lock Infobox Anime.png",
+     "text": "You can only remember three things at a time. Escaping is impossible."
+    }
+   ]
+  },
+  {
+   "id": "bohemian-rhapsody",
+   "part": 6,
+   "user": "Ungalo",
+   "stages": [
+    {
+     "id": "bohemian-rhapsody",
+     "name": "Bohemian Rhapsody",
+     "image": "Bohemian Rhapsody Infobox Anime.png",
+     "text": "Brings fictional characters to life and drags everyone into their stories."
+    }
+   ]
+  },
+  {
+   "id": "sky-high",
+   "part": 6,
+   "user": "Rikiel",
+   "stages": [
+    {
+     "id": "sky-high",
+     "name": "Sky High",
+     "image": "Sky High Infobox Manga.png",
+     "text": "Controls the invisible flying Rods that steal your body heat."
+    }
+   ]
+  },
+  {
+   "id": "under-world",
+   "part": 6,
+   "user": "Donatello Versus",
+   "stages": [
+    {
+     "id": "under-world",
+     "name": "Under World",
+     "image": "Under World Infobox Anime.png",
+     "text": "Digs up the memories buried in the ground and replays the past for real."
+    }
+   ]
+  },
+  {
    "id": "tusk",
    "part": 7,
    "user": "Johnny Joestar",
@@ -472,8 +1499,16 @@
      "id": "d4c",
      "name": "Dirty Deeds Done Dirt Cheap",
      "text": "Dojyaaan! Slips between parallel worlds and brings back anyone it likes."
+    },
+    {
+     "id": "d4c-love-train",
+     "name": "D4C Love Train",
+     "image": "D4C Love Train Infobox Manga.JPG",
+     "text": "Behind a wall of light, every misfortune slides away into the rest of the world.",
+     "burst": "LOVE TRAIN!"
     }
-   ]
+   ],
+   "evolution": "acts"
   },
   {
    "id": "mandom",
@@ -485,6 +1520,201 @@
      "name": "Mandom",
      "image": "Mandom Infobox Manga.png",
      "text": "Turn the watch and time rewinds six seconds."
+    }
+   ]
+  },
+  {
+   "id": "ticket-to-ride",
+   "part": 7,
+   "user": "Lucy Steel",
+   "stages": [
+    {
+     "id": "ticket-to-ride",
+     "name": "Ticket to Ride",
+     "image": "Ticket to Ride Infobox Manga.png",
+     "text": "The Saint's protection: any harm aimed at Lucy turns back on the attacker."
+    }
+   ]
+  },
+  {
+   "id": "cream-starter",
+   "part": 7,
+   "user": "Hot Pants",
+   "stages": [
+    {
+     "id": "cream-starter",
+     "name": "Cream Starter",
+     "image": "Cream Starter Infobox Manga.png",
+     "text": "A spray can of flesh that heals wounds or seals mouths shut."
+    }
+   ]
+  },
+  {
+   "id": "in-a-silent-way",
+   "part": 7,
+   "user": "Sandman",
+   "stages": [
+    {
+     "id": "in-a-silent-way",
+     "name": "In a Silent Way",
+     "image": "In a Silent Way Infobox Manga.png",
+     "text": "Turns sounds into physical things you can touch, and that cut."
+    }
+   ]
+  },
+  {
+   "id": "tomb-of-the-boom-1-2-3",
+   "part": 7,
+   "user": "Boomboom Family",
+   "stages": [
+    {
+     "id": "tomb-of-the-boom-1-2-3",
+     "name": "Tomb of the Boom 1 2 3",
+     "image": "Tomb of the Boom 1 Infobox Anime.png",
+     "text": "Magnetism pulls the iron out of your blood and rips you apart."
+    }
+   ]
+  },
+  {
+   "id": "boku-no-rhythm-wo-kiitekure",
+   "part": 7,
+   "user": "Oyecomova",
+   "stages": [
+    {
+     "id": "boku-no-rhythm-wo-kiitekure",
+     "name": "Boku no Rhythm wo Kiitekure",
+     "image": "Boku no Rhythm wo Kiitekure Infobox Anime.png",
+     "text": "Pins that turn anything into a bomb when they are pulled out."
+    }
+   ]
+  },
+  {
+   "id": "wired",
+   "part": 7,
+   "user": "Pork Pie Hat Kid",
+   "stages": [
+    {
+     "id": "wired",
+     "name": "Wired",
+     "image": "Wired Infobox Anime.png",
+     "text": "Hooks that drop from the sky and reel their prey back in."
+    }
+   ]
+  },
+  {
+   "id": "catch-the-rainbow",
+   "part": 7,
+   "user": "Blackmore",
+   "stages": [
+    {
+     "id": "catch-the-rainbow",
+     "name": "Catch the Rainbow",
+     "image": "Catch the Rainbow Infobox Manga.png",
+     "text": "Freezes raindrops in midair and walks on them."
+    }
+   ]
+  },
+  {
+   "id": "sugar-mountain",
+   "part": 7,
+   "user": "Sugar Mountain",
+   "stages": [
+    {
+     "id": "sugar-mountain",
+     "name": "Sugar Mountain",
+     "image": "Sugar Mountain Stand Infobox Manga.png",
+     "text": "A spring that gives you a fortune, if you can spend it all before sunset."
+    }
+   ]
+  },
+  {
+   "id": "tatoo-you",
+   "part": 7,
+   "user": "Eleven Men",
+   "stages": [
+    {
+     "id": "tatoo-you",
+     "name": "TATOO YOU!",
+     "image": "TATOO YOU! Infobox Manga.png",
+     "text": "Eleven men sharing one Stand, slipping in and out of each other's backs."
+    }
+   ]
+  },
+  {
+   "id": "tubular-bells",
+   "part": 7,
+   "user": "Mike O.",
+   "stages": [
+    {
+     "id": "tubular-bells",
+     "name": "Tubular Bells",
+     "image": "Tubular Bells Infobox Manga.png",
+     "text": "Balloon animals made of metal that burst into deadly spikes."
+    }
+   ]
+  },
+  {
+   "id": "20th-century-boy",
+   "part": 7,
+   "user": "Magent Magent",
+   "stages": [
+    {
+     "id": "20th-century-boy",
+     "name": "20th Century BOY",
+     "image": "20th Century BOY Infobox Manga.png",
+     "text": "Total invulnerability while kneeling. Just don't move."
+    }
+   ]
+  },
+  {
+   "id": "civil-war",
+   "part": 7,
+   "user": "Axl RO",
+   "stages": [
+    {
+     "id": "civil-war",
+     "name": "Civil War",
+     "image": "Civil War Infobox Manga.png",
+     "text": "Makes your guilt come back to haunt you, literally."
+    }
+   ]
+  },
+  {
+   "id": "chocolate-disco",
+   "part": 7,
+   "user": "D-I-S-C-O",
+   "stages": [
+    {
+     "id": "chocolate-disco",
+     "name": "Chocolate Disco",
+     "image": "Chocolate Disco Infobox Manga.png",
+     "text": "A grid on the ground: anything thrown lands on the square it chooses."
+    }
+   ]
+  },
+  {
+   "id": "oh-lonesome-me",
+   "part": 7,
+   "user": "Mountain Tim",
+   "stages": [
+    {
+     "id": "oh-lonesome-me",
+     "name": "Oh! Lonesome Me",
+     "image": "Oh! Lonesome Me Infobox Anime.png",
+     "text": "A lasso that splits bodies apart and slides them along the rope."
+    }
+   ]
+  },
+  {
+   "id": "hey-ya",
+   "part": 7,
+   "user": "Pocoloco",
+   "stages": [
+    {
+     "id": "hey-ya",
+     "name": "Hey Ya!",
+     "image": "Hey Ya! Infobox Manga.png",
+     "text": "Does nothing but cheer its user on. Somehow, it works."
     }
    ]
   },
@@ -593,6 +1823,240 @@
    ]
   },
   {
+   "id": "paper-moon-king",
+   "part": 8,
+   "user": "Tsurugi Higashikata",
+   "stages": [
+    {
+     "id": "paper-moon-king",
+     "name": "Paper Moon King",
+     "image": "Paper Moon King Infobox Manga.png",
+     "text": "Origami that make you see everything with the same face."
+    }
+   ]
+  },
+  {
+   "id": "california-king-bed",
+   "part": 8,
+   "user": "Daiya Higashikata",
+   "stages": [
+    {
+     "id": "california-king-bed",
+     "name": "California King Bed",
+     "image": "CFKB Infobox Manga.png",
+     "text": "Break her rules and it steals one of your memories."
+    }
+   ]
+  },
+  {
+   "id": "walking-heart",
+   "part": 8,
+   "user": "Hato Higashikata",
+   "stages": [
+    {
+     "id": "walking-heart",
+     "name": "Walking Heart",
+     "image": "Walking Heart Infobox Manga.png",
+     "text": "Long spikes shoot out of its user's high heels to climb or stab."
+    }
+   ]
+  },
+  {
+   "id": "awaking-iii-leaves",
+   "part": 8,
+   "user": "Mitsuba Higashikata",
+   "stages": [
+    {
+     "id": "awaking-iii-leaves",
+     "name": "Awaking III Leaves",
+     "image": "Awaking III Leaves Infobox Manga.png",
+     "text": "Arrows that redirect the energy of anything they mark."
+    }
+   ]
+  },
+  {
+   "id": "space-trucking",
+   "part": 8,
+   "user": "Kaato Higashikata",
+   "stages": [
+    {
+     "id": "space-trucking",
+     "name": "Space Trucking",
+     "image": "Space Trucking Infobox Manga.png",
+     "text": "Hides objects, and even people, between playing cards."
+    }
+   ]
+  },
+  {
+   "id": "fun-fun-fun",
+   "part": 8,
+   "user": "Ojiro Sasame",
+   "stages": [
+    {
+     "id": "fun-fun-fun",
+     "name": "Fun Fun Fun",
+     "image": "Fun Fun Fun Infobox Manga.PNG",
+     "text": "Puppeteers anyone through their wounds."
+    }
+   ]
+  },
+  {
+   "id": "born-this-way",
+   "part": 8,
+   "user": "Kei Nijimura",
+   "stages": [
+    {
+     "id": "born-this-way",
+     "name": "Born This Way",
+     "image": "Born This Way Infobox Manga.png",
+     "text": "A biker Stand that rams you the moment you open a window or a door."
+    }
+   ]
+  },
+  {
+   "id": "i-am-a-rock",
+   "part": 8,
+   "user": "Yotsuyu Yagiyama",
+   "stages": [
+    {
+     "id": "i-am-a-rock",
+     "name": "I Am a Rock",
+     "image": "I Am a Rock Infobox Manga.png",
+     "text": "Marks a target, and everything of one kind piles onto it until it suffocates."
+    }
+   ]
+  },
+  {
+   "id": "doobie-wah",
+   "part": 8,
+   "user": "Aisho Dainenjiyama",
+   "stages": [
+    {
+     "id": "doobie-wah",
+     "name": "Doobie Wah!",
+     "image": "Doobie Wah! Infobox Manga.png",
+     "text": "A tornado that follows the breath of its target, no matter how far."
+    }
+   ]
+  },
+  {
+   "id": "schott-key-no-1",
+   "part": 8,
+   "user": "Elder A. Phex Brother",
+   "stages": [
+    {
+     "id": "schott-key-no-1",
+     "name": "Schott Key No.1",
+     "image": "Schott Key No.1 Infobox Manga.png",
+     "text": "Moves whatever the left hand holds straight into the right one."
+    }
+   ]
+  },
+  {
+   "id": "schott-key-no-2",
+   "part": 8,
+   "user": "Younger A. Phex Brother",
+   "stages": [
+    {
+     "id": "schott-key-no-2",
+     "name": "Schott Key No.2",
+     "image": "Schott Key No.2 Infobox Manga.png",
+     "text": "A toxic gas that burns skin, kept sealed inside a soccer ball."
+    }
+   ]
+  },
+  {
+   "id": "blue-hawaii",
+   "part": 8,
+   "user": "Dolomite",
+   "stages": [
+    {
+     "id": "blue-hawaii",
+     "name": "Blue Hawaii",
+     "image": "Blue Hawaii Infobox Manga.png",
+     "text": "One touch and you become a zombie chasing the target until it falls."
+    }
+   ]
+  },
+  {
+   "id": "brain-storm",
+   "part": 8,
+   "user": "Urban Guerrilla",
+   "stages": [
+    {
+     "id": "brain-storm",
+     "name": "Brain Storm",
+     "image": "Brain Storm Infobox Manga.png",
+     "text": "Bacteria that melt the flesh of anyone who touches them."
+    }
+   ]
+  },
+  {
+   "id": "ozon-baby",
+   "part": 8,
+   "user": "Poor Tom",
+   "stages": [
+    {
+     "id": "ozon-baby",
+     "name": "Ozon Baby",
+     "image": "Ozon Baby Stand Infobox Manga.png",
+     "text": "Raises the air pressure underground until bodies burst."
+    }
+   ]
+  },
+  {
+   "id": "doctor-wu",
+   "part": 8,
+   "user": "Wu Tomoki",
+   "stages": [
+    {
+     "id": "doctor-wu",
+     "name": "Doctor Wu",
+     "image": "Doctor Wu Infobox Manga.png",
+     "text": "Turns its user into rock particles that slip inside your body."
+    }
+   ]
+  },
+  {
+   "id": "love-love-deluxe",
+   "part": 8,
+   "user": "Karera Sakunami",
+   "stages": [
+    {
+     "id": "love-love-deluxe",
+     "name": "Love Love Deluxe",
+     "image": "Love Love Deluxe Infobox Manga.png",
+     "text": "Controls other people's hair to pick their pockets."
+    }
+   ]
+  },
+  {
+   "id": "les-feuilles",
+   "part": 8,
+   "user": "no one (Shakedown Road)",
+   "stages": [
+    {
+     "id": "les-feuilles",
+     "name": "Les Feuilles",
+     "image": "Les Feuilles Infobox Manga.png",
+     "text": "Hides under fallen ginkgo leaves and carries things away along Shakedown Road."
+    }
+   ]
+  },
+  {
+   "id": "milagroman",
+   "part": 8,
+   "user": "Zaihei Nigatake",
+   "stages": [
+    {
+     "id": "milagroman",
+     "name": "Milagroman",
+     "image": "Milagroman Infobox Manga.png",
+     "text": "Money that multiplies endlessly, and you can never get rid of a single bill."
+    }
+   ]
+  },
+  {
    "id": "november-rain",
    "part": 9,
    "user": "Jodio Joestar",
@@ -615,6 +2079,149 @@
      "name": "Smooth Operators",
      "image": "Smooth Operators Infobox Manga.png",
      "text": "Tiny operators that move anything, a millimetre at a time."
+    }
+   ]
+  },
+  {
+   "id": "the-hustle",
+   "part": 9,
+   "user": "Paco Laburantes",
+   "stages": [
+    {
+     "id": "the-hustle",
+     "name": "The Hustle",
+     "image": "The Hustle Infobox Manga.png",
+     "text": "Muscles that grab anything touching his skin."
+    }
+   ]
+  },
+  {
+   "id": "the-mattekudasai",
+   "part": 9,
+   "user": "Usagi Alohaoe",
+   "stages": [
+    {
+     "id": "the-mattekudasai",
+     "name": "THE MATTEKUDASAI",
+     "image": "THE MATTEKUDASAI Infobox Manga.png",
+     "text": "Turns into a fake of whatever someone wishes for."
+    }
+   ]
+  },
+  {
+   "id": "big-mouth-strikes-again",
+   "part": 9,
+   "user": "Charming Man",
+   "stages": [
+    {
+     "id": "big-mouth-strikes-again",
+     "name": "Big Mouth Strikes Again",
+     "image": "Big Mouth Strikes Again Infobox Manga.png",
+     "text": "Skin that hardens into sand and scatters, so he can slip anywhere, even inside you."
+    }
+   ]
+  },
+  {
+   "id": "eclipse-eight",
+   "part": 9,
+   "user": "Hacca Howler",
+   "stages": [
+    {
+     "id": "eclipse-eight",
+     "name": "Eclipse Eight",
+     "image": "Eclipse Eight Infobox Manga.png",
+     "text": "Attacks from a mist only Stand users can see."
+    }
+   ]
+  },
+  {
+   "id": "cat-size",
+   "part": 9,
+   "user": "Wild Cat Size",
+   "stages": [
+    {
+     "id": "cat-size",
+     "name": "Cat Size",
+     "image": "Cat Size Infobox Manga.png",
+     "text": "Three cats spinning invisible strings as fine as fishing line."
+    }
+   ]
+  },
+  {
+   "id": "bags-groove",
+   "part": 9,
+   "user": "Lulu",
+   "stages": [
+    {
+     "id": "bags-groove",
+     "name": "Bags' Groove",
+     "image": "Bags' Groove Infobox Manga.png",
+     "text": "Booby-traps any object, and the curse strikes everyone who touches it."
+    }
+   ]
+  },
+  {
+   "id": "glory-days",
+   "part": 9,
+   "user": "Bobby Jean",
+   "stages": [
+    {
+     "id": "glory-days",
+     "name": "Glory Days",
+     "image": "Glory Days Infobox Manga.png",
+     "text": "Controls the speed of his bullets so they hit before anyone notices."
+    }
+   ]
+  },
+  {
+   "id": "lyin-eyes",
+   "part": 9,
+   "user": "Laem Chabang",
+   "stages": [
+    {
+     "id": "lyin-eyes",
+     "name": "Lyin' Eyes",
+     "image": "Lyin' Eyes Infobox Manga.png",
+     "text": "Trained nematodes that sniff out the stress of a liar."
+    }
+   ]
+  },
+  {
+   "id": "200-balloons",
+   "part": 9,
+   "user": "Ningbo",
+   "stages": [
+    {
+     "id": "200-balloons",
+     "name": "200 Balloons",
+     "image": "200 Balloons Infobox Manga.png",
+     "text": "Inflates anything it touches until it floats away."
+    }
+   ]
+  },
+  {
+   "id": "west-end-girl",
+   "part": 9,
+   "user": "Key West",
+   "stages": [
+    {
+     "id": "west-end-girl",
+     "name": "West End Girl",
+     "image": "West End Girl Infobox Manga.png",
+     "text": "Dozens of tiny hands that slip into any gap and crush it with a ton of force."
+    }
+   ]
+  },
+  {
+   "id": "point-blank-seal",
+   "part": 9,
+   "user": "Mundra",
+   "stages": [
+    {
+     "id": "point-blank-seal",
+     "name": "Point Blank Seal",
+     "image": "Point Blank Seal Infobox Manga.png",
+     "text": "Stickers that mark a target and spread from one person to the next."
     }
    ]
   }

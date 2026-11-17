@@ -38,7 +38,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md data/stand-users.json
+          git add README.md data/stand-users.json assets/stands/cards
           if ! git diff --staged --quiet; then
             git commit -m "Stand Arrow: a new Stand user"
             for i in 1 2 3; do

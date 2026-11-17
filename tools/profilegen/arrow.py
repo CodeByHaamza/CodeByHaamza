@@ -126,7 +126,8 @@ def card(stand: dict) -> str:
         for i in range(n - 1):
             t = (i + 1) * STAGE
             req = stand.get("evolution") == "requiem"
-            word = "REQUIEM!" if req else f"ACT {i + 2}!" if stand["id"] in ("echoes", "tusk") else "EVOLUTION!"
+            word = (stages[i + 1].get("burst") or ("REQUIEM!" if req else f"ACT {i + 2}!" if stand["id"] in ("echoes", "tusk")
+                                                   else "EVOLUTION!"))
             css.append(f"@keyframes fl{i}{{0%,{_pc(t - .3, period)}{{opacity:0}}{_pc(t, period)}{{opacity:.95}}"
                        f"{_pc(t + .5, period)},100%{{opacity:0}}}}.fl{i}{{opacity:0;animation:fl{i} {period}s linear infinite}}")
             b.append(f'<rect class="fl{i}" width="{CW}" height="{CH}" fill="#fff"/>')
@@ -156,13 +157,30 @@ def card(stand: dict) -> str:
             f"<defs>{defs}{D.defs()}{A.defs()}</defs><style>{''.join(css)}{REDUCE}</style>" + "".join(b) + "</svg>")
 
 
-def build_cards() -> None:
+EXAMPLE = "gold-experience"  # la carte montrée tant que personne n'a tiré
+
+
+def build_card(stand_id: str) -> Path:
+    """Écrit la carte d'un Stand (si elle a changé) et renvoie son chemin."""
     CARDS.mkdir(parents=True, exist_ok=True)
-    for st in load_stands():
-        svg = card(st)
-        f = CARDS / f"{st['id']}.svg"
-        if not f.exists() or f.read_text(encoding="utf-8") != svg:
-            f.write_text(svg, encoding="utf-8")
+    st = next(s for s in load_stands() if s["id"] == stand_id)
+    svg = card(st)
+    f = CARDS / f"{stand_id}.svg"
+    if not f.exists() or f.read_text(encoding="utf-8") != svg:
+        f.write_text(svg, encoding="utf-8")
+    return f
+
+
+def build_cards() -> None:
+    """Les cartes ne sont faites que pour les Stands déjà tirés (et l'exemple) : avec plus de 160 Stands,
+    on ne stocke pas une carte animée par Stand d'avance. Le workflow fait la carte du Stand tiré."""
+    wanted = {r["stand"] for r in load_log()} | {EXAMPLE}
+    known = {s["id"] for s in load_stands()}
+    for sid in sorted(wanted & known):
+        build_card(sid)
+    for f in CARDS.glob("*.svg"):
+        if f.stem not in wanted:
+            f.unlink()
 
 
 # ---------------------------------------------------------------- le bouton du README

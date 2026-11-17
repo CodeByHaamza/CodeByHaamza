@@ -45,6 +45,7 @@ def main() -> None:
         text = readme.read_text(encoding="utf-8")
         text = re.sub(re.escape(arrow.START) + r".*?" + re.escape(arrow.END), lambda m: arrow.readme_block(log), text, flags=re.S)
         readme.write_text(text, encoding="utf-8")
+        arrow.build_card(s["id"])  # la carte animée de ce Stand, faite au moment du tirage
         stages = s["stages"]
         chain = " → ".join(x["name"] for x in stages)
         lines = [f"🏹 **@{user}, the Stand Arrow pierced you!**", "",
