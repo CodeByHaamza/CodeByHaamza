@@ -106,7 +106,7 @@ def card(stand: dict) -> str:
         if n > 1:
             ctx = fx.Ctx(f"x{i}_", cx, cy, i * STAGE, period, True, s["id"], D, img_id)
         else:
-            ctx = fx.Ctx(f"x{i}_", cx, cy, .1, fx.DURATION + .9, False, s["id"], D, img_id)
+            ctx = fx.Ctx(f"x{i}_", cx, cy, .1, fx.DURATION + 1.3, False, s["id"], D, img_id)
         fx_layers.append(fx.render(s.get("fx"), ctx))
         fx_defs += ctx.defs
         css += ctx.css

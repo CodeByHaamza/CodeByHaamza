@@ -1035,6 +1035,37 @@ def restore(ctx, color="#ff9de6", **_):
                                ctx.cx, ctx.cy, .7, .1)
 
 
+def frozen_time(ctx, word="THE WORLD", **_):
+    """THE WORLD (Part 7) : le temps s'arrête ; l'essence, l'allumette craquée et la balle restent suspendues
+    en l'air… puis le temps reprend : la balle file, l'essence tombe et s'embrase."""
+    resume = 1.1
+    out = [timestop(ctx, word=word)]
+    for i in range(16):  # gouttes d'essence figées en plein vol
+        x, y = ctx.rnd.uniform(50, 330), ctx.rnd.uniform(40, 210)
+        r = ctx.rnd.uniform(4.5, 7.5)
+        drop = (f'<ellipse cx="{x:.1f}" cy="{y:.1f}" rx="{r:.1f}" ry="{r * 1.5:.1f}" fill="#ffb21f" fill-opacity=".9" '
+                f'stroke="#8a5a00" stroke-width="1.2"/><circle cx="{x - r * .3:.1f}" cy="{y - r * .5:.1f}" r="{r * .3:.1f}" fill="#fff" opacity=".7"/>')
+        name = ctx.kf([(0, "opacity:0;transform:translateY(-70px)"), (.28, "opacity:1;transform:translateY(0)"),
+                       (resume, "opacity:1;transform:translateY(0)"), (resume + .35, "opacity:1;transform:translateY(240px)"),
+                       (resume + .45, "opacity:0;transform:translateY(260px)")])
+        out.append(f"<g {ctx.style(name, i * .01)}>{drop}</g>")
+    mx, my = ctx.cx + 80, 90
+    match = (f'<g transform="rotate(-30 {mx} {my + 30})"><rect x="{mx - 4}" y="{my}" width="8" height="74" rx="2" fill="#e8c88a" '
+             f'stroke="{INK}" stroke-width="1.5"/><ellipse cx="{mx}" cy="{my}" rx="7" ry="10" fill="#d62828" stroke="{INK}" stroke-width="1.5"/>'
+             + _flame(mx, my - 4, 1.1, "#ff8a1f") + "</g>")
+    name = ctx.kf([(0, "opacity:0;transform:scale(.4)"), (.35, "opacity:1;transform:scale(1)"), (resume, "opacity:1;transform:scale(1)"),
+                   (resume + .3, "opacity:1;transform:translate(-30px,170px) rotate(140deg)"),
+                   (resume + .4, "opacity:0;transform:translate(-34px,190px) rotate(160deg)")])
+    out.append(f"<g {ctx.style(name, 0, (mx, my + 30))}>{match}</g>")
+    bx, by = 70, 230
+    name = ctx.kf([(0, "opacity:0;transform:translateX(-90px)"), (.32, "opacity:1;transform:translateX(0)"),
+                   (resume, "opacity:1;transform:translateX(0)"), (resume + .22, "opacity:1;transform:translateX(280px)"),
+                   (resume + .28, "opacity:0;transform:translateX(300px)")])
+    out.append(f"<g {ctx.style(name)}>{_bullet(bx, by, '#ffd27a', True)}</g>")
+    out.append(_pop(_Shift(ctx, resume + .2), _word(ctx, "FWOOSH!", ctx.cx - 50, 70, 26), ctx.cx - 50, 60, 0, .5, -8))
+    return "".join(out) + flames(_Shift(ctx, resume + .15), n=16)
+
+
 class _Shift:
     """Le même contexte, décalé dans le temps (pour enchaîner deux effets)."""
 
@@ -1057,7 +1088,7 @@ EFFECTS = {f.__name__.rstrip("_"): f for f in (
     strings, vines, hooks, fishing, flames, ice, water, lightning, timestop, rewind, rush, explosion, zipper, bullets, sfx,
     pages, void, shadow, mirror, sand, mist, rain, spores, virus, gravity, dimension, light, slice_, magnet, bubbles,
     goldspin, money, shrink, army, stickers, meteors, footprints, afterimage, slash, lock, heat, glitch, souls, zero, discs,
-    grid, aura, knives, gun, gasoline, emeralds, ankh, restore)}
+    grid, aura, knives, gun, gasoline, emeralds, ankh, restore, frozen_time)}
 DURATION = 1.9  # durée d'un effet, en secondes
 
 

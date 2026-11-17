@@ -1941,11 +1941,8 @@
      "id": "the-world-sbr",
      "name": "THE WORLD",
      "image": "THE WORLD Infobox Manga.PNG",
-     "text": "Another universe, the same power: time stops and Diego moves.",
-     "fx": {
-      "type": "timestop",
-      "word": "THE WORLD"
-     }
+     "text": "Another universe, the same power: time stops, and gasoline, a lit match and a bullet hang in the air.",
+     "fx": "frozen_time"
     }
    ]
   },
