@@ -1,49 +1,39 @@
+<!-- Généré par tools/gen_readme.py : modifier data/profile.json ou le générateur, pas ce fichier. -->
 <div align="center">
 
-<img src="assets/gen/header.svg" alt="HAMZA, in a Spider-Verse style with cyan and magenta chromatic offset, surrounded by motifs of my hobbies: a spider, a Persona tarot arcana, code brackets, a dumbbell and manga speed lines" width="100%">
+<img src="assets/gen/psp-hero.svg" width="100%" alt="Handheld console home menu, category Hamza selected: CS student · BUT Informatique, 3rd year (work-study · France); Ships a project every two weeks (Docker, tests and a changelog, every time); ROM hacker (French fan translations of PSP-era Megaten); Runs Grimoire du Cœur (the French Persona / SMT / Atlus community)">
 
-[![personadle.net](assets/gen/link-personadle-net.svg)](https://personadle.net)
-[![discord](assets/gen/link-discord.svg)](https://discord.com/users/690536004758536192)
-[![steam](assets/gen/link-steam.svg)](https://steamcommunity.com/profiles/76561199179744533/)
-[![mail](assets/gen/link-mail.svg)](mailto:hamza.karrouchi.dev@gmail.com)
-[![linkedin](assets/gen/link-linkedin.svg)](https://www.linkedin.com/in/hamza-karrouchi/)
+<a href="https://personadle.net"><img src="assets/gen/psp-link-personadle-net.svg" height="40" alt="personadle.net"></a> <a href="https://discord.com/users/690536004758536192"><img src="assets/gen/psp-link-discord.svg" height="40" alt="discord"></a> <a href="https://steamcommunity.com/profiles/76561199179744533/"><img src="assets/gen/psp-link-steam.svg" height="40" alt="steam"></a> <a href="mailto:hamza.karrouchi.dev@gmail.com"><img src="assets/gen/psp-link-mail.svg" height="40" alt="mail"></a> <a href="https://www.linkedin.com/in/hamza-karrouchi/"><img src="assets/gen/psp-link-linkedin.svg" height="40" alt="linkedin"></a>
 
 </div>
 
-<div align="center"><img src="assets/divider.svg" width="100%" alt=""></div>
+<a href="https://github.com/CodeByHaamza/CodeByHaamza/blob/main/MANGA.md"><img src="assets/gen/psp-portal.svg" width="100%" alt="A hand spins a PSP in its palm, a golden spiral turning behind it (the Golden Rotation, phi = 1.618). Tap it to open the manga version of this page."></a>
 
-<img src="assets/gen/whoami.svg" alt="Third-year CS student (BUT Informatique), work-study, France. I build small complete things: a daily game, a gesture engine, a fighting game, and French fan translations of PSP-era Megaten titles.  Everything ships with Docker, tests and a changelog. I don't leave projects half-finished — I just start too many of them." width="100%">
+<img src="assets/gen/psp-system.svg" width="100%" alt="Settings › System Information: my PC and my home server">
 
-<img src="assets/gen/neofetch.svg" alt="My two machines: PC-HAMZA (Windows 11, Ryzen 9 9950X3D, RTX 5080, 32 GB DDR5-6000) and karrouchi-server (Ubuntu 26.04, running backups, a Discord bot, game servers and scrapers), with my stack folded in" width="100%">
+<img src="assets/gen/psp-stack.svg" width="100%" alt="Settings › Stack: languages: typescript, python, php, javascript, java, c, bash / web: react, three.js, vite, node, nestjs, pwa / data: mariadb, mysql, mongodb, pandas, numpy / infra: docker, compose, github actions, apache, cloudflare, ubuntu / quality: vitest, playwright, pytest, ruff, eslint, prettier / rabbit holes: mediapipe, onnxruntime-web, pygame-ce, psp eboot">
 
-<img src="assets/gen/stack.svg" alt="Stack by category — languages: typescript, python, php, javascript, java, c, bash / web: react, three.js, vite, node, nestjs, pwa / data: mariadb, mysql, mongodb, pandas, numpy / infra: docker, compose, github actions, apache, cloudflare, ubuntu / quality: vitest, playwright, pytest, ruff, eslint, prettier / rabbit holes: mediapipe, onnxruntime-web, pygame-ce, psp eboot" width="100%">
+<img src="assets/gen/psp-projects.svg" width="100%" alt="Projects › Saved Data Utility">
+<a href="https://github.com/Grimoire-du-Coeur"><img src="assets/gen/psp-project-grimoire-du-coeur.svg" width="100%" alt="Grimoire du Cœur: French Persona / SMT / Atlus community — I run it"></a>
+<a href="https://github.com/CodeByHaamza/Persona_GRUB_Themes"><img src="assets/gen/psp-project-persona-grub-themes.svg" width="100%" alt="Persona_GRUB_Themes: 70+ bootloader themes for Persona fans"></a>
+<a href="https://github.com/CodeByHaamza/personadle"><img src="assets/gen/psp-project-personadle.svg" width="100%" alt="personadle: daily Persona guessing game, 6 modes"></a>
+<a href="https://github.com/CodeByHaamza/kagami"><img src="assets/gen/psp-project-kagami.svg" width="100%" alt="kagami: anime hand-signs recognised by your webcam"></a>
+<a href="https://github.com/CodeByHaamza/jojo-arena"><img src="assets/gen/psp-project-jojo-arena.svg" width="100%" alt="jojo-arena: 1v1 top-down pixel arena fighter"></a>
+<a href="https://github.com/CodeByHaamza/p2is-relecture"><img src="assets/gen/psp-project-p2is-relecture.svg" width="100%" alt="p2is-relecture: proofreading webapp for the Persona 2 translation"></a>
+<a href="https://github.com/ViscoCrowd/ViscoCrowd-simulation"><img src="assets/gen/psp-project-viscocrowd.svg" width="100%" alt="ViscoCrowd: particle simulation of a panicking pool evacuation"></a>
+<a href="https://github.com/damien-ledain/five_nights_at_fabron"><img src="assets/gen/psp-project-five-nights-at-fabron.svg" width="100%" alt="five_nights_at_fabron: point-and-click horror survival game"></a>
 
-<div align="center"><img src="assets/divider.svg" width="100%" alt=""></div>
-
-<img src="assets/gen/projects.svg" alt="My projects — Grimoire du Cœur — French Persona / SMT / Atlus community — I run it; Persona_GRUB_Themes — 70+ bootloader themes for Persona fans; personadle — daily Persona guessing game, 6 modes; kagami — anime hand-signs recognised by your webcam; jojo-arena — 1v1 top-down pixel arena fighter; p2is-relecture — proofreading webapp for the Persona 2 translation; ViscoCrowd — particle simulation of a panicking pool evacuation; five_nights_at_fabron — point-and-click horror survival game" width="100%">
-
-<img src="assets/gen/funfacts.svg" alt="We picked every part ourselves, saved up for 8 years, then built the whole thing by hand, piece by piece. The assembly took an afternoon. The waiting took most of my teens. Scratch is where I met programming. In middle school I started a coding club, and we shipped Asteroids in it — drag-and-drop blocks, collision maths worked out by hand, and a room full of people who had never written a line. Spider-Man is my guy. The Spider-Verse films are my favourite films, full stop — nothing else animates like that. And yes, I own more Spider-Man Lego sets than a third-year student should admit to. My manga shelves hold around 300 volumes — among them exclusives, collector printings and limited editions. The gallery above only shows what I rate highly. It doesn't show the wall behind me." width="100%">
-
-<div align="center"><img src="assets/divider.svg" width="100%" alt=""></div>
-
-<div align="center">
-
-<img src="assets/take-your-time.svg" width="420" alt="Take your time">
-
-<a href="https://store.steampowered.com/app/1687950/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1687950/header.jpg" width="138" alt="Persona 5 Royal"></a>
-<a href="https://store.steampowered.com/app/2161700/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2161700/header.jpg" width="138" alt="Persona 3 Reload"></a>
-<a href="https://store.steampowered.com/app/1113000/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1113000/header.jpg" width="138" alt="Persona 4 Golden"></a>
-<a href="https://store.steampowered.com/app/1245620/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg" width="138" alt="Elden Ring"></a>
-<a href="https://store.steampowered.com/app/2358720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" width="138" alt="Black Myth: Wukong"></a>
-<a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="138" alt="Cyberpunk 2077"></a>
-
-</div>
+<img src="assets/gen/psp-games.svg" width="100%" alt="Game › Favourites">
 
 <div align="center">
 
-<img src="assets/menacing.svg" width="620" alt="ゴゴゴ — is that a JoJo reference?">
+<a href="https://store.steampowered.com/app/1687950/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1687950/header.jpg" width="122" alt="Persona 5 Royal"></a> <a href="https://store.steampowered.com/app/2161700/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2161700/header.jpg" width="122" alt="Persona 3 Reload"></a> <a href="https://store.steampowered.com/app/1113000/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1113000/header.jpg" width="122" alt="Persona 4 Golden"></a> <a href="https://store.steampowered.com/app/1245620/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg" width="122" alt="Elden Ring"></a> <a href="https://store.steampowered.com/app/2358720/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" width="122" alt="Black Myth: Wukong"></a> <a href="https://store.steampowered.com/app/1091500/"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" width="122" alt="Cyberpunk 2077"></a>
 
 </div>
+
+<img src="assets/gen/stats.svg" width="100%" alt="My GitHub stats for the last twelve months: rank, totals, current and longest streak, and languages. Generated in this repo every night.">
+
+<img src="profile-3d-contrib/profile-night-view.svg" width="100%" alt="My contribution year as an animated 3D skyline">
 
 <!-- anime-favorites start -->
 <div align="center">
@@ -58,18 +48,4 @@
 </div>
 <!-- anime-favorites end -->
 
-<div align="center"><img src="assets/divider.svg" width="100%" alt=""></div>
-
-<img src="assets/gen/stats.svg" alt="GitHub stats and streak, generated in-repo with no external service" width="100%">
-
-<div align="center">
-  <img src="profile-3d-contrib/profile-night-view.svg" width="100%" alt="My contribution year as an animated 3D skyline">
-</div>
-
-<img src="assets/gen/contrib-pacman.svg" alt="A full game of Pac-Man played on my contribution graph: four ghosts chase him, he eats a power pellet, they turn blue and flee to the corners where he eats them for 200, 400, 800 and 1600 points, and it ends on a CONGRATULATIONS screen" width="100%">
-
-<img src="assets/gen/star-trail.svg" alt="A Joestar shooting star crossing the page, trailed by JoJo onomatopoeia in braille ASCII" width="100%">
-
-<div align="right">
-  <img src="assets/to-be-continued.svg" width="360" alt="To Be Continued">
-</div>
+<sub>Every panel on this page is an SVG generated in this repo by <a href="https://github.com/CodeByHaamza/CodeByHaamza/tree/main/tools"><code>tools/gen_readme.py</code></a> and refreshed every night by GitHub Actions. Fonts: M PLUS Rounded 1c, Dela Gothic One, Anton (SIL Open Font License). Logos: Simple Icons (CC0). Steel ball artwork from <i>Steel Ball Run</i> © Hirohiko Araki / Shueisha, used as a fan homage.</sub>
