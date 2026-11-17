@@ -47,13 +47,15 @@
 
 <a href="https://github.com/CodeByHaamza/CodeByHaamza/issues/new?title=arrow%3A%20pierce%20me&amp;body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%0A%0AA%20GitHub%20Action%20shoots%20the%20Stand%20Arrow%20at%20you%20and%20replies%20here%20within%20a%20minute%20or%20two%20with%20the%20Stand%20you%20awakened.%20One%20arrow%20per%20visitor%20per%20day."><img src="assets/gen/arrow-button.svg" width="460" alt="Get pierced by the Stand Arrow: opens an issue, a GitHub Action replies with your Stand"></a>
 
-<sub><b>0</b> arrows shot · <b>0</b> Stand users · <b>0/43</b> Stands awakened · one arrow per visitor per day</sub>
+<sub><b>1</b> arrows shot · <b>1</b> Stand users · <b>1/43</b> Stands awakened · one arrow per visitor per day</sub>
 
 </div>
 
-<img src="assets/stands/cards/gold-experience.svg" width="100%" alt="Example card: Gold Experience, pierced by the Requiem Arrow, becomes Gold Experience Requiem">
+<img src="assets/stands/cards/november-rain.svg" width="100%" alt="Latest awakening: @shalee-pnt got November Rain">
 
-<p align="center"><sub>No one has been pierced yet. Be the first.</sub></p>
+| Stand user | Stand | Part | Date |
+|:--|:--|:-:|:--|
+| [@shalee-pnt](https://github.com/shalee-pnt) | November Rain | 9 | 2026-11-17 |
 <!-- stand-arrow end -->
 
 <!-- anime-favorites start -->
