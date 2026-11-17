@@ -45,7 +45,7 @@
 
 <a href="https://github.com/CodeByHaamza/CodeByHaamza/issues/new?title=arrow%3A%20pierce%20me&amp;body=Just%20press%20%2A%2ACreate%2A%2A%20%28or%20%2A%2ASubmit%20new%20issue%2A%2A%29.%0A%0AA%20GitHub%20Action%20shoots%20the%20Stand%20Arrow%20at%20you%20and%20replies%20here%20within%20a%20minute%20or%20two%20with%20the%20Stand%20you%20awakened.%20One%20arrow%20per%20visitor%20per%20day."><img src="assets/gen/arrow-button.svg" width="460" alt="Get pierced by the Stand Arrow: opens an issue, a GitHub Action replies with your Stand"></a>
 
-<sub><b>2</b> arrows shot · <b>2</b> Stand users · <b>2/166</b> Stands awakened · one arrow per visitor per day</sub>
+<sub><b>2</b> arrows shot · <b>2</b> Stand users · <b>2/165</b> Stands awakened · one arrow per visitor per day</sub>
 
 </div>
 

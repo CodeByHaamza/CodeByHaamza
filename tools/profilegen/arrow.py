@@ -13,6 +13,7 @@ import random
 import urllib.parse
 from pathlib import Path
 
+from . import fx
 from .kit import DATA, REDUCE, REPO_URL, ROOT, SERIF, Font, data_uri, esc, poly, txt, wrap, write
 
 STANDS_DIR = ROOT / "assets" / "stands"
@@ -94,11 +95,27 @@ def card(stand: dict) -> str:
     x0 = 368
     b.append(A.text("STAND", x0, 58, 16, GOLD, track=6))
     b.append(A.text(f"PART {stand['part']}", 830, 58, 16, GOLD, anchor="end", track=4))
+    fx_defs, fx_layers = [], []
     for i, s in enumerate(stages):
         name = s["name"].upper()
         size = D.fit(name, 38, 460, floor=18)
         lines = wrap(s["text"], 52)[:3]
-        g = [f'<g class="bob">{_image(s["id"], cx, cy, isz)}</g>',
+        img_id = f"si{i}"
+        fx_defs.append(f'<g id="{img_id}">{_image(s["id"], cx, cy, isz)}</g>')
+        # l'effet d'apparition, lié au pouvoir du Stand : une fois au chargement, ou à chaque étape
+        if n > 1:
+            ctx = fx.Ctx(f"x{i}_", cx, cy, i * STAGE, period, True, s["id"], D, img_id)
+        else:
+            ctx = fx.Ctx(f"x{i}_", cx, cy, .1, fx.DURATION + .9, False, s["id"], D, img_id)
+        fx_layers.append(fx.render(s.get("fx"), ctx))
+        fx_defs += ctx.defs
+        css += ctx.css
+        image = f'<g class="bob"><use href="#{img_id}"/></g>'
+        if n == 1:  # le Stand apparaît une fois l'effet lancé
+            image = f'<g class="appear" style="transform-origin:{cx}px {cy}px">{image}</g>'
+            css.append("@keyframes appear{0%,55%{opacity:0;transform:scale(.75)}100%{opacity:1;transform:none}}"
+                       ".appear{animation:appear 1.5s cubic-bezier(.2,1.3,.4,1) both}")
+        g = [image,
              D.text(name, x0, 108, size, "#fff", INK, 6, skew=-6),
              A.text(f"STAND USER  ·  {stand['user'].upper()}", x0, 140, 15, GOLD, track=1.5)]
         for k, ln in enumerate(lines):
@@ -121,6 +138,9 @@ def card(stand: dict) -> str:
             b.append(f'<g class="st{i}">' + "".join(g) + "</g>")
         else:
             b.append("".join(g))
+    # les effets restent dans la zone de l'image : le nom et la phrase du Stand ne sont jamais recouverts
+    b.append(f'<g clip-path="url(#fxclip)">' + "".join(fx_layers) + "</g>")
+    defs += "".join(fx_defs) + f'<clipPath id="fxclip"><rect width="354" height="{CH}"/></clipPath>'
     # le passage d'une étape à la suivante : flash, et le mot qui claque (ou la flèche Requiem qui transperce)
     if n > 1:
         for i in range(n - 1):
