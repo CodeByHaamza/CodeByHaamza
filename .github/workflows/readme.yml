@@ -1,4 +1,4 @@
-name: Generate README SVGs
+name: Generate profile pages
 
 on:
   schedule:
@@ -9,9 +9,10 @@ on:
     branches: [main]
     paths:
       - data/profile.json
-      - tools/gen_readme.py
-      - assets/ascii/**
+      - data/fonts/**
+      - tools/**
       - assets/icons/**
+      - assets/steel-ball.png
       - .github/workflows/readme.yml
   workflow_dispatch:
 
@@ -63,10 +64,11 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/gen data/gh-raw.json
+          git add assets/gen data/gh-raw.json README.md MANGA.md
           if git diff --staged --quiet; then
             echo "rien a committer"
           else
-            git commit -m "Regenerate profile SVGs"
+            git commit -m "Regenerate profile pages"
+            git pull --rebase
             git push
           fi

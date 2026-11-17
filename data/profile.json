@@ -40,6 +40,24 @@
     "Everything ships with Docker, tests and a changelog. I don't leave",
     "projects half-finished — I just start too many of them."
   ],
+  "menu": [
+    [
+      "CS student · BUT Informatique, 3rd year",
+      "work-study · France"
+    ],
+    [
+      "Ships a project every two weeks",
+      "Docker, tests and a changelog, every time"
+    ],
+    [
+      "ROM hacker",
+      "French fan translations of PSP-era Megaten"
+    ],
+    [
+      "Runs Grimoire du Cœur",
+      "the French Persona / SMT / Atlus community"
+    ]
+  ],
   "machines": [
     {
       "user": "hamza",
