@@ -78,7 +78,6 @@ def write_readme(cfg: dict, links: list, projects: list, block: str) -> None:
         *[linked(url, img(n, f"{label}: {descs[label]}")) for n, url, label in projects],
         "", games(cfg), "",
         picture("stats", "My GitHub stats for the last twelve months: rank, totals, streaks and languages"), "",
-        picture("calendar", "My contribution calendar for the last year"), "",
         '<h3 align="center">Stand Arrow</h3>', "",
         arrow.readme_block(), "",
         START, block, END, "",

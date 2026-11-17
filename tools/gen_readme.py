@@ -57,7 +57,6 @@ def main() -> None:
                   xmb.project_row(cfg, st, i, pr, 76), manga.chapter_row(cfg, i, pr, 76))
         rows.append((name, pr["url"], pr["name"]))
     footer.stats_card(cfg, st)
-    footer.calendar(st)
 
     arrow.button()
     arrow.build_cards()
