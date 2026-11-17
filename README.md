@@ -38,8 +38,6 @@
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/gen/stats-dark.svg"><img src="assets/gen/stats-light.svg" width="100%" alt="My GitHub stats for the last twelve months: rank, totals, streaks and languages"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/gen/calendar-dark.svg"><img src="assets/gen/calendar-light.svg" width="100%" alt="My contribution calendar for the last year"></picture>
-
 <h3 align="center">Stand Arrow</h3>
 
 <!-- stand-arrow start -->

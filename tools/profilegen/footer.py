@@ -3,7 +3,7 @@
 Couleurs et police de GitHub, en deux fichiers (clair et sombre) que le README sert avec
 <picture> : c'est le thème GitHub du visiteur qui choisit. Animations jouées une fois au
 chargement, depuis un état écrit final : compteurs qui défilent comme un odomètre, anneau de
-la note qui se remplit, barres qui poussent, calendrier qui s'allume semaine par semaine.
+la note qui se remplit, barres qui poussent. (Le calendrier de contributions, c'est le snake.)
 """
 from __future__ import annotations
 
@@ -216,45 +216,3 @@ def stats_card(cfg: dict, st: dict) -> None:
         write(f"stats-{mode}.svg", f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H:.0f}" width="{W}" height="{H:.0f}" '
               f'role="img"><title>{esc(title)}</title><defs>{defs}</defs><style>{theme(mode)}{CSS}{REDUCE}</style>'
               + "".join(b) + "</svg>")
-
-
-# ---------------------------------------------------------------- 2. le calendrier de contributions
-
-def calendar(st: dict) -> None:
-    weeks = st["weeks"]
-    counts = sorted(d["contributionCount"] for wk in weeks for d in wk["contributionDays"] if d["contributionCount"])
-    q = [counts[int(len(counts) * f)] for f in (.25, .5, .75)] if counts else [1, 2, 3]
-
-    def level(c):
-        return 0 if c == 0 else 1 if c <= q[0] else 2 if c <= q[1] else 3 if c <= q[2] else 4
-    cell, gap = 12, 3
-    step = cell + gap
-    x0, y0 = 50, 62
-    H = y0 + 7 * step + 50
-    b = [card(0, 0, W, H), t(25, 36, f"{num(st['total'])} contributions in the last year", "fg", 16, 600)]
-    for i, lbl in ((1, "Mon"), (3, "Wed"), (5, "Fri")):
-        b.append(t(x0 - 8, y0 + i * step + 10, lbl, "mu", 11, 400, "end"))
-    last_month = None
-    for wi, wk in enumerate(weeks):
-        x = x0 + wi * step
-        first = wk["contributionDays"][0]["date"]
-        m = first[5:7]
-        if m != last_month and wi < len(weeks) - 2:
-            b.append(t(x, y0 - 10, date.fromisoformat(first).strftime("%b"), "mu", 11))
-            last_month = m
-        b.append(f'<g class="pop" style="animation-delay:{.2 + wi * .022:.3f}s">')
-        for d in wk["contributionDays"]:
-            dow = (date.fromisoformat(d["date"]).weekday() + 1) % 7  # dimanche en haut, comme sur GitHub
-            b.append(f'<rect x="{x}" y="{y0 + dow * step}" width="{cell}" height="{cell}" rx="2" class="l{level(d["contributionCount"])}"/>')
-        b.append("</g>")
-    ly = y0 + 7 * step + 28
-    lx = W - 25 - 5 * step - 34
-    b.append(t(lx - 8, ly + 10, "Less", "mu", 11, 400, "end"))
-    for i in range(5):
-        b.append(f'<rect x="{lx + i * step}" y="{ly}" width="{cell}" height="{cell}" rx="2" class="l{i}"/>')
-    b.append(t(lx + 5 * step + 4, ly + 10, "More", "mu", 11))
-    b.append(t(25, ly + 10, f"best day: {num(max(counts) if counts else 0)} contributions", "mu", 11))
-    for mode in PALETTES:
-        write(f"calendar-{mode}.svg", f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" '
-              f'role="img"><title>{esc(num(st["total"]))} contributions in the last year</title>'
-              f"<style>{theme(mode)}{CSS}{REDUCE}</style>" + "".join(b) + "</svg>")
