@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 """Prépare les images de la Flèche du Stand (à lancer en local, une fois).
 
-Le serveur d'images du wiki refuse les téléchargements automatiques : les images sont donc
-enregistrées à la main depuis jjba.fandom.com/fr (le fichier de chaque étape est dans
-data/stands.json, champ « wiki »), dans un même dossier, sous leur nom d'origine ou sous
-<id de l'étape>.png / .jpg / .webp. Ce script les recadre, les réduit et les compresse dans
-assets/stands/.
+Les images sources sont récupérées par tools/fetch_stands.py, sous <id de l'étape>.png ; on
+peut aussi en déposer d'autres dans le même dossier, sous ce nom ou sous leur nom d'origine.
+Ce script les recadre, les réduit et les compresse dans assets/stands/.
 
     pip install pillow
-    python tools/build_stands.py ~/Downloads/stands
+    python tools/build_stands.py .cache/stands
 
 Il traite aussi les deux flèches (flèche du Stand, flèche Requiem) si on lui donne leurs
 chemins avec --arrow et --requiem.
@@ -44,7 +42,7 @@ def compress(src: Path, dst: Path, box: tuple[int, int], colors: int = 160) -> i
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("folder", type=Path, help="dossier où sont les images enregistrées depuis le wiki")
+    ap.add_argument("folder", type=Path, help="dossier des images sources (tools/fetch_stands.py)")
     ap.add_argument("--arrow", type=Path, help="image de la flèche du Stand")
     ap.add_argument("--requiem", type=Path, help="image de la flèche Requiem")
     ap.add_argument("--extra", nargs="*", default=[], help="id=chemin pour une étape prise ailleurs (ex. d4c=D4c_sbr69.webp)")
@@ -66,9 +64,9 @@ def main() -> None:
                 found.setdefault(norm(p.name), p)
     missing = []
     for s in stages:
-        src = Path(extra[s["id"]]) if s["id"] in extra else (found.get(s["id"]) or found.get(norm(s["wiki"])))
+        src = Path(extra[s["id"]]) if s["id"] in extra else (found.get(s["id"]) or found.get(norm(s.get("image", ""))))
         if not src or not src.exists():
-            missing.append(f"{s['id']}  ←  Fichier:{s['wiki']}")
+            missing.append(f"{s['id']}  ←  {s.get('image', '(image à fournir avec --extra)')}")
             continue
         size = compress(src, OUT / f"{s['id']}.png", (300, 300))
         print(f"{s['id']:26} {size // 1024:4} Ko")
@@ -77,7 +75,7 @@ def main() -> None:
     if a.requiem:
         print("arrow-requiem ", compress(a.requiem, ROOT / "assets" / "arrow-requiem.png", (220, 220), 128) // 1024, "Ko")
     if missing:
-        print(f"\n{len(missing)} image(s) manquante(s) (enregistrer depuis jjba.fandom.com/fr) :")
+        print(f"\n{len(missing)} image(s) manquante(s) (relancer tools/fetch_stands.py) :")
         print("\n".join("  " + m for m in missing))
 
 

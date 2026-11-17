@@ -86,7 +86,8 @@ def write_readme(cfg: dict, links: list, projects: list, block: str) -> None:
         "<sub>Every panel on this page is an SVG generated in this repo by "
         f'<a href="{REPO_URL}/tree/main/tools"><code>tools/gen_readme.py</code></a> and refreshed every night by GitHub Actions. '
         "Fonts: M PLUS Rounded 1c, Dela Gothic One, Anton (SIL Open Font License). Logos: Simple Icons (CC0). "
-        "Steel ball artwork from <i>Steel Ball Run</i> © Hirohiko Araki / Shueisha, used as a fan homage.</sub>",
+        "Stand images from <a href=\"https://jojowiki.com\">JoJo's Bizarre Encyclopedia</a>. "
+        "<i>JoJo's Bizarre Adventure</i> and its artwork © Hirohiko Araki / Shueisha, used as a fan homage.</sub>",
         "",
     ]
     (ROOT / "README.md").write_text("\n".join(out), encoding="utf-8")
