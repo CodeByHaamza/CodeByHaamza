@@ -1,29 +1,31 @@
 <!-- Généré par tools/gen_readme.py : modifier data/profile.json ou le générateur, pas ce fichier. -->
 <div align="center">
 
-<img src="assets/gen/psp-hero.svg" width="100%" alt="Handheld console home menu, category Hamza selected: CS student · BUT Informatique, 3rd year (work-study · France); Ships a project every two weeks (Docker, tests and a changelog, every time); ROM hacker (French fan translations of PSP-era Megaten); Runs Grimoire du Cœur (the French Persona / SMT / Atlus community)">
+<img src="assets/gen/hero.svg" width="100%" alt="Every 12 seconds this page switches between two styles: a handheld console menu and a manga chapter. Home menu, category Hamza: CS student · BUT Informatique, 3rd year (work-study · France); Ships a project every two weeks (Docker, tests and a changelog, every time); ROM hacker (French fan translations of PSP-era Megaten); Runs Grimoire du Cœur (the French Persona / SMT / Atlus community).">
 
-<a href="https://personadle.net"><img src="assets/gen/psp-link-personadle-net.svg" height="40" alt="personadle.net"></a> <a href="https://discord.com/users/690536004758536192"><img src="assets/gen/psp-link-discord.svg" height="40" alt="discord"></a> <a href="https://steamcommunity.com/profiles/76561199179744533/"><img src="assets/gen/psp-link-steam.svg" height="40" alt="steam"></a> <a href="mailto:hamza.karrouchi.dev@gmail.com"><img src="assets/gen/psp-link-mail.svg" height="40" alt="mail"></a> <a href="https://www.linkedin.com/in/hamza-karrouchi/"><img src="assets/gen/psp-link-linkedin.svg" height="40" alt="linkedin"></a>
+<a href="https://personadle.net"><img src="assets/gen/link-personadle-net.svg" height="44" alt="personadle.net"></a> <a href="https://discord.com/users/690536004758536192"><img src="assets/gen/link-discord.svg" height="44" alt="discord"></a> <a href="https://steamcommunity.com/profiles/76561199179744533/"><img src="assets/gen/link-steam.svg" height="44" alt="steam"></a> <a href="mailto:hamza.karrouchi.dev@gmail.com"><img src="assets/gen/link-mail.svg" height="44" alt="mail"></a> <a href="https://www.linkedin.com/in/hamza-karrouchi/"><img src="assets/gen/link-linkedin.svg" height="44" alt="linkedin"></a>
 
 </div>
 
-<a href="https://github.com/CodeByHaamza/CodeByHaamza/blob/main/MANGA.md"><img src="assets/gen/psp-portal.svg" width="100%" alt="A hand spins a PSP in its palm, a golden spiral turning behind it (the Golden Rotation, phi = 1.618). Tap it to open the manga version of this page."></a>
+<img src="assets/gen/portal.svg" width="100%" alt="A hand spins a PSP in its palm, a golden spiral turning behind it (the Golden Rotation, phi = 1.618). In manga mode, the hand spins a steel ball instead.">
 
-<img src="assets/gen/psp-system.svg" width="100%" alt="Settings › System Information: my PC and my home server">
+<img src="assets/gen/setup.svg" width="100%" alt="My setup: my PC and my home server">
 
-<img src="assets/gen/psp-stack.svg" width="100%" alt="Settings › Stack: languages: typescript, python, php, javascript, java, c, bash / web: react, three.js, vite, node, nestjs, pwa / data: mariadb, mysql, mongodb, pandas, numpy / infra: docker, compose, github actions, apache, cloudflare, ubuntu / quality: vitest, playwright, pytest, ruff, eslint, prettier / rabbit holes: mediapipe, onnxruntime-web, pygame-ce, psp eboot">
+<img src="assets/gen/stack.svg" width="100%" alt="Stack: languages: typescript, python, php, javascript, java, c, bash / web: react, three.js, vite, node, nestjs, pwa / data: mariadb, mysql, mongodb, pandas, numpy / infra: docker, compose, github actions, apache, cloudflare, ubuntu / quality: vitest, playwright, pytest, ruff, eslint, prettier / rabbit holes: mediapipe, onnxruntime-web, pygame-ce, psp eboot">
 
-<img src="assets/gen/psp-projects.svg" width="100%" alt="Projects › Saved Data Utility">
-<a href="https://github.com/Grimoire-du-Coeur"><img src="assets/gen/psp-project-grimoire-du-coeur.svg" width="100%" alt="Grimoire du Cœur: French Persona / SMT / Atlus community — I run it"></a>
-<a href="https://github.com/CodeByHaamza/Persona_GRUB_Themes"><img src="assets/gen/psp-project-persona-grub-themes.svg" width="100%" alt="Persona_GRUB_Themes: 70+ bootloader themes for Persona fans"></a>
-<a href="https://github.com/CodeByHaamza/personadle"><img src="assets/gen/psp-project-personadle.svg" width="100%" alt="personadle: daily Persona guessing game, 6 modes"></a>
-<a href="https://github.com/CodeByHaamza/kagami"><img src="assets/gen/psp-project-kagami.svg" width="100%" alt="kagami: anime hand-signs recognised by your webcam"></a>
-<a href="https://github.com/CodeByHaamza/jojo-arena"><img src="assets/gen/psp-project-jojo-arena.svg" width="100%" alt="jojo-arena: 1v1 top-down pixel arena fighter"></a>
-<a href="https://github.com/CodeByHaamza/p2is-relecture"><img src="assets/gen/psp-project-p2is-relecture.svg" width="100%" alt="p2is-relecture: proofreading webapp for the Persona 2 translation"></a>
-<a href="https://github.com/ViscoCrowd/ViscoCrowd-simulation"><img src="assets/gen/psp-project-viscocrowd.svg" width="100%" alt="ViscoCrowd: particle simulation of a panicking pool evacuation"></a>
-<a href="https://github.com/damien-ledain/five_nights_at_fabron"><img src="assets/gen/psp-project-five-nights-at-fabron.svg" width="100%" alt="five_nights_at_fabron: point-and-click horror survival game"></a>
+<img src="assets/gen/grades.svg" width="100%" alt="My GitHub year graded from A to E: trophies in console mode, a Stand card 「HELLO WORLD」 in manga mode">
 
-<img src="assets/gen/psp-games.svg" width="100%" alt="Game › Favourites">
+<img src="assets/gen/projects.svg" width="100%" alt="Projects">
+<a href="https://github.com/Grimoire-du-Coeur"><img src="assets/gen/project-grimoire-du-coeur.svg" width="100%" alt="Grimoire du Cœur: French Persona / SMT / Atlus community — I run it"></a>
+<a href="https://github.com/CodeByHaamza/Persona_GRUB_Themes"><img src="assets/gen/project-persona-grub-themes.svg" width="100%" alt="Persona_GRUB_Themes: 70+ bootloader themes for Persona fans"></a>
+<a href="https://github.com/CodeByHaamza/personadle"><img src="assets/gen/project-personadle.svg" width="100%" alt="personadle: daily Persona guessing game, 6 modes"></a>
+<a href="https://github.com/CodeByHaamza/kagami"><img src="assets/gen/project-kagami.svg" width="100%" alt="kagami: anime hand-signs recognised by your webcam"></a>
+<a href="https://github.com/CodeByHaamza/jojo-arena"><img src="assets/gen/project-jojo-arena.svg" width="100%" alt="jojo-arena: 1v1 top-down pixel arena fighter"></a>
+<a href="https://github.com/CodeByHaamza/p2is-relecture"><img src="assets/gen/project-p2is-relecture.svg" width="100%" alt="p2is-relecture: proofreading webapp for the Persona 2 translation"></a>
+<a href="https://github.com/ViscoCrowd/ViscoCrowd-simulation"><img src="assets/gen/project-viscocrowd.svg" width="100%" alt="ViscoCrowd: particle simulation of a panicking pool evacuation"></a>
+<a href="https://github.com/damien-ledain/five_nights_at_fabron"><img src="assets/gen/project-five-nights-at-fabron.svg" width="100%" alt="five_nights_at_fabron: point-and-click horror survival game"></a>
+
+<img src="assets/gen/games.svg" width="100%" alt="Games">
 
 <div align="center">
 
@@ -31,7 +33,9 @@
 
 </div>
 
-<img src="assets/gen/stats.svg" width="100%" alt="My GitHub stats for the last twelve months: rank, totals, current and longest streak, and languages. Generated in this repo every night.">
+<img src="assets/gen/stats.svg" width="100%" alt="My GitHub stats for the last twelve months">
+
+<img src="assets/gen/calendar.svg" width="100%" alt="My contribution calendar for the last year">
 
 <img src="profile-3d-contrib/profile-night-view.svg" width="100%" alt="My contribution year as an animated 3D skyline">
 

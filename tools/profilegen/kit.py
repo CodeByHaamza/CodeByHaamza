@@ -20,8 +20,6 @@ DATA = ROOT / "data"
 W = 860  # largeur de rendu d'un README GitHub
 
 REPO_URL = "https://github.com/CodeByHaamza/CodeByHaamza"
-PROFILE_URL = "https://github.com/CodeByHaamza"
-MANGA_URL = f"{REPO_URL}/blob/main/MANGA.md"
 
 # Heure de génération. PROFILE_NOW (ISO 8601) la fige, pour des rendus reproductibles.
 NOW = (datetime.fromisoformat(os.environ["PROFILE_NOW"]) if os.environ.get("PROFILE_NOW")
@@ -181,6 +179,44 @@ def save(name: str, parts: list[str]) -> None:
     write(name, "".join(parts) + "</svg>")
 
 
+# ---------------------------------------------------------------- l'horloge commune des deux styles
+# Chaque panneau contient les deux styles et bascule sur la même boucle de T secondes :
+#   0 → SWITCH_IN : style PSP ; SWITCH_IN → SHOW_MANGA : transition ;
+#   SHOW_MANGA → SWITCH_OUT : style manga ; SWITCH_OUT → T : retour au PSP.
+T, SWITCH_IN, SHOW_MANGA, SWITCH_OUT = 28.0, 12.0, 14.0, 26.0
+
+
+def pc(t: float) -> str:
+    """Un instant de la boucle, en pourcentage de keyframes."""
+    return f"{max(0.0, min(100.0, t / T * 100)):.3f}%"
+
+
+def keyframes(name: str, frames: list[tuple[float, str]]) -> str:
+    """@keyframes sur la boucle commune : frames = [(secondes, 'déclarations'), ...]."""
+    return f"@keyframes {name}{{" + "".join(f"{pc(t)}{{{css}}}" for t, css in frames) + "}"
+
+
+def on_loop(cls: str, name: str, extra: str = "") -> str:
+    return f".{cls}{{{extra}animation:{name} {T:g}s linear infinite}}"
+
+
+Layer = tuple  # (defs, css, body)
+
+
+def prefix_layer(layer: tuple, pre: str) -> tuple:
+    """Préfixe les id et les classes d'un calque, pour en superposer deux dans un même SVG."""
+    defs, css, body = layer
+    text = defs + "\x00" + body
+    ids = set(re.findall(r'\bid="([^"]+)"', text))
+    text = re.sub(r'\bid="([^"]+)"', lambda m: f'id="{pre}{m.group(1)}"', text)
+    text = re.sub(r'(url\(#|href="#)([^)"]+)',
+                  lambda m: m.group(1) + (pre + m.group(2) if m.group(2) in ids else m.group(2)), text)
+    text = re.sub(r'\bclass="([^"]+)"', lambda m: 'class="' + " ".join(pre + c for c in m.group(1).split()) + '"', text)
+    css = re.sub(r"(?<![\w-])\.([a-zA-Z][\w-]*)", lambda m: "." + pre + m.group(1), css)
+    defs, body = text.split("\x00")
+    return defs, css, body
+
+
 def slug(s: str) -> str:
     s = unicodedata.normalize("NFKD", s.replace("œ", "oe").replace("Œ", "Oe"))
     return re.sub(r"[^a-z0-9]+", "-", s.encode("ascii", "ignore").decode().lower()).strip("-")
@@ -240,17 +276,42 @@ def load_gh() -> dict:
     return json.loads(f.read_text(encoding="utf-8"))["data"]["user"]
 
 
-def rank(commits: int, prs: int, issues: int, reviews: int, stars: int, followers: int) -> str:
-    """Rang lettre, même esprit que github-readme-stats : une moyenne pondérée
-    de percentiles, pas une note absolue."""
+def rank_score(commits: int, prs: int, issues: int, reviews: int, stars: int, followers: int) -> float:
+    """Score entre 0 et 1, même esprit que github-readme-stats : une moyenne pondérée de percentiles."""
     def pct(v, med):
         return 1.0 / (1.0 + (med / max(v, 1)) ** 0.5)
-    s = (pct(commits, 250) * .30 + pct(prs, 50) * .20 + pct(issues, 25) * .10
-         + pct(reviews, 20) * .10 + pct(stars, 50) * .20 + pct(followers, 25) * .10)
+    return (pct(commits, 250) * .30 + pct(prs, 50) * .20 + pct(issues, 25) * .10
+            + pct(reviews, 20) * .10 + pct(stars, 50) * .20 + pct(followers, 25) * .10)
+
+
+def rank(commits: int, prs: int, issues: int, reviews: int, stars: int, followers: int) -> str:
+    """Rang lettre tiré du score (pas une note absolue)."""
+    s = rank_score(commits, prs, issues, reviews, stars, followers)
     for lim, name in ((.92, "S"), (.82, "A+"), (.70, "A"), (.58, "B+"), (.45, "B"), (.30, "C+")):
         if s >= lim:
             return name
     return "C"
+
+
+def streak_ranges(weeks: list[dict]) -> dict:
+    """Dates de début et de fin de la série en cours et de la plus longue."""
+    days = [d for wk in weeks for d in wk["contributionDays"]]
+    best, best_rng, start = 0, (None, None), None
+    for i, d in enumerate(days):
+        if d["contributionCount"] > 0:
+            start = start if start is not None else i
+            if i - start + 1 > best:
+                best, best_rng = i - start + 1, (days[start]["date"], d["date"])
+        else:
+            start = None
+    end = len(days) - 1
+    if days and days[end]["contributionCount"] == 0:  # aujourd'hui vide ne casse pas la série
+        end -= 1
+    s = end
+    while s >= 0 and days[s]["contributionCount"] > 0:
+        s -= 1
+    cur_rng = (days[s + 1]["date"], days[end]["date"]) if end >= 0 and s + 1 <= end else (None, None)
+    return {"first": days[0]["date"] if days else None, "cur": cur_rng, "best": best_rng}
 
 
 def streaks(weeks: list[dict]) -> tuple[int, int]:
@@ -299,6 +360,28 @@ def stats(cfg: dict, gh: dict) -> dict:
              stars=sum(r["stargazerCount"] for r in repos) + org_stars,
              followers=gh["followers"]["totalCount"], total=cal["totalContributions"],
              repos=gh["repositories"]["totalCount"], cur=cur, best=best, nlangs=nlangs,
-             langs=languages(repos), updated={r["name"]: r["updatedAt"][:10] for r in repos})
+             langs=languages(repos), updated={r["name"]: r["updatedAt"][:10] for r in repos},
+             weeks=cal["weeks"], ranges=streak_ranges(cal["weeks"]))
     s["rank"] = rank(s["commits"], s["prs"], s["issues"], s["reviews"], s["stars"], s["followers"])
+    s["score"] = rank_score(s["commits"], s["prs"], s["issues"], s["reviews"], s["stars"], s["followers"])
+    s["grades"] = [grade(s[k], th) for _, _, k, th in GRADE_AXES]
     return s
+
+
+# Les six axes notés de A à E (fiche de Stand côté manga, trophées côté PSP).
+GRADES = "EDCBA"
+GRADE_AXES = [
+    ("POWER", "破壊力", "commits", [300, 1000, 2500, 4000]),
+    ("SPEED", "スピード", "prs", [20, 80, 200, 500]),
+    ("RANGE", "射程距離", "nlangs", [2, 4, 7, 12]),
+    ("STAMINA", "持続力", "best", [7, 21, 45, 90]),
+    ("PRECISION", "精密動作性", "reviews", [10, 30, 80, 200]),
+    ("POTENTIAL", "成長性", "total", [500, 1500, 3000, 5000]),
+]
+UNIT = {"commits": "commits", "prs": "PRs", "nlangs": "languages", "best": "day streak", "reviews": "reviews",
+        "total": "contributions"}
+
+
+def grade(v: int, th: list[int]) -> int:
+    """0..4, c'est-à-dire E..A."""
+    return sum(v >= t for t in th)
