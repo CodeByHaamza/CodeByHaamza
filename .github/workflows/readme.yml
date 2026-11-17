@@ -64,7 +64,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/gen data/gh-raw.json README.md MANGA.md
+          git add assets/gen data/gh-raw.json README.md
           if git diff --staged --quiet; then
             echo "rien a committer"
           else

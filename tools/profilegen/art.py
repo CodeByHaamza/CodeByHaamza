@@ -197,3 +197,27 @@ def hand_shade_clip(x: float, y: float, s: float) -> str:
 def palm_shadow(x: float, y: float, s: float, r: float, color: str, op: float = .35) -> str:
     """L'ombre portée de l'objet qui tourne au creux de la main."""
     return f'<ellipse cx="{x + 4 * s:.1f}" cy="{y + 14 * s:.1f}" rx="{r * .9:.1f}" ry="{r * .55:.1f}" fill="{color}" opacity="{op}"/>'
+
+
+# ---------------------------------------------------------------- la steel ball, en vectoriel léger
+
+def ball_defs(pid: str = "sb") -> str:
+    return (f'<radialGradient id="{pid}" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#e6ffa8"/>'
+            f'<stop offset=".38" stop-color="#8fcf3f"/><stop offset=".78" stop-color="#2f6b14"/>'
+            f'<stop offset="1" stop-color="#0d2405"/></radialGradient>')
+
+
+def ball_vector(cx: float, cy: float, r: float, pid: str = "sb") -> str:
+    """Une boule verte à facettes, inspirée des steel balls (dessinée ici, pas l'image du manga).
+    À faire tourner autour de (cx, cy)."""
+    hexa = poly([(cx - r * .62 + r * .36 * math.cos(math.radians(a)), cy - r * .05 + r * .36 * math.sin(math.radians(a)))
+                 for a in range(0, 360, 60)])
+    k = r / 50
+    return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="url(#{pid})" stroke="#0b1a05" stroke-width="{max(1.5, 2.5 * k):.1f}"/>'
+            f'<polygon points="{hexa}" fill="#c7f07a" fill-opacity=".35" stroke="#0b1a05" stroke-width="{max(1.2, 2 * k):.1f}"/>'
+            f'<path d="M{cx - r * .1:.1f} {cy - r * .55:.1f}Q{cx + r * .45:.1f} {cy - r * .6:.1f} {cx + r * .75:.1f} {cy - r * .2:.1f}'
+            f'M{cx - r * .1:.1f} {cy + r * .1:.1f}Q{cx + r * .35:.1f} {cy - r * .05:.1f} {cx + r * .8:.1f} {cy + r * .15:.1f}'
+            f'M{cx - r * .05:.1f} {cy + r * .35:.1f}A{r * .3:.1f} {r * .3:.1f} 0 1 0 {cx + r * .5:.1f} {cy + r * .3:.1f}" '
+            f'fill="none" stroke="#0b1a05" stroke-width="{max(1.2, 2.2 * k):.1f}" stroke-linecap="round"/>'
+            f'<ellipse cx="{cx - r * .32:.1f}" cy="{cy - r * .42:.1f}" rx="{r * .22:.1f}" ry="{r * .12:.1f}" fill="#fff" opacity=".55" '
+            f'transform="rotate(-30 {cx - r * .32:.1f} {cy - r * .42:.1f})"/>')
