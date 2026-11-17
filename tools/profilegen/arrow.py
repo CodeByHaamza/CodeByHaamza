@@ -24,6 +24,7 @@ START, END = "<!-- stand-arrow start -->", "<!-- stand-arrow end -->"
 INK, GOLD, VIOLET, PAPER = "#120a1f", "#f2c14e", "#8a3cff", "#fff8ea"
 CW, CH = 860, 300
 STAGE = 4.2  # secondes par étape d'évolution
+SOLO_LOOP = 9.0  # un Stand simple : son apparition se rejoue toutes les 9 s
 
 
 def load_stands() -> list[dict]:
@@ -102,19 +103,21 @@ def card(stand: dict) -> str:
         lines = wrap(s["text"], 52)[:3]
         img_id = f"si{i}"
         fx_defs.append(f'<g id="{img_id}">{_image(s["id"], cx, cy, isz)}</g>')
-        # l'effet d'apparition, lié au pouvoir du Stand : une fois au chargement, ou à chaque étape
+        # l'effet d'apparition, lié au pouvoir du Stand. Il se rejoue en boucle : la carte est souvent en bas
+        # de page, et un effet joué une seule fois au chargement serait fini avant qu'on la voie.
         if n > 1:
             ctx = fx.Ctx(f"x{i}_", cx, cy, i * STAGE, period, True, s["id"], D, img_id)
         else:
-            ctx = fx.Ctx(f"x{i}_", cx, cy, .1, fx.DURATION + 1.3, False, s["id"], D, img_id)
+            ctx = fx.Ctx(f"x{i}_", cx, cy, .1, SOLO_LOOP, True, s["id"], D, img_id)
         fx_layers.append(fx.render(s.get("fx"), ctx))
         fx_defs += ctx.defs
         css += ctx.css
         image = f'<g class="bob"><use href="#{img_id}"/></g>'
-        if n == 1:  # le Stand apparaît une fois l'effet lancé
+        if n == 1:  # le Stand apparaît une fois l'effet lancé, reste, puis s'efface juste avant la boucle suivante
             image = f'<g class="appear" style="transform-origin:{cx}px {cy}px">{image}</g>'
-            css.append("@keyframes appear{0%,55%{opacity:0;transform:scale(.75)}100%{opacity:1;transform:none}}"
-                       ".appear{animation:appear 1.5s cubic-bezier(.2,1.3,.4,1) both}")
+            css.append("@keyframes appear{0%,8.9%{opacity:0;transform:scale(.75)}15%{opacity:1;transform:none}"
+                       "96%{opacity:1;transform:none}99.9%,100%{opacity:0;transform:none}}"
+                       f".appear{{animation:appear {SOLO_LOOP}s cubic-bezier(.2,1.3,.4,1) infinite}}")
         g = [image,
              D.text(name, x0, 108, size, "#fff", INK, 6, skew=-6),
              A.text(f"STAND USER  ·  {stand['user'].upper()}", x0, 140, 15, GOLD, track=1.5)]
