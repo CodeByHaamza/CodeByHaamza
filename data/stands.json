@@ -739,7 +739,10 @@
      "name": "Bad Company",
      "image": "Bad Company Infobox Anime.png",
      "text": "A whole army of tiny soldiers, tanks and helicopters.",
-     "fx": "army"
+     "fx": {
+      "type": "army",
+      "vehicles": true
+     }
     }
    ]
   },
@@ -2104,7 +2107,10 @@
      "name": "Catch the Rainbow",
      "image": "Catch the Rainbow Infobox Manga.png",
      "text": "Freezes raindrops in midair and walks on them.",
-     "fx": "rain"
+     "fx": {
+      "type": "rain",
+      "frozen": true
+     }
     }
    ]
   },

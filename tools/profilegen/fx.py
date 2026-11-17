@@ -61,12 +61,18 @@ def _smooth(pts) -> str:
     return d + f"L{pts[-1][0]:.1f} {pts[-1][1]:.1f}"
 
 
-def _draw(ctx: Ctx, d: str, color: str, width: float, delay: float = 0, hold: float = .6, extra: str = "") -> str:
-    """Un trait qui se dessine (stroke-dashoffset), reste, puis s'efface."""
+def _draw(ctx: Ctx, d: str, color: str, width: float, delay: float = 0, hold: float = .6, extra: str = "",
+          glow: float = 0) -> str:
+    """Un trait qui se dessine (stroke-dashoffset), reste, puis s'efface. glow : un halo large et pâle dessous."""
     name = ctx.kf([(0, "opacity:1;stroke-dashoffset:100"), (.55, "opacity:1;stroke-dashoffset:0"),
                    (.55 + hold, "opacity:1;stroke-dashoffset:0"), (.95 + hold, "opacity:0;stroke-dashoffset:0")])
-    return (f'<path d="{d}" pathLength="100" stroke-dasharray="100" fill="none" stroke="{color}" stroke-width="{width}" '
-            f'stroke-linecap="round" stroke-linejoin="round" {extra} {ctx.style(name, delay)}/>')
+    halo = ""
+    if glow:
+        halo = (f'<path d="{d}" pathLength="100" stroke-dasharray="100" fill="none" stroke="{color}" '
+                f'stroke-width="{width * glow:.1f}" stroke-opacity=".22" stroke-linecap="round" stroke-linejoin="round" '
+                f'{ctx.style(name, delay)}/>')
+    return halo + (f'<path d="{d}" pathLength="100" stroke-dasharray="100" fill="none" stroke="{color}" stroke-width="{width}" '
+                   f'stroke-linecap="round" stroke-linejoin="round" {extra} {ctx.style(name, delay)}/>')
 
 
 def _pop(ctx: Ctx, svg: str, x: float, y: float, delay: float = 0, hold: float = .7, rot: float = 0) -> str:
@@ -102,54 +108,64 @@ def _word(ctx: Ctx, text: str, x: float, y: float, size: float, color: str = GOL
 
 # ---------------------------------------------------------------- les effets
 
-def strings(ctx, color="#8fe3ff", n=8, width=2.2, **_):
+def strings(ctx, color="#8fe3ff", n=11, width=2.6, **_):
+    """Des fils qui se tendent depuis les bords et se nouent au centre."""
     out = []
     for i in range(n):
         a = i * 2 * math.pi / n + ctx.rnd.uniform(-.2, .2)
-        r = ctx.rnd.uniform(200, 260)
+        r = ctx.rnd.uniform(200, 270)
         pts = [(ctx.cx + r * math.cos(a), ctx.cy + r * math.sin(a))]
-        for k in range(1, 5):
-            rr = r * (1 - k / 5)
-            aa = a + ctx.rnd.uniform(-.5, .5)
+        for k in range(1, 6):
+            rr = r * (1 - k / 6)
+            aa = a + ctx.rnd.uniform(-.6, .6)
             pts.append((ctx.cx + rr * math.cos(aa), ctx.cy + rr * math.sin(aa)))
-        pts.append((ctx.cx + ctx.rnd.uniform(-10, 10), ctx.cy + ctx.rnd.uniform(-10, 10)))
-        out.append(_draw(ctx, _smooth(pts), color, width, i * .05))
-    out.append(_pop(ctx, f'<circle cx="{ctx.cx}" cy="{ctx.cy}" r="16" fill="none" stroke="{color}" stroke-width="3"/>',
-                    ctx.cx, ctx.cy, .5, .4))
+        pts.append((ctx.cx + ctx.rnd.uniform(-8, 8), ctx.cy + ctx.rnd.uniform(-8, 8)))
+        out.append(_draw(ctx, _smooth(pts), color, width, i * .04, glow=3.2))
+    # le nœud : un cercle de fil qui se serre
+    knot = (f'<circle cx="{ctx.cx}" cy="{ctx.cy}" r="20" fill="none" stroke="{color}" stroke-width="3.5"/>'
+            f'<circle cx="{ctx.cx}" cy="{ctx.cy}" r="11" fill="none" stroke="#fff" stroke-width="2"/>')
+    out.append(_pop(ctx, knot, ctx.cx, ctx.cy, .5, .45))
     return "".join(out)
 
 
 def vines(ctx, color="#6fcf5a", accent=GOLD, thorny=False, **_):
+    """Des tiges qui poussent depuis le bas en s'enroulant ; feuilles et fleurs (ou épines) qui éclosent."""
     out = []
-    for i in range(7):
-        x0 = 40 + i * 48 + ctx.rnd.uniform(-10, 10)
+    dark = "#2f7a2a" if not thorny else "#5a2a8a"
+    for i in range(9):
+        x0 = 30 + i * 38 + ctx.rnd.uniform(-10, 10)
         pts = [(x0, 310)]
         x, y = x0, 310.0
         for k in range(5):
-            y -= ctx.rnd.uniform(30, 48)
-            x += ctx.rnd.uniform(-35, 35) + (ctx.cx - x) * .18
+            y -= ctx.rnd.uniform(30, 50)
+            x += ctx.rnd.uniform(-38, 38) + (ctx.cx - x) * .18
             pts.append((x, y))
         # la pointe s'enroule
-        r = 12
-        for k in range(1, 7):
+        r = 14
+        for k in range(1, 8):
             a = k * .9
             pts.append((x + r * math.cos(a) - r, y - r * math.sin(a)))
             r *= .82
-        out.append(_draw(ctx, _smooth(pts), color, 4.5 if not thorny else 3.5, i * .06, .7))
+        out.append(_draw(ctx, _smooth(pts), color, 6 if not thorny else 5, i * .05, .7, glow=2.6))
         for k, (px, py) in enumerate(pts[1:5]):
+            side = 1 if k % 2 else -1
             if thorny:
-                leaf = (f'<path d="M{px:.1f} {py:.1f}l{8 if k % 2 else -8} -6" stroke="{color}" stroke-width="2.5" '
-                        f'stroke-linecap="round"/>')
+                leaf = (f'<path d="M{px - 3:.1f} {py + 2:.1f}l{side * 13:.0f} -9l{-side * 6:.0f} 9z" fill="{color}" '
+                        f'stroke="{dark}" stroke-width="1.2" stroke-linejoin="round"/>')
             else:
                 rot = 35 if k % 2 else -35
-                leaf = (f'<ellipse cx="{px + (9 if k % 2 else -9):.1f}" cy="{py:.1f}" rx="9" ry="4.5" fill="{color}" '
+                leaf = (f'<ellipse cx="{px + side * 12:.1f}" cy="{py:.1f}" rx="13" ry="6" fill="{color}" stroke="{dark}" '
+                        f'stroke-width="1.2" transform="rotate({rot} {px:.1f} {py:.1f})"/>'
+                        f'<path d="M{px:.1f} {py:.1f}l{side * 20:.0f} 0" stroke="{dark}" stroke-width="1" '
                         f'transform="rotate({rot} {px:.1f} {py:.1f})"/>')
-            out.append(_pop(ctx, leaf, px, py, .25 + i * .06 + k * .07, .7))
+            out.append(_pop(ctx, leaf, px, py, .22 + i * .05 + k * .07, .7))
         if not thorny and accent:
             fx, fy = pts[5]
-            flower = "".join(f'<circle cx="{fx + 6 * math.cos(j * 1.256):.1f}" cy="{fy + 6 * math.sin(j * 1.256):.1f}" r="4" '
-                             f'fill="{accent}"/>' for j in range(5)) + f'<circle cx="{fx:.1f}" cy="{fy:.1f}" r="3" fill="#fff"/>'
-            out.append(_pop(ctx, flower, fx, fy, .55 + i * .06, .6))
+            flower = "".join(f'<ellipse cx="{fx + 8 * math.cos(j * 1.256):.1f}" cy="{fy + 8 * math.sin(j * 1.256):.1f}" rx="6" ry="4" '
+                             f'fill="{accent}" stroke="#a67c00" stroke-width="1" '
+                             f'transform="rotate({math.degrees(j * 1.256):.0f} {fx + 8 * math.cos(j * 1.256):.1f} {fy + 8 * math.sin(j * 1.256):.1f})"/>'
+                             for j in range(5)) + f'<circle cx="{fx:.1f}" cy="{fy:.1f}" r="4" fill="#fff"/>'
+            out.append(_pop(ctx, flower, fx, fy, .55 + i * .05, .6))
     return "".join(out)
 
 
@@ -180,23 +196,43 @@ def fishing(ctx, color="#f0f0f0", **_):
                    (1.7, "opacity:0;transform:none")])
     out.append(f"<g {ctx.style(name)}>{rod}</g>")
     line = _smooth([(292, 46), (220, 70), (130, 120), (60, 150), (40, 190), (90, 230), (150, 215), (ctx.cx, ctx.cy + 40)])
-    out.append(_draw(ctx, line, color, 1.8, .15, .65))
+    out.append(_draw(ctx, line, color, 2.4, .15, .65, glow=3.5))
     hx, hy = ctx.cx, ctx.cy + 40
-    out.append(_pop(ctx, f'<path d="M{hx} {hy}v10a7 7 0 1 1 -14 0l4 -4" fill="none" stroke="{color}" stroke-width="3" '
-                    f'stroke-linecap="round"/>', hx, hy, .65, .5))
+    hook = (f'<path d="M{hx} {hy}v14a10 10 0 1 1 -20 0l6 -6" fill="none" stroke="{color}" stroke-width="4" stroke-linecap="round"/>'
+            f'<circle cx="{hx}" cy="{hy}" r="3" fill="{color}"/>')
+    out.append(_pop(ctx, hook, hx, hy, .65, .5))
+    # l'endroit où la ligne traverse le mur : un éclat
+    out.append(_pop(ctx, f'<circle cx="{wx + 18}" cy="140" r="9" fill="none" stroke="#fff" stroke-width="2.5"/>', wx + 18, 140, .35, .4))
     return "".join(out)
 
 
-def flames(ctx, colors=("#ff5a1f", "#ffb21f", "#ffe36b"), n=16, **_):
+def _flame(x: float, y: float, s: float, outer: str, inner: str = "#fff3a8") -> str:
+    """Une langue de feu : une forme extérieure et un cœur plus clair."""
+    def tongue(k, c):
+        return (f'<path d="M{x:.1f} {y:.1f}c{12 * s * k:.1f} {-10 * s * k:.1f} {12 * s * k:.1f} {-30 * s * k:.1f} {2 * s * k:.1f} {-48 * s * k:.1f}'
+                f'c{-2 * s * k:.1f} {12 * s * k:.1f} {-10 * s * k:.1f} {14 * s * k:.1f} {-12 * s * k:.1f} {24 * s * k:.1f}'
+                f'c{-6 * s * k:.1f} {-6 * s * k:.1f} {-4 * s * k:.1f} {-12 * s * k:.1f} {-2 * s * k:.1f} {-16 * s * k:.1f}'
+                f'c{-10 * s * k:.1f} {12 * s * k:.1f} {-12 * s * k:.1f} {30 * s * k:.1f} {2 * s * k:.1f} {40 * s * k:.1f}z" fill="{c}"/>')
+    return f"<g>{tongue(1, outer)}{tongue(.55, inner)}</g>"
+
+
+def flames(ctx, colors=("#ff3d1f", "#ff8a1f", "#ffb21f"), n=20, **_):
+    """Un brasier qui monte du bas, langues de feu à cœur clair."""
     out = []
+    glow = ctx.kf([(0, "opacity:0;transform:scaleY(.2)"), (.3, "opacity:.75;transform:scaleY(1)"), (1.1, "opacity:.6;transform:scaleY(1)"),
+                   (1.5, "opacity:0;transform:scaleY(1.2)")])
+    out.append(f'<ellipse cx="{ctx.cx}" cy="300" rx="190" ry="70" fill="#ff6a1f" {ctx.style(glow, 0, (ctx.cx, 300))}/>')
     for i in range(n):
-        x = ctx.rnd.uniform(50, 330)
-        s = ctx.rnd.uniform(.8, 1.8)
-        c = colors[i % len(colors)]
-        fl = (f'<path d="M{x:.1f} 300c{10 * s:.1f} {-12 * s:.1f} {6 * s:.1f} {-26 * s:.1f} 0 {-40 * s:.1f}'
-              f'c{-6 * s:.1f} {14 * s:.1f} {-10 * s:.1f} {28 * s:.1f} 0 {40 * s:.1f}z" fill="{c}"/>')
-        rise = ctx.rnd.uniform(120, 230)
-        out.append(_move(ctx, fl, [(0, 0), (0, -rise * .5), (0, -rise)], 1.1, ctx.rnd.uniform(0, .6), origin=(x, 300), scale=(1, .4)))
+        x = ctx.rnd.uniform(40, 340)
+        s = ctx.rnd.uniform(1.1, 2.3)
+        fl = _flame(x, 300, s, colors[i % len(colors)])
+        rise = ctx.rnd.uniform(110, 220)
+        out.append(_move(ctx, fl, [(0, 10), (ctx.rnd.uniform(-10, 10), -rise * .5), (ctx.rnd.uniform(-20, 20), -rise)], 1.1,
+                         ctx.rnd.uniform(0, .6), origin=(x, 300), scale=(1, .35)))
+    for i in range(14):  # escarbilles
+        x = ctx.rnd.uniform(60, 320)
+        ember = f'<circle cx="{x:.1f}" cy="280" r="2.5" fill="#ffe36b"/>'
+        out.append(_move(ctx, ember, [(0, 0), (ctx.rnd.uniform(-40, 40), -ctx.rnd.uniform(150, 260))], .9, ctx.rnd.uniform(.2, .8)))
     return "".join(out)
 
 
@@ -216,12 +252,25 @@ def ice(ctx, color="#c8f1ff", **_):
 
 
 def water(ctx, color="#5ec8ff", **_):
+    """Une gerbe d'eau : couronne d'éclaboussures, gouttes qui retombent, ondes."""
     out = []
-    for i in range(16):
+    crown = []
+    for i in range(14):
+        a = math.pi + i * math.pi / 13
+        r1 = 80 if i % 2 else 55
+        crown.append((ctx.cx + 70 * math.cos(a), ctx.cy + 60 + 26 * math.sin(a)))
+        crown.append((ctx.cx + r1 * 1.3 * math.cos(a), ctx.cy + 60 - r1 * abs(math.sin(a)) * 1.4))
+    name = ctx.kf([(0, "opacity:0;transform:scaleY(0)"), (.25, "opacity:.9;transform:scaleY(1)"), (.6, "opacity:.6;transform:scaleY(1.1)"),
+                   (.9, "opacity:0;transform:scaleY(1.2)")])
+    out.append(f'<polygon points="{poly(crown)}" fill="{color}" fill-opacity=".45" stroke="#fff" stroke-width="1.5" '
+               f'{ctx.style(name, 0, (ctx.cx, ctx.cy + 60))}/>')
+    for i in range(24):
         a = ctx.rnd.uniform(-math.pi, 0)
-        sp = ctx.rnd.uniform(70, 150)
+        sp = ctx.rnd.uniform(70, 170)
         dx, dy = sp * math.cos(a), sp * math.sin(a)
-        drop = f'<ellipse cx="{ctx.cx}" cy="{ctx.cy + 60}" rx="5" ry="7" fill="{color}" stroke="#fff" stroke-width=".8"/>'
+        r = ctx.rnd.uniform(4, 8)
+        drop = (f'<ellipse cx="{ctx.cx}" cy="{ctx.cy + 60}" rx="{r:.1f}" ry="{r * 1.4:.1f}" fill="{color}" stroke="#fff" stroke-width=".8"/>'
+                f'<circle cx="{ctx.cx - r * .3:.1f}" cy="{ctx.cy + 60 - r * .5:.1f}" r="{r * .3:.1f}" fill="#fff" opacity=".8"/>')
         out.append(_move(ctx, drop, [(0, 0), (dx * .6, dy * .8), (dx, dy * .4 + 90)], 1.0, ctx.rnd.uniform(0, .25)))
     for k in range(3):
         name = ctx.kf([(0, "opacity:.9;transform:scale(.1)"), (.9, "opacity:0;transform:scale(1)")])
@@ -329,38 +378,59 @@ def explosion(ctx, word="CLICK!", color="#ffb347", **_):
     return "".join(out)
 
 
-def zipper(ctx, color="#e0e0e0", **_):
-    x0, y0, x1, y1 = 60, 30, 320, 270
-    n = 22
+def zipper(ctx, color="#dfe6ee", **_):
+    """Une fermeture éclair qui court en diagonale, puis s'ouvre sur l'intérieur."""
+    x0, y0, x1, y1 = 50, 26, 330, 276
+    n = 26
     out = []
     ang = math.degrees(math.atan2(y1 - y0, x1 - x0))
+    nx, ny = -math.sin(math.radians(ang)), math.cos(math.radians(ang))
+    # la fente qui s'ouvre : un vide sombre bordé de lumière
+    gap = poly([(x0, y0), (x1, y1), (x1 + nx * 2, y1 + ny * 2), (x0 + nx * 2, y0 + ny * 2)])
+    name = ctx.kf([(0, "opacity:0;transform:scaleY(1)"), (.6, "opacity:1"), (1.0, "opacity:1"), (1.4, "opacity:0")])
+    out.append(f'<polygon points="{gap}" fill="#0a0612" stroke="#7fb2ff" stroke-width="3" {ctx.style(name)}/>')
     for k in range(n):
         t = k / (n - 1)
         x, y = x0 + (x1 - x0) * t, y0 + (y1 - y0) * t
         side = 1 if k % 2 else -1
-        tooth = (f'<rect x="{x - 4:.1f}" y="{y - 7 + side * 5:.1f}" width="8" height="10" rx="1.5" fill="{color}" stroke="{INK}" '
-                 f'stroke-width="1" transform="rotate({ang:.0f} {x:.1f} {y:.1f})"/>')
-        name = ctx.kf([(0, "opacity:0"), (.05, "opacity:1;transform:none"), (.75, "opacity:1;transform:none"),
-                       (1.0, f"opacity:1;transform:translate({side * -8 * math.sin(math.radians(ang)):.1f}px,{side * 8 * math.cos(math.radians(ang)):.1f}px)"),
+        tooth = (f'<rect x="{x - 6:.1f}" y="{y - 9 + side * 7:.1f}" width="12" height="13" rx="2.5" fill="{color}" stroke="{INK}" '
+                 f'stroke-width="1.4" transform="rotate({ang:.0f} {x:.1f} {y:.1f})"/>'
+                 f'<rect x="{x - 4:.1f}" y="{y - 7 + side * 7:.1f}" width="8" height="3" rx="1" fill="#fff" opacity=".8" '
+                 f'transform="rotate({ang:.0f} {x:.1f} {y:.1f})"/>')
+        name = ctx.kf([(0, "opacity:0;transform:scale(.4)"), (.06, "opacity:1;transform:none"), (.7, "opacity:1;transform:none"),
+                       (1.0, f"opacity:1;transform:translate({side * 14 * nx:.1f}px,{side * 14 * ny:.1f}px)"),
                        (1.4, "opacity:0")])
-        out.append(f"<g {ctx.style(name, t * .55)}>{tooth}</g>")
-    slider = (f'<rect x="{x0 - 10}" y="{y0 - 14}" width="20" height="28" rx="5" fill="{GOLD}" stroke="{INK}" stroke-width="2" '
-              f'transform="rotate({ang:.0f} {x0} {y0})"/>')
+        out.append(f"<g {ctx.style(name, t * .55, (x, y))}>{tooth}</g>")
+    slider = (f'<g transform="rotate({ang:.0f} {x0} {y0})"><rect x="{x0 - 14}" y="{y0 - 18}" width="28" height="36" rx="7" '
+              f'fill="{GOLD}" stroke="{INK}" stroke-width="2.5"/><rect x="{x0 - 6}" y="{y0 + 14}" width="12" height="26" rx="5" '
+              f'fill="{GOLD}" stroke="{INK}" stroke-width="2.5"/><circle cx="{x0}" cy="{y0 + 32}" r="3" fill="{INK}"/></g>')
     out.append(_move(ctx, slider, [(0, 0), (x1 - x0, y1 - y0)], .6, 0, fade_in=.03))
     return "".join(out)
 
 
+def _bullet(x: float, y: float, color: str, left: bool) -> str:
+    """Une balle (pointe vers où elle va) et sa traînée. left : elle vient de la gauche."""
+    d = 1 if left else -1  # sens du déplacement
+    return (f'<g><path d="M{x - d * 120:.1f} {y:.1f}H{x:.1f}" stroke="{color}" stroke-width="8" stroke-opacity=".25" stroke-linecap="round"/>'
+            f'<path d="M{x - d * 90:.1f} {y:.1f}H{x:.1f}" stroke="#fff" stroke-width="2.5" stroke-opacity=".8" stroke-linecap="round"/>'
+            f'<rect x="{x - 10:.1f}" y="{y - 5:.1f}" width="16" height="10" rx="2" fill="#c98a3d" stroke="{INK}" stroke-width="1.5"/>'
+            f'<ellipse cx="{x + d * 7:.1f}" cy="{y:.1f}" rx="8" ry="5" fill="{color}" stroke="{INK}" stroke-width="1.5"/></g>')
+
+
 def bullets(ctx, color="#ffd27a", n=7, **_):
+    """Des balles qui traversent la zone, traînée lumineuse derrière elles."""
     out = []
     for i in range(n):
         y = ctx.rnd.uniform(40, 260)
         left = i % 2 == 0
         x0 = -40 if left else 420
         tx = ctx.cx + ctx.rnd.uniform(-60, 60) - x0
-        b = (f'<g><path d="M{x0 + (-70 if left else 70)} {y:.1f}H{x0}" stroke="#fff" stroke-width="2" opacity=".6"/>'
-             f'<rect x="{x0 - 9}" y="{y - 4:.1f}" width="18" height="8" rx="4" fill="{color}" stroke="{INK}" stroke-width="1.5"/></g>')
-        out.append(_move(ctx, b, [(0, 0), (tx, ctx.rnd.uniform(-20, 20)), (tx * 1.6, ctx.rnd.uniform(-40, 40))], .7, i * .09,
-                         fade_in=.03))
+        out.append(_move(ctx, _bullet(x0, y, color, left), [(0, 0), (tx, ctx.rnd.uniform(-20, 20)), (tx * 1.7, ctx.rnd.uniform(-40, 40))],
+                         .65, i * .09, fade_in=.03))
+        sx, sy = x0 + tx, y
+        spark = poly([(sx + (16 if k % 2 == 0 else 6) * math.cos(k * math.pi / 5), sy + (16 if k % 2 == 0 else 6) * math.sin(k * math.pi / 5))
+                      for k in range(10)])
+        out.append(_pop(ctx, f'<polygon points="{spark}" fill="#fff36b"/>', sx, sy, i * .09 + .3, .05))
     return "".join(out)
 
 
@@ -430,14 +500,22 @@ def mirror(ctx, color="#d6f1ff", **_):
     return "".join(out)
 
 
-def sand(ctx, color="#e3c48a", n=50, **_):
+def sand(ctx, color="#e3c48a", n=80, **_):
+    """Un tourbillon de sable qui s'enroule vers le centre et prend forme."""
     out = []
+    for k in range(3):  # les bras du tourbillon
+        pts = []
+        for j in range(30):
+            a = k * 2 * math.pi / 3 + j * .2
+            r = 220 - j * 7
+            pts.append((ctx.cx + r * math.cos(a), ctx.cy + r * .8 * math.sin(a)))
+        out.append(_draw(ctx, _smooth(pts), color, 10, k * .08, .3, 'stroke-opacity=".35"'))
     for i in range(n):
         a = ctx.rnd.uniform(0, 2 * math.pi)
-        r = ctx.rnd.uniform(140, 230)
+        r = ctx.rnd.uniform(140, 240)
         x, y = ctx.cx + r * math.cos(a), ctx.cy + r * math.sin(a)
-        mid = (ctx.cx + r * .5 * math.cos(a + 1.2) - x, ctx.cy + r * .5 * math.sin(a + 1.2) - y)
-        g = f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{ctx.rnd.uniform(1.8, 3.6):.1f}" fill="{color}"/>'
+        mid = (ctx.cx + r * .5 * math.cos(a + 1.3) - x, ctx.cy + r * .5 * math.sin(a + 1.3) - y)
+        g = f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{ctx.rnd.uniform(2.4, 5):.1f}" fill="{color}" stroke="#8a6a3a" stroke-width=".6"/>'
         out.append(_move(ctx, g, [(0, 0), mid, (ctx.cx - x, ctx.cy - y)], .9, ctx.rnd.uniform(0, .35)))
     return "".join(out)
 
@@ -454,13 +532,20 @@ def mist(ctx, color="#e8e8f0", **_):
     return "".join(out)
 
 
-def rain(ctx, color="#9fd4ff", heavy=False, **_):
+def rain(ctx, color="#cfe9ff", heavy=False, frozen=False, **_):
+    """Une averse. heavy : grosses gouttes qui éclatent au sol. frozen : les gouttes s'arrêtent en l'air, puis repartent."""
     out = []
-    w, L = (3.5, 28) if heavy else (1.6, 18)
-    for i in range(40 if not heavy else 26):
+    w, L = (5, 34) if heavy else (2.6, 26)
+    for i in range(48 if not heavy else 30):
         x = ctx.rnd.uniform(20, 370)
-        drop = f'<path d="M{x:.1f} -30l-4 {L}" stroke="{color}" stroke-width="{w}" stroke-linecap="round"/>'
-        out.append(_move(ctx, drop, [(0, 0), (-40, 360)], .55, ctx.rnd.uniform(0, 1.0), fade_in=.02))
+        drop = (f'<path d="M{x:.1f} -30l-5 {L}" stroke="{color}" stroke-width="{w * 2.2:.1f}" stroke-opacity=".25" stroke-linecap="round"/>'
+                f'<path d="M{x:.1f} -30l-5 {L}" stroke="#fff" stroke-width="{w}" stroke-linecap="round"/>')
+        if frozen:
+            stop = ctx.rnd.uniform(90, 250)
+            out.append(_move(ctx, drop, [(0, 0), (-stop / 9, stop), (-stop / 9, stop), (-stop / 9, stop), (-40, 360)], 1.5,
+                             ctx.rnd.uniform(0, .3), fade_in=.02))
+        else:
+            out.append(_move(ctx, drop, [(0, 0), (-40, 360)], .55, ctx.rnd.uniform(0, 1.0), fade_in=.02))
     if heavy:
         for i in range(6):
             x = ctx.rnd.uniform(60, 320)
@@ -469,15 +554,26 @@ def rain(ctx, color="#9fd4ff", heavy=False, **_):
     return "".join(out)
 
 
-def spores(ctx, color="#9be15d", n=42, **_):
+def spores(ctx, color="#9be15d", n=64, **_):
+    """Une nuée qui se répand depuis le centre : grosses spores floues et fines particules."""
     out = []
+    fid = f"{ctx.p}sblur"
+    ctx.defs.append(f'<filter id="{fid}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>')
+    for i in range(7):  # le nuage
+        a = i * 2 * math.pi / 7
+        blob = (f'<circle cx="{ctx.cx + 40 * math.cos(a):.1f}" cy="{ctx.cy + 40 * math.sin(a):.1f}" r="{ctx.rnd.uniform(30, 48):.0f}" '
+                f'fill="{color}" opacity=".35" filter="url(#{fid})"/>')
+        out.append(_move(ctx, blob, [(0, 0), (60 * math.cos(a), 60 * math.sin(a))], 1.3, i * .04, scale=(.3, 1.4),
+                         origin=(ctx.cx, ctx.cy)))
     for i in range(n):
         a = ctx.rnd.uniform(0, 2 * math.pi)
-        d = ctx.rnd.uniform(60, 190)
-        dot = f'<circle cx="{ctx.cx}" cy="{ctx.cy}" r="{ctx.rnd.uniform(2, 5):.1f}" fill="{color}" stroke="#fff" stroke-width=".6"/>'
+        d = ctx.rnd.uniform(60, 200)
+        r = ctx.rnd.uniform(2.5, 6.5)
+        dot = (f'<circle cx="{ctx.cx}" cy="{ctx.cy}" r="{r:.1f}" fill="{color}" stroke="#fff" stroke-width=".8"/>'
+               f'<circle cx="{ctx.cx - r * .3:.1f}" cy="{ctx.cy - r * .3:.1f}" r="{r * .3:.1f}" fill="#fff" opacity=".7"/>')
         out.append(_move(ctx, dot, [(0, 0), (d * .6 * math.cos(a), d * .6 * math.sin(a)),
                                     (d * math.cos(a) + ctx.rnd.uniform(-20, 20), d * math.sin(a) - 30)],
-                         1.2, ctx.rnd.uniform(0, .4), scale=(.4, 1.3)))
+                         1.2, ctx.rnd.uniform(0, .4), scale=(.4, 1.2)))
     return "".join(out)
 
 
@@ -562,16 +658,26 @@ def slice_(ctx, color="#ffffff", **_):
     return "".join(out)
 
 
-def magnet(ctx, color="#b8c0cc", **_):
+def magnet(ctx, color="#dbe4f0", **_):
+    """Un champ magnétique : les lignes de force se dessinent, la limaille s'y aligne."""
     out = []
-    for i in range(44):
+    for k in range(5):  # lignes de champ, de part et d'autre
+        r = 40 + k * 26
+        for side in (-1, 1):
+            d = (f"M{ctx.cx} {ctx.cy - 30}C{ctx.cx + side * r * 1.6:.0f} {ctx.cy - 30 - r * 1.1:.0f} "
+                 f"{ctx.cx + side * r * 1.6:.0f} {ctx.cy + 30 + r * 1.1:.0f} {ctx.cx} {ctx.cy + 30}")
+            out.append(_draw(ctx, d, "#7fb2ff", 2, .05 + k * .06, .6, 'stroke-opacity=".8"', glow=3))
+    poles = (f'<rect x="{ctx.cx - 14}" y="{ctx.cy - 44}" width="28" height="22" rx="4" fill="#d62828" stroke="{INK}" stroke-width="2"/>'
+             f'<rect x="{ctx.cx - 14}" y="{ctx.cy + 22}" width="28" height="22" rx="4" fill="#3b7bff" stroke="{INK}" stroke-width="2"/>')
+    out.append(_pop(ctx, poles, ctx.cx, ctx.cy, 0, .9))
+    for i in range(54):
         a = ctx.rnd.uniform(0, 2 * math.pi)
-        r0 = ctx.rnd.uniform(160, 240)
-        r1 = ctx.rnd.uniform(60, 110)
+        r0 = ctx.rnd.uniform(170, 250)
+        r1 = ctx.rnd.uniform(60, 120)
         x, y = ctx.cx + r0 * math.cos(a), ctx.cy + r0 * math.sin(a)
-        f = f'<path d="M{x - 5:.1f} {y:.1f}h10" stroke="{color}" stroke-width="2.5" stroke-linecap="round"/>'
-        out.append(_move(ctx, f, [(0, 0), ((r1 - r0) * math.cos(a), (r1 - r0) * math.sin(a))], .8, ctx.rnd.uniform(0, .3),
-                         spin=math.degrees(a), origin=(x, y)))
+        f = f'<path d="M{x - 7:.1f} {y:.1f}h14" stroke="{color}" stroke-width="3.2" stroke-linecap="round"/>'
+        out.append(_move(ctx, f, [(0, 0), ((r1 - r0) * math.cos(a), (r1 - r0) * math.sin(a))], .8, ctx.rnd.uniform(0, .35),
+                         spin=math.degrees(a) + 90, origin=(x, y)))
     return "".join(out)
 
 
@@ -629,23 +735,45 @@ def shrink(ctx, color="#ffd1f0", **_):
         name = ctx.kf([(0, "opacity:0;transform:scale(1)"), (.1, "opacity:1;transform:scale(1)"), (.8, "opacity:.8;transform:scale(0)")])
         out.append(f'<circle cx="{ctx.cx}" cy="{ctx.cy}" r="160" fill="none" stroke="{color}" stroke-width="3" '
                    f'{ctx.style(name, k * .2, (ctx.cx, ctx.cy))}/>')
-    star = f'<polygon points="{poly([(ctx.cx + (14 if i % 2 == 0 else 5) * math.cos(i * math.pi / 4), ctx.cy + (14 if i % 2 == 0 else 5) * math.sin(i * math.pi / 4)) for i in range(8)])}" fill="#fff"/>'
+    for i in range(30):  # tout est aspiré vers un point minuscule
+        a = ctx.rnd.uniform(0, 2 * math.pi)
+        r = ctx.rnd.uniform(120, 220)
+        x, y = ctx.cx + r * math.cos(a), ctx.cy + r * math.sin(a)
+        dot = f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{ctx.rnd.uniform(2.5, 4.5):.1f}" fill="{color}"/>'
+        out.append(_move(ctx, dot, [(0, 0), (ctx.cx - x, ctx.cy - y)], .8, ctx.rnd.uniform(0, .3), scale=(1, .2)))
+    star = f'<polygon points="{poly([(ctx.cx + (18 if i % 2 == 0 else 6) * math.cos(i * math.pi / 4), ctx.cy + (18 if i % 2 == 0 else 6) * math.sin(i * math.pi / 4)) for i in range(8)])}" fill="#fff"/>'
     out.append(_pop(ctx, star, ctx.cx, ctx.cy, .85, .2))
     return "".join(out)
 
 
-def army(ctx, color="#9aa77b", swarm=False, **_):
+def army(ctx, color="#9aa77b", swarm=False, vehicles=False, **_):
+    """Une troupe qui déboule en rangs serrés (soldats, ou petites bêtes pour swarm). vehicles : chars et hélicoptères."""
     out = []
-    for i in range(20):
-        row, col = i // 5, i % 5
-        x, y = 70 + col * 28 + row * 10, 200 + row * 22
+    for i in range(24):
+        row, col = i // 6, i % 6
+        x, y = 40 + col * 34 + row * 14, 180 + row * 30
         if swarm:
-            u = f'<ellipse cx="{x}" cy="{y}" rx="8" ry="5" fill="{color}" stroke="{INK}" stroke-width="1.2"/><circle cx="{x + 7}" cy="{y - 2}" r="2" fill="{INK}"/>'
+            u = (f'<g><ellipse cx="{x}" cy="{y}" rx="12" ry="7" fill="{color}" stroke="{INK}" stroke-width="1.5"/>'
+                 f'<circle cx="{x + 10}" cy="{y - 3}" r="3" fill="#fff"/><circle cx="{x + 11}" cy="{y - 3}" r="1.5" fill="{INK}"/>'
+                 f'<path d="M{x - 12} {y}q-8 -2 -12 4" fill="none" stroke="{INK}" stroke-width="1.5"/></g>')
         else:
-            u = (f'<g><rect x="{x - 4}" y="{y - 6}" width="8" height="12" rx="2" fill="{color}" stroke="{INK}" stroke-width="1"/>'
-                 f'<circle cx="{x}" cy="{y - 9}" r="3.5" fill="{color}" stroke="{INK}" stroke-width="1"/>'
-                 f'<path d="M{x + 4} {y - 3}h7" stroke="{INK}" stroke-width="2"/></g>')
-        out.append(_move(ctx, u, [(-260, 0), (-120, -4), (0, 0), (0, 0)], 1.4, i * .03))
+            u = (f'<g><rect x="{x - 6}" y="{y - 9}" width="12" height="18" rx="3" fill="{color}" stroke="{INK}" stroke-width="1.5"/>'
+                 f'<circle cx="{x}" cy="{y - 14}" r="5.5" fill="{color}" stroke="{INK}" stroke-width="1.5"/>'
+                 f'<path d="M{x - 6} {y - 16}h12" stroke="{INK}" stroke-width="2.5"/>'
+                 f'<path d="M{x + 6} {y - 4}h12" stroke="{INK}" stroke-width="3"/></g>')
+        out.append(_move(ctx, u, [(-280, 0), (-130, -6), (0, 0), (0, 0)], 1.4, i * .025))
+        if not swarm and i % 4 == 0:  # coups de feu
+            out.append(_pop(ctx, f'<circle cx="{x + 22}" cy="{y - 4}" r="4" fill="#fff36b"/>', x + 22, y - 4, .7 + i * .025, .05))
+    if vehicles:
+        for k, x in enumerate((90, 230)):
+            tank = (f'<g><rect x="{x - 26}" y="250" width="52" height="18" rx="6" fill="#6f7d4f" stroke="{INK}" stroke-width="2"/>'
+                    f'<rect x="{x - 14}" y="238" width="28" height="14" rx="4" fill="#7d8c5a" stroke="{INK}" stroke-width="2"/>'
+                    f'<path d="M{x + 12} 244h30" stroke="{INK}" stroke-width="5" stroke-linecap="round"/></g>')
+            out.append(_move(ctx, tank, [(-300, 0), (0, 0), (0, 0)], 1.3, .1 + k * .15))
+        for k, (x, y) in enumerate(((110, 60), (250, 40))):
+            heli = (f'<g><ellipse cx="{x}" cy="{y}" rx="22" ry="10" fill="#6f7d4f" stroke="{INK}" stroke-width="2"/>'
+                    f'<path d="M{x - 22} {y}h-24M{x - 36} {y - 18}h44M{x} {y - 10}v-8" stroke="{INK}" stroke-width="3" stroke-linecap="round"/></g>')
+            out.append(_move(ctx, heli, [(-260, -30), (-80, 10), (0, 0)], 1.3, .2 + k * .2))
     return "".join(out)
 
 
@@ -662,24 +790,36 @@ def stickers(ctx, color="#ff6b9a", **_):
 
 
 def meteors(ctx, color="#ff8a3d", **_):
+    """Une pluie de météorites enflammées, et l'éclair de l'impact."""
     out = []
     for i in range(7):
-        x0 = ctx.rnd.uniform(220, 420)
-        m = (f'<g><path d="M{x0:.1f} -40l60 -40" stroke="{color}" stroke-width="10" stroke-linecap="round" opacity=".5"/>'
-             f'<circle cx="{x0:.1f}" cy="-40" r="11" fill="#ffd27a" stroke="{color}" stroke-width="4"/></g>')
-        out.append(_move(ctx, m, [(0, 0), (-260, 300)], .7, i * .14, fade_in=.03))
+        x0 = ctx.rnd.uniform(220, 440)
+        r = ctx.rnd.uniform(11, 18)
+        m = (f'<g><path d="M{x0:.1f} -40l{r * 7:.0f} {-r * 5.5:.0f}" stroke="{color}" stroke-width="{r * 2:.0f}" stroke-linecap="round" opacity=".28"/>'
+             f'<path d="M{x0:.1f} -40l{r * 5:.0f} {-r * 4:.0f}" stroke="#ffd27a" stroke-width="{r:.0f}" stroke-linecap="round" opacity=".6"/>'
+             f'<circle cx="{x0:.1f}" cy="-40" r="{r:.1f}" fill="#fff3a8" stroke="{color}" stroke-width="4"/>'
+             f'<circle cx="{x0 - r * .3:.1f}" cy="{-40 + r * .3:.1f}" r="{r * .35:.1f}" fill="#b85a1f" opacity=".6"/></g>')
+        out.append(_move(ctx, m, [(0, 0), (-280, 300)], .7, i * .13, fade_in=.03))
+        ix, iy = x0 - 280, 260
+        if 0 < ix < 360:
+            boom = poly([(ix + (30 if k % 2 == 0 else 12) * math.cos(k * math.pi / 6), iy + (30 if k % 2 == 0 else 12) * math.sin(k * math.pi / 6))
+                         for k in range(12)])
+            out.append(_pop(ctx, f'<polygon points="{boom}" fill="#ffb21f" stroke="#fff" stroke-width="2"/>', ix, iy, i * .13 + .68, .08))
     return "".join(out)
 
 
-def footprints(ctx, color="#e0e0e0", **_):
+def footprints(ctx, color="#d9c7ff", **_):
+    """Une piste d'empreintes qui fonce droit vers la cible."""
     out = []
-    for k in range(10):
-        t = k / 9
-        x = 40 + t * (ctx.cx - 40)
-        y = 280 - t * 120 + (8 if k % 2 else -8)
-        fp = (f'<ellipse cx="{x:.1f}" cy="{y:.1f}" rx="6" ry="10" fill="{color}" transform="rotate(60 {x:.1f} {y:.1f})"/>'
-              f'<circle cx="{x + 9:.1f}" cy="{y - 6:.1f}" r="3" fill="{color}"/>')
-        out.append(_pop(ctx, fp, x, y, k * .08, .7 - k * .05))
+    for k in range(12):
+        t = k / 11
+        x = 30 + t * (ctx.cx - 10)
+        y = 285 - t * 130 + (10 if k % 2 else -10)
+        ang = math.degrees(math.atan2(-130, ctx.cx - 40)) + 90
+        fp = (f'<g transform="rotate({ang:.0f} {x:.1f} {y:.1f})"><ellipse cx="{x:.1f}" cy="{y:.1f}" rx="9" ry="15" fill="{color}" '
+              f'stroke="#fff" stroke-width="1.5" fill-opacity=".8"/><ellipse cx="{x:.1f}" cy="{y + 20:.1f}" rx="7" ry="7" fill="{color}" '
+              f'stroke="#fff" stroke-width="1.5" fill-opacity=".8"/></g>')
+        out.append(_pop(ctx, fp, x, y, k * .07, .75 - k * .04))
     return "".join(out)
 
 
@@ -816,30 +956,42 @@ def knives(ctx, n=9, **_):
 
 def gun(ctx, color="#ffd27a", **_):
     """Un coup de pistolet : flamme au canon, puis la balle (qui peut tourner en vol)."""
-    mx, my = 30, 120
-    flash = poly([(mx + (34 if i % 2 == 0 else 12) * math.cos(i * math.pi / 6), my + (34 if i % 2 == 0 else 12) * math.sin(i * math.pi / 6))
-                  for i in range(12)])
-    out = [_pop(ctx, f'<polygon points="{flash}" fill="#fff36b" stroke="#ff8a3d" stroke-width="3"/>', mx, my, 0, .15)]
-    for i in range(3):
-        b = (f'<g><path d="M{mx - 30} {my}H{mx}" stroke="#fff" stroke-width="2" opacity=".6"/>'
-             f'<rect x="{mx - 9}" y="{my - 4}" width="18" height="8" rx="4" fill="{color}" stroke="{INK}" stroke-width="1.5"/></g>')
-        out.append(_move(ctx, b, [(0, 0), (120, -40 + i * 40), (ctx.cx - mx + 10, -10 + i * 30)], .55, .08 + i * .1, fade_in=.02))
+    mx, my = 34, 150
+    flash = poly([(mx + (58 if i % 2 == 0 else 20) * math.cos(i * math.pi / 7), my + (46 if i % 2 == 0 else 16) * math.sin(i * math.pi / 7))
+                  for i in range(14)])
+    out = [_pop(ctx, f'<polygon points="{flash}" fill="#fff36b" stroke="#ff8a3d" stroke-width="4"/>'
+                     f'<circle cx="{mx}" cy="{my}" r="14" fill="#fff"/>', mx, my, 0, .12)]
+    for k in range(5):  # fumée
+        puff = f'<circle cx="{mx}" cy="{my}" r="{ctx.rnd.uniform(10, 18):.0f}" fill="#cfc8d8" opacity=".5"/>'
+        out.append(_move(ctx, puff, [(0, 0), (ctx.rnd.uniform(-30, 10), -ctx.rnd.uniform(40, 90))], 1.0, .1 + k * .05, scale=(.4, 1.6),
+                         origin=(mx, my)))
+    out.append(_pop(ctx, _word(ctx, "BANG!", mx + 70, 70, 30), mx + 70, 60, .05, .5, -10))
+    for i in range(3):  # la balle tourne en vol
+        path = [(0, 0), (90, -60 + i * 50), (150, -20 + i * 30), (ctx.cx - mx + 20, -40 + i * 40)]
+        out.append(_move(ctx, _bullet(mx, my, color, True), path, .6, .1 + i * .12, fade_in=.02))
     return "".join(out)
 
 
 def gasoline(ctx, **_):
     """L'essence qui gicle, l'allumette qu'on gratte, et tout s'embrase."""
     out = []
-    for i in range(14):
-        x = ctx.rnd.uniform(60, 320)
-        drop = f'<ellipse cx="{x:.1f}" cy="-10" rx="4" ry="6" fill="#ffb21f" fill-opacity=".85" stroke="#8a5a00" stroke-width="1"/>'
-        out.append(_move(ctx, drop, [(0, 0), (0, ctx.rnd.uniform(220, 300))], .45, ctx.rnd.uniform(0, .3), fade_in=.03))
-    mx, my = ctx.cx + 60, 70
-    match = (f'<g><rect x="{mx - 2}" y="{my}" width="4" height="46" fill="#e8c88a" stroke="{INK}" stroke-width="1"/>'
-             f'<ellipse cx="{mx}" cy="{my}" rx="4" ry="6" fill="#d62828"/>'
-             f'<path d="M{mx} {my - 2}c8 -8 4 -18 0 -24c-4 6 -8 16 0 24z" fill="#ffb21f"/></g>')
-    out.append(_pop(ctx, match, mx, my + 20, .35, .35, 20))
-    return "".join(out) + flames(_Shift(ctx, .75), n=14)
+    for i in range(22):
+        x = ctx.rnd.uniform(50, 330)
+        r = ctx.rnd.uniform(5, 8)
+        drop = (f'<ellipse cx="{x:.1f}" cy="-10" rx="{r:.1f}" ry="{r * 1.5:.1f}" fill="#ffb21f" fill-opacity=".85" stroke="#8a5a00" stroke-width="1.2"/>'
+                f'<circle cx="{x - r * .3:.1f}" cy="{-10 - r * .5:.1f}" r="{r * .3:.1f}" fill="#fff" opacity=".7"/>')
+        out.append(_move(ctx, drop, [(0, 0), (ctx.rnd.uniform(-15, 15), ctx.rnd.uniform(220, 300))], .45, ctx.rnd.uniform(0, .3), fade_in=.03))
+    # la flaque d'essence
+    name = ctx.kf([(0, "opacity:0;transform:scaleX(0)"), (.4, "opacity:.8;transform:scaleX(1)"), (.9, "opacity:.8;transform:scaleX(1)"),
+                   (1.2, "opacity:0")])
+    out.append(f'<ellipse cx="{ctx.cx}" cy="282" rx="160" ry="16" fill="#ffb21f" fill-opacity=".55" {ctx.style(name, .2, (ctx.cx, 282))}/>')
+    mx, my = ctx.cx + 70, 60
+    match = (f'<g transform="rotate(25 {mx} {my + 30})"><rect x="{mx - 4}" y="{my}" width="8" height="74" rx="2" fill="#e8c88a" stroke="{INK}" stroke-width="1.5"/>'
+             f'<ellipse cx="{mx}" cy="{my}" rx="7" ry="10" fill="#d62828" stroke="{INK}" stroke-width="1.5"/>'
+             + _flame(mx, my - 4, 1.1, "#ff8a1f") + "</g>")
+    out.append(_pop(ctx, match, mx, my + 30, .3, .4, 0))
+    out.append(_pop(ctx, _word(ctx, "FWOOSH!", ctx.cx - 40, 60, 26), ctx.cx - 40, 50, .8, .5, -8))
+    return "".join(out) + flames(_Shift(ctx, .75), n=18)
 
 
 def emeralds(ctx, color="#3ddc84", n=14, **_):
