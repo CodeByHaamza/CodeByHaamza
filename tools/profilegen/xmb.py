@@ -393,11 +393,3 @@ def project_row(cfg: dict, st: dict, i: int, pr: dict, H: float) -> tuple:
         q.b.append(R.text(f"★ {pr['stars']}", W - 28, cy - 9, 17, WH, anchor="end"))
     q.b.append(M.text(right, W - 28, cy + 25, 10.5, WH, anchor="end", attrs=' opacity=".6"'))
     return q.layer()
-
-
-# ---------------------------------------------------------------- 8. en-tête des jeux
-
-def games_head(cfg: dict, H: float) -> tuple:
-    p = Page(H, waves=False, shade=.18)
-    p.crumb("pad", "Game", "Favourites", f"{len(cfg['games'])} titles · Steam", y=H / 2 + 2)
-    return p.layer()

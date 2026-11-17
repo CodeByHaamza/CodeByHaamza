@@ -1,0 +1,100 @@
+{
+  "_note": "Stands que la Flèche peut donner. Une entrée = un tirage ; stages = les étapes (actes, évolutions, Requiem), jouées dans l'ordre sur la carte. wiki = l'image source sur jjba.fandom.com/fr (Fichier:<wiki>), à enregistrer sous assets/stands/<id>.png via tools/build_stands.py. Images © Hirohiko Araki / Shueisha / David Production, usage de fan.",
+  "stands": [
+    {"id": "star-platinum", "part": 3, "user": "Jotaro Kujo", "stages": [
+      {"id": "star-platinum", "name": "Star Platinum", "wiki": "Star platinium Anime.png", "text": "ORA ORA ORA! Precise, brutally fast, and it can stop time for a few seconds."}]},
+    {"id": "the-world", "part": 3, "user": "DIO", "stages": [
+      {"id": "the-world", "name": "The World", "wiki": "Theworldprofil.png", "text": "ZA WARUDO! Time stops, and only DIO keeps moving."}]},
+    {"id": "silver-chariot", "part": 3, "user": "Jean Pierre Polnareff", "evolution": "requiem", "stages": [
+      {"id": "silver-chariot", "name": "Silver Chariot", "wiki": "SilverChariot.png", "text": "A rapier knight so fast it leaves afterimages behind."},
+      {"id": "chariot-requiem", "name": "Chariot Requiem", "wiki": "Chariot Requiem Render.png", "text": "Pierced by the Arrow: it swaps everyone's souls and puts the whole city to sleep."}]},
+    {"id": "magicians-red", "part": 3, "user": "Muhammad Avdol", "stages": [
+      {"id": "magicians-red", "name": "Magician's Red", "wiki": "Magician's Red Infobox Manga.png", "text": "Crossfire Hurricane: flames shaped into an ankh, hot enough to melt steel."}]},
+    {"id": "hermit-purple", "part": 3, "user": "Joseph Joestar", "stages": [
+      {"id": "hermit-purple", "name": "Hermit Purple", "wiki": "SenninPurpleanime.jpg", "text": "Thorny vines that take spirit photographs and track down anyone."}]},
+    {"id": "hierophant-green", "part": 3, "user": "Noriaki Kakyoin", "stages": [
+      {"id": "hierophant-green", "name": "Hierophant Green", "wiki": "Hierophantgreen37.png", "text": "Emerald Splash! It unravels into tendrils and hides inside its prey."}]},
+    {"id": "the-fool", "part": 3, "user": "Iggy", "stages": [
+      {"id": "the-fool", "name": "The Fool", "wiki": "ThefoolJojoAnime.jpg", "text": "A sand Stand for a dog who hates everyone. Bribes accepted in coffee gum."}]},
+    {"id": "crazy-diamond", "part": 4, "user": "Josuke Higashikata", "stages": [
+      {"id": "crazy-diamond", "name": "Crazy Diamond", "wiki": "Crazy Diamond Anime.Infobox.png", "text": "DORARARA! Fixes anything it breaks. Just don't insult the hair."}]},
+    {"id": "the-hand", "part": 4, "user": "Okuyasu Nijimura", "stages": [
+      {"id": "the-hand", "name": "The Hand", "wiki": "The_Hand_Anime.png", "text": "Its right hand erases space itself. Okuyasu still isn't sure where it goes."}]},
+    {"id": "echoes", "part": 4, "user": "Koichi Hirose", "evolution": "acts", "stages": [
+      {"id": "echoes-act1", "name": "Echoes ACT 1", "wiki": "EchoesAct1A.png", "text": "Sticks sound effects onto anything, and the words keep echoing."},
+      {"id": "echoes-act2", "name": "Echoes ACT 2", "wiki": "EchoesAct2(A).png", "text": "The sounds come alive: touch the word BOING and you bounce."},
+      {"id": "echoes-act3", "name": "Echoes ACT 3", "wiki": "Echoes Act 3(A).png", "text": "3 FREEZE! Pins its target to the ground under its own weight."}]},
+    {"id": "heavens-door", "part": 4, "user": "Rohan Kishibe", "stages": [
+      {"id": "heavens-door", "name": "Heaven's Door", "wiki": "Heaven's Door Anime.Infobox.png", "text": "Turns people into books: read their life, write new rules in the margins."}]},
+    {"id": "killer-queen", "part": 4, "user": "Yoshikage Kira", "stages": [
+      {"id": "killer-queen", "name": "Killer Queen", "wiki": "Killer Queen anime.png", "text": "Anything it touches becomes a bomb. All Kira wants is a quiet life."}]},
+    {"id": "gold-experience", "part": 5, "user": "Giorno Giovanna", "evolution": "requiem", "stages": [
+      {"id": "gold-experience", "name": "Gold Experience", "wiki": "Gold Experience Anime.png", "text": "Gives life to anything it touches: a rock becomes a frog."},
+      {"id": "gold-experience-requiem", "name": "Gold Experience Requiem", "wiki": "GER Info.PNG", "text": "Returns every action to zero. You will never arrive at the truth."}]},
+    {"id": "sticky-fingers", "part": 5, "user": "Bruno Bucciarati", "stages": [
+      {"id": "sticky-fingers", "name": "Sticky Fingers", "wiki": "Sticky Fingers animé.png", "text": "Zips open walls, floors, even people. Arrivederci!"}]},
+    {"id": "sex-pistols", "part": 5, "user": "Guido Mista", "stages": [
+      {"id": "sex-pistols", "name": "Sex Pistols", "wiki": "SexPistolsinfobox.png", "text": "Six tiny gremlins that redirect every bullet. Never, ever number four."}]},
+    {"id": "aerosmith", "part": 5, "user": "Narancia Ghirga", "stages": [
+      {"id": "aerosmith", "name": "Aerosmith", "wiki": "Aerosmith_anime.png", "text": "A tiny fighter plane with a CO2 radar. Volare via!"}]},
+    {"id": "purple-haze", "part": 5, "user": "Pannacotta Fugo", "stages": [
+      {"id": "purple-haze", "name": "Purple Haze", "wiki": "Purple Haze Anime.png", "text": "A killer virus in the capsules on its fists. Even its user is afraid of it."}]},
+    {"id": "moody-blues", "part": 5, "user": "Leone Abbacchio", "stages": [
+      {"id": "moody-blues", "name": "Moody Blues", "wiki": "Moody BlueConcept.png", "text": "Replays the past like a videotape: rewind anyone's last moves."}]},
+    {"id": "spice-girl", "part": 5, "user": "Trish Una", "stages": [
+      {"id": "spice-girl", "name": "Spice Girl", "wiki": "Spice_Girl_anime.png", "text": "Makes anything soft, and soft things can't be broken. Wannabe!"}]},
+    {"id": "king-crimson", "part": 5, "user": "Diavolo", "stages": [
+      {"id": "king-crimson", "name": "King Crimson", "wiki": "King.Crimson.Anime.Infobox.png", "text": "Erases time and skips straight to the result. Only the boss remembers."}]},
+    {"id": "metallica", "part": 5, "user": "Risotto Nero", "stages": [
+      {"id": "metallica", "name": "Metallica", "wiki": "Metallica Anime.png", "text": "Controls the iron in your blood. Razors, from the inside."}]},
+    {"id": "stone-free", "part": 6, "user": "Jolyne Cujoh", "stages": [
+      {"id": "stone-free", "name": "Stone Free", "wiki": "StoneFreeAnime.png", "text": "Unravels its user into string, and ties fate back together."}]},
+    {"id": "kiss", "part": 6, "user": "Ermes Costello", "stages": [
+      {"id": "kiss", "name": "Kiss", "wiki": "Kiss Anime.png", "text": "Stickers that duplicate anything. Peel one off and the copies smash back together."}]},
+    {"id": "weather-report", "part": 6, "user": "Weather Report", "stages": [
+      {"id": "weather-report", "name": "Weather Report", "wiki": "Weather Reaport (Stand) Anime.png", "text": "Controls the weather, from light fog to a rain of poison frogs."}]},
+    {"id": "foo-fighters", "part": 6, "user": "F.F.", "stages": [
+      {"id": "foo-fighters", "name": "Foo Fighters", "wiki": "Foo Fighters Anime.png", "text": "A colony of plankton that learned to think, and to remember."}]},
+    {"id": "diver-down", "part": 6, "user": "Narciso Anasui", "stages": [
+      {"id": "diver-down", "name": "Diver Down", "wiki": "Diver Down Anime.png", "text": "Dives into objects and stores its punches inside them."}]},
+    {"id": "whitesnake", "part": 6, "user": "Enrico Pucci", "evolution": "acts", "stages": [
+      {"id": "whitesnake", "name": "Whitesnake", "wiki": "WhitesnakeAnime.png", "text": "Steals memories and Stands, and keeps them as discs."},
+      {"id": "c-moon", "name": "C-MOON", "wiki": "C-Moon (anime).png", "text": "Gravity turns upside down around Pucci: whatever it hits turns inside out."},
+      {"id": "made-in-heaven", "name": "Made in Heaven", "wiki": "Made in Heaven.png", "text": "Accelerates time until the universe starts over. Heaven is here."}]},
+    {"id": "tusk", "part": 7, "user": "Johnny Joestar", "evolution": "acts", "stages": [
+      {"id": "tusk-act1", "name": "Tusk ACT 1", "wiki": "Tusk ACT1 All Star Battle.png", "text": "Spinning fingernails fired like bullets."},
+      {"id": "tusk-act2", "name": "Tusk ACT 2", "wiki": "Tusk ACT2 All Star Battle.png", "text": "The bullet holes move, and they chase their target."},
+      {"id": "tusk-act3", "name": "Tusk ACT 3", "wiki": "Tusk ACT3 All Star Battle.png", "text": "Shoots itself to hide inside its own spinning holes."},
+      {"id": "tusk-act4", "name": "Tusk ACT 4", "wiki": "Tusk ACT4 All Star Battle.png", "text": "Infinite rotation, born from the Golden Spin on horseback. Nothing escapes it."}]},
+    {"id": "ball-breaker", "part": 7, "user": "Gyro Zeppeli", "stages": [
+      {"id": "ball-breaker", "name": "Ball Breaker", "wiki": "Ball Breaker SBR.png", "text": "The Golden Rectangle's full power: everything it touches withers."}]},
+    {"id": "scary-monsters", "part": 7, "user": "Diego Brando", "stages": [
+      {"id": "scary-monsters", "name": "Scary Monsters", "wiki": "ScaryMonsterscolor.png", "text": "Turns its user, and anyone it wounds, into dinosaurs."}]},
+    {"id": "the-world-sbr", "part": 7, "user": "Diego Brando (alternate world)", "stages": [
+      {"id": "the-world-sbr", "name": "THE WORLD", "wiki": "THE WORLD (SBR).png", "text": "Another universe, the same power: time stops and Diego moves."}]},
+    {"id": "d4c", "part": 7, "user": "Funny Valentine", "stages": [
+      {"id": "d4c", "name": "Dirty Deeds Done Dirt Cheap", "wiki": "D4c sbr69.png", "text": "Dojyaaan! Slips between parallel worlds and brings back anyone it likes."}]},
+    {"id": "mandom", "part": 7, "user": "Ringo Roadagain", "stages": [
+      {"id": "mandom", "name": "Mandom", "wiki": "Mandomcolor.png", "text": "Turn the watch and time rewinds six seconds."}]},
+    {"id": "soft-and-wet", "part": 8, "user": "Josuke Higashikata", "stages": [
+      {"id": "soft-and-wet", "name": "Soft & Wet", "wiki": "S&WManga.png", "text": "Bubbles that plunder something: sound, sight, friction."}]},
+    {"id": "paisley-park", "part": 8, "user": "Yasuho Hirose", "stages": [
+      {"id": "paisley-park", "name": "Paisley Park", "wiki": "PaisleyPark stand.webp", "text": "Slips into any phone or map and guides you where you need to go."}]},
+    {"id": "speed-king", "part": 8, "user": "Jobin Higashikata", "stages": [
+      {"id": "speed-king", "name": "Speed King", "wiki": "Speed King Manga Infobox.png", "text": "Stores heat inside anything it touches, then releases it all at once."}]},
+    {"id": "king-nothing", "part": 8, "user": "Norisuke Higashikata IV", "stages": [
+      {"id": "king-nothing", "name": "King Nothing", "wiki": "KingNothing.png", "text": "A puzzle-piece tracker that follows the scent of whatever was lost."}]},
+    {"id": "nut-king-call", "part": 8, "user": "Joshu Higashikata", "stages": [
+      {"id": "nut-king-call", "name": "Nut King Call", "wiki": "Nut King Call Infobox Manga.png", "text": "Screws nuts and bolts into anything, and takes people apart."}]},
+    {"id": "wonder-of-u", "part": 8, "user": "Satoru Akefu", "stages": [
+      {"id": "wonder-of-u", "name": "Wonder of U", "wiki": "Wonder of U Stand Manga Infobox.png", "text": "Calamity falls on anyone who tries to chase it."}]},
+    {"id": "doggy-style", "part": 8, "user": "Rai Mamezuku", "stages": [
+      {"id": "doggy-style", "name": "Doggy Style", "wiki": "Doggy Style.png", "text": "Peels its user into a long ribbon, like an apple."}]},
+    {"id": "vitamin-c", "part": 8, "user": "Tamaki Damo", "stages": [
+      {"id": "vitamin-c", "name": "Vitamin C", "wiki": "VitaminC.png", "text": "Leaves a fingerprint, and whatever it touched melts into a puddle."}]},
+    {"id": "november-rain", "part": 9, "user": "Jodio Joestar", "stages": [
+      {"id": "november-rain", "name": "November Rain", "wiki": "November Rain.png", "text": "Raindrops heavy enough to crush whatever they hit."}]},
+    {"id": "smooth-operators", "part": 9, "user": "Dragona Joestar", "stages": [
+      {"id": "smooth-operators", "name": "Smooth Operators", "wiki": "Smooth Operators.jpg", "text": "Tiny operators that move anything, a millimetre at a time."}]}
+  ]
+}

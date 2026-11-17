@@ -1,0 +1,56 @@
+name: Stand Arrow
+
+# Un visiteur ouvre une issue dont le titre commence par « arrow » (le bouton du README la
+# pré-remplit) : la Flèche lui donne un Stand, le tableau du README se met à jour, l'Action
+# répond dans l'issue puis la ferme.
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+# une flèche à la fois : deux visiteurs en même temps ne doivent pas se marcher dessus
+concurrency:
+  group: stand-arrow
+  cancel-in-progress: false
+
+jobs:
+  pierce:
+    if: ${{ startsWith(github.event.issue.title, 'arrow') && github.event.issue.user.type != 'Bot' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Shoot the arrow
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tools/stand_arrow.py
+
+      - name: Update the Stand users board
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md data/stand-users.json
+          if ! git diff --staged --quiet; then
+            git commit -m "Stand Arrow: a new Stand user"
+            for i in 1 2 3; do
+              git pull --rebase && git push && break
+              sleep 5
+            done
+          fi
+
+      - name: Reply and close
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "$NUM" --body-file comment.md
+          gh issue close "$NUM" --reason completed

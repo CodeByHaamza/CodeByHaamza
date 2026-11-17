@@ -1,9 +1,9 @@
-"""Le bas de page commun, au look GitHub natif : il ne bascule pas avec les deux styles.
+"""Le bas de page commun, au look GitHub « vanilla » : il ne bascule pas avec les deux styles.
 
-Couleurs et police de GitHub, thème clair ou sombre selon le réglage du visiteur
-(prefers-color-scheme). Animations jouées une fois au chargement, depuis un état écrit final :
-compteurs qui défilent comme un odomètre, anneau de la note qui se remplit, barres qui poussent,
-calendrier qui s'allume semaine par semaine.
+Couleurs et police de GitHub, en deux fichiers (clair et sombre) que le README sert avec
+<picture> : c'est le thème GitHub du visiteur qui choisit. Animations jouées une fois au
+chargement, depuis un état écrit final : compteurs qui défilent comme un odomètre, anneau de
+la note qui se remplit, barres qui poussent, calendrier qui s'allume semaine par semaine.
 """
 from __future__ import annotations
 
@@ -13,14 +13,19 @@ from datetime import date
 from .kit import REDUCE, W, esc, num, write
 
 FONT = "-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif"
-THEME = ("svg{--bg:#ffffff;--fg:#1f2328;--mu:#59636e;--bd:#d1d9e0;--ac:#0969da;--tr:#eff2f5;--fire:#fb8f44;"
-         "--l0:#eff2f5;--l1:#aceebb;--l2:#4ac26b;--l3:#2da44e;--l4:#116329}"
-         "@media (prefers-color-scheme: dark){svg{--bg:#0d1117;--fg:#f0f6fc;--mu:#9198a1;--bd:#3d444d;--ac:#4493f8;"
-         "--tr:#21262d;--fire:#f0883e;--l0:#151b23;--l1:#033a16;--l2:#196c2e;--l3:#2ea043;--l4:#56d364}}"
-         ".bg{fill:var(--bg)}.bd{stroke:var(--bd)}.fg{fill:var(--fg)}.mu{fill:var(--mu)}.ac{fill:var(--ac)}"
-         ".sac{stroke:var(--ac)}.str{stroke:var(--tr)}.ftr{fill:var(--tr)}.fire{fill:var(--fire)}.sfire{stroke:var(--fire)}.smu{stroke:var(--mu)}"
-         + "".join(f".l{i}{{fill:var(--l{i})}}" for i in range(5))
-         + f"text{{font-family:{FONT}}}")
+PALETTES = {
+    "light": "--bg:#ffffff;--fg:#1f2328;--mu:#59636e;--bd:#d1d9e0;--ac:#0969da;--tr:#eff2f5;--fire:#fb8f44;"
+             "--l0:#eff2f5;--l1:#aceebb;--l2:#4ac26b;--l3:#2da44e;--l4:#116329",
+    "dark": "--bg:#0d1117;--fg:#f0f6fc;--mu:#9198a1;--bd:#3d444d;--ac:#4493f8;--tr:#21262d;--fire:#f0883e;"
+            "--l0:#151b23;--l1:#033a16;--l2:#196c2e;--l3:#2ea043;--l4:#56d364",
+}
+
+
+def theme(mode: str) -> str:
+    return ("svg{" + PALETTES[mode] + "}"
+            ".bg{fill:var(--bg)}.bd{stroke:var(--bd)}.fg{fill:var(--fg)}.mu{fill:var(--mu)}.ac{fill:var(--ac)}"
+            ".sac{stroke:var(--ac)}.str{stroke:var(--tr)}.ftr{fill:var(--tr)}.fire{fill:var(--fire)}.sfire{stroke:var(--fire)}"
+            ".smu{stroke:var(--mu)}" + "".join(f".l{i}{{fill:var(--l{i})}}" for i in range(5)) + f"text{{font-family:{FONT}}}")
 
 LANG_COLORS = {"JavaScript": "#f1e05a", "Python": "#3572A5", "HTML": "#e34c26", "PHP": "#4F5D95", "CSS": "#663399",
                "TypeScript": "#3178c6", "Java": "#b07219", "C": "#555555", "Shell": "#89e051", "Dockerfile": "#384d54",
@@ -207,8 +212,10 @@ def stats_card(cfg: dict, st: dict) -> None:
              f"{num(st['prs'])} PRs, {num(st['issues'])} issues, {num(st['reviews'])} reviews, {num(st['total'])} contributions; "
              f"current streak {st['cur']} days, longest {st['best']} days; languages: "
              + ", ".join(f"{n} {v:.0f}%" for n, v in langs))
-    write("stats.svg", f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H:.0f}" width="{W}" height="{H:.0f}" role="img">'
-          f"<title>{esc(title)}</title><defs>{defs}</defs><style>{THEME}{CSS}{REDUCE}</style>" + "".join(b) + "</svg>")
+    for mode in PALETTES:
+        write(f"stats-{mode}.svg", f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H:.0f}" width="{W}" height="{H:.0f}" '
+              f'role="img"><title>{esc(title)}</title><defs>{defs}</defs><style>{theme(mode)}{CSS}{REDUCE}</style>'
+              + "".join(b) + "</svg>")
 
 
 # ---------------------------------------------------------------- 2. le calendrier de contributions
@@ -247,6 +254,7 @@ def calendar(st: dict) -> None:
         b.append(f'<rect x="{lx + i * step}" y="{ly}" width="{cell}" height="{cell}" rx="2" class="l{i}"/>')
     b.append(t(lx + 5 * step + 4, ly + 10, "More", "mu", 11))
     b.append(t(25, ly + 10, f"best day: {num(max(counts) if counts else 0)} contributions", "mu", 11))
-    write("calendar.svg", f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img">'
-          f"<title>{esc(num(st['total']))} contributions in the last year</title><style>{THEME}{CSS}{REDUCE}</style>"
-          + "".join(b) + "</svg>")
+    for mode in PALETTES:
+        write(f"calendar-{mode}.svg", f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" '
+              f'role="img"><title>{esc(num(st["total"]))} contributions in the last year</title>'
+              f"<style>{theme(mode)}{CSS}{REDUCE}</style>" + "".join(b) + "</svg>")
